@@ -1,48 +1,48 @@
 name: Deploy Documentation
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    group: "pages"
+    cancel-in-progress: false
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.12"
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
+            - name: Install uv
+              uses: astral-sh/setup-uv@v4
 
-      - name: Install dependencies
-        run: uv pip install --system -e ".[docs]"
+            - name: Install dependencies
+              run: uv pip install --system -e ".[docs]"
 
-      - name: Build documentation
-        run: mkdocs build --strict
+            - name: Build documentation
+              run: mkdocs build --strict
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+            - name: Setup Pages
+              uses: actions/configure-pages@v4
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "./site"
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: "./site"
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
