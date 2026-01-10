@@ -1,9 +1,9 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
 [project]
-name = "nhs-rap-cookiecutter"
+name = "nhse-rap-cookiecutter"
 version = "0.1.0"
 description = "A cookiecutter template for NHS England Reproducible Analytical Pipelines (RAP) projects."
 authors = [
@@ -24,39 +24,23 @@ classifiers = [
   "Topic :: Scientific/Engineering",
 ]
 requires-python = ">=3.10"
-dependencies = [
-  "click",
-  "cookiecutter",
-  "tomlkit",
-]
-
-[project.optional-dependencies]
-dev = [
-  "ansi2html",
-  "build",
-  "chardet",
-  "mkdocs",
-  "mkdocs-material",
-  "mkdocs-gen-files",
-  "mkdocs-include-markdown-plugin",
-  "pexpect",
-  "pre-commit",
-  "pytest",
-  "ruff",
-  "termynal",
-  "twine",
-]
+dependencies = ["click", "cookiecutter", "tomlkit"]
 
 [project.scripts]
-nhs-rap-template = "nhs_rap_template.__main__:main"
+nhs-rap-template = "nhse_rap_cookiecutter.cli:main"
+
+[project.optional-dependencies]
+dev = ["build", "pre-commit", "pytest", "pytest-cookies", "ruff"]
+docs = ["mkdocs", "mkdocs-material", "mkdocs-include-markdown-plugin"]
 
 [project.urls]
-"Homepage" = "https://github.com/nhs-england/nhs-rap-cookiecutter"
-"Source Code" = "https://github.com/nhs-england/nhs-rap-cookiecutter"
-"Bug Tracker" = "https://github.com/nhs-england/nhs-rap-cookiecutter/issues"
-
-[tool.hatch.build.targets.wheel]
-packages = ["nhs_rap_template"]
+# TODO: Update to nhsengland organization once transferred
+# "Homepage" = "https://github.com/nhsengland/nhs-rap-cookiecutter"
+# "Source Code" = "https://github.com/nhsengland/nhs-rap-cookiecutter"
+# "Bug Tracker" = "https://github.com/nhsengland/nhs-rap-cookiecutter/issues"
+"Homepage" = "https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter"
+"Source Code" = "https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter"
+"Bug Tracker" = "https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter/issues"
 
 [tool.ruff]
 line-length = 99
@@ -72,13 +56,13 @@ extend-exclude = [
 
 [tool.ruff.lint]
 select = [
-  "E",   # pycodestyle errors
-  "W",   # pycodestyle warnings
-  "F",   # pyflakes
-  "I",   # isort
-  "B",   # flake8-bugbear
-  "C4",  # flake8-comprehensions
-  "UP",  # pyupgrade
+  "E",  # pycodestyle errors
+  "W",  # pycodestyle warnings
+  "F",  # pyflakes
+  "I",  # isort
+  "B",  # flake8-bugbear
+  "C4", # flake8-comprehensions
+  "UP", # pyupgrade
 ]
 ignore = [
   "E203", # whitespace before ':'
@@ -87,7 +71,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]  # unused imports in __init__.py
+"__init__.py" = ["F401"] # unused imports in __init__.py
 
 [tool.ruff.format]
 quote-style = "double"
