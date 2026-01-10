@@ -5,5 +5,10 @@ from pathlib import Path
 
 # Rename _pyproject.toml to pyproject.toml
 pyproject = Path("_pyproject.toml")
-if pyproject.exists():
-    pyproject.rename("pyproject.toml")
+replace_list = [
+    Path("_pyproject.toml"),
+    Path("_docs"),
+]
+for path in replace_list:
+    if path.exists():
+        path.rename(path.name.lstrip("_"))
