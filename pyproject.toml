@@ -46,7 +46,7 @@ docs = ["mkdocs", "mkdocs-material", "mkdocs-include-markdown-plugin"]
 line-length = 99
 target-version = "py310"
 extend-exclude = [
-  "{{ cookiecutter.repo_name }}",
+  "[{][{] cookiecutter.repo_name [}][}]",
   ".venv",
   "venv",
   "dist",
