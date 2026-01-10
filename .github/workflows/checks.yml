@@ -79,7 +79,7 @@ jobs:
 
             - name: Generate project from template
               run: |
-                  cookiecutter . --no-input \
+                  uv run cookiecutter . --no-input \
                     project_name="Test Project" \
                     repo_name="test-project" \
                     module_name="test_project"
@@ -96,7 +96,7 @@ jobs:
             - name: Install generated project
               run: |
                   cd test-project
-                  uv pip install --system -e ".[dev]"
+                  uv sync --extra dev
 
             - name: Run generated project tests
               run: |
