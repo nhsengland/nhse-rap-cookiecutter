@@ -3,12 +3,12 @@
 
 from pathlib import Path
 
-# Rename _pyproject.toml to pyproject.toml
-pyproject = Path("_pyproject.toml")
+# List of paths to rename by stripping leading underscore
 replace_list = [
     Path("_pyproject.toml"),
-    Path("_docs"),
+    Path("_data"),
 ]
+
 for path in replace_list:
     if path.exists():
         path.rename(path.name.lstrip("_"))
