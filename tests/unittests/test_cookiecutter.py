@@ -207,7 +207,10 @@ class TestCookiecutterFileContent:
 
     def test_pyproject_toml_is_valid(self, tmp_path, template_dir):
         """pyproject.toml is valid TOML and can be parsed."""
-        import tomllib
+        try:
+            import tomllib
+        except ModuleNotFoundError:
+            import tomli as tomllib
 
         subprocess.run(
             [
