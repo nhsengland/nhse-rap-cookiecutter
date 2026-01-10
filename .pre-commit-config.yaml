@@ -1,22 +1,39 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
+  # Ruff for linting and formatting
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
-    rev: v0.14.10
+    rev: v0.14.3
     hooks:
-      # Run the linter.
+      # Run the linter
       - id: ruff
         args: [--fix]
-      # Run the formatter.
+        exclude: '{{ cookiecutter.repo_name }}'
+      # Run the formatter
       - id: ruff-format
-
+        exclude: '{{ cookiecutter.repo_name }}'
+  # Additional helpful hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
+        exclude: '{{ cookiecutter.repo_name }}'
       - id: end-of-file-fixer
-      - id: check-yaml
-      - id: check-added-large-files
+        exclude: '{{ cookiecutter.repo_name }}'
       - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-yaml
+        exclude: '{{ cookiecutter.repo_name }}|mkdocs\.yml'
       - id: check-toml
+        exclude: '{{ cookiecutter.repo_name }}'
+      - id: check-json
+        files: 'cookiecutter\.json$'
+  # Validate cookiecutter template
+  - repo: local
+    hooks:
+      - id: cookiecutter-validate
+        name: Validate cookiecutter template
+        entry: bash -c 'uv run cookiecutter --no-input . --output-dir /tmp/cc-test && rm -rf /tmp/cc-test'
+        language: system
+        pass_filenames: false
+        files: 'cookiecutter\.json|{{ cookiecutter\.repo_name }}/.*'
