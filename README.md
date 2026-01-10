@@ -1,9 +1,10 @@
 # NHS RAP Cookiecutter Template
 
-[![Project Status: WIP](https://img.shields.io/badge/Status-Work%20In%20Progress-yellow)](https://github.com/nhsengland/nhse-rap-cookiecutter)
+[![Project Status: WIP](https://img.shields.io/badge/Status-Work%20In%20Progress-yellow)](https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter)
 [![Python: 3.10 | 3.11 | 3.12](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
 [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter)
-[![tests](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/tests.yml/badge.svg)](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/tests.yml)
+[![Checks](https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter/actions/workflows/checks.yml/badge.svg)](https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter/actions/workflows/checks.yml)
+[![Deploy Docs](https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter/actions/workflows/deploy-docs.yml/badge.svg)](https://josephwilson8-nhs.github.io/nhse-rap-cookiecutter/)
 [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
