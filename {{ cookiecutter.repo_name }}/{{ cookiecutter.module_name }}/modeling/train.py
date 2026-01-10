@@ -1,3 +1,9 @@
+"""Model training module for {{ cookiecutter.project_name }}.
+
+This module handles model training and serialization.
+Use this as a starting point for your model training pipeline.
+"""
+
 from pathlib import Path
 
 from loguru import logger
@@ -16,7 +22,14 @@ def main(
     labels_path: Path = PROCESSED_DATA_DIR / "labels.csv",
     model_path: Path = MODELS_DIR / "model.pkl",
     # -----------------------------------------
-):
+) -> None:
+    """Train a model on processed features and labels.
+
+    Args:
+        features_path: Path to the features CSV file.
+        labels_path: Path to the labels CSV file.
+        model_path: Path where trained model will be saved.
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Training some model...")
     for i in tqdm(range(10), total=10):

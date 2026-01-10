@@ -1,3 +1,9 @@
+"""Visualization module for {{ cookiecutter.project_name }}.
+
+This module handles plot and figure generation from processed data.
+Use this as a starting point for your visualization pipeline.
+"""
+
 from pathlib import Path
 
 from loguru import logger
@@ -15,7 +21,13 @@ def main(
     input_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
     output_path: Path = FIGURES_DIR / "plot.png",
     # -----------------------------------------
-):
+) -> None:
+    """Generate visualizations from processed data.
+
+    Args:
+        input_path: Path to the processed input data file.
+        output_path: Path where generated plot will be saved.
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Generating plot from data...")
     for i in tqdm(range(10), total=10):

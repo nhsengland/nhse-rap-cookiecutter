@@ -1,3 +1,22 @@
+"""Configuration module for {{ cookiecutter.project_name }}.
+
+This module provides project-wide configuration including:
+- Directory paths for data, models, and reports
+- Environment variable loading from .env files
+- Logger configuration with tqdm integration
+
+Attributes:
+    PROJ_ROOT: Root directory of the project.
+    DATA_DIR: Base directory for all data storage.
+    RAW_DATA_DIR: Directory for original, immutable data.
+    INTERIM_DATA_DIR: Directory for intermediate transformed data.
+    PROCESSED_DATA_DIR: Directory for final, canonical datasets.
+    EXTERNAL_DATA_DIR: Directory for data from third-party sources.
+    MODELS_DIR: Directory for trained model files.
+    REPORTS_DIR: Directory for generated reports.
+    FIGURES_DIR: Directory for generated figures and plots.
+"""
+
 from pathlib import Path
 
 from dotenv import load_dotenv
