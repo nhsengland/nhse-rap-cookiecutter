@@ -34,24 +34,15 @@ dev = ["build", "pre-commit", "pytest", "pytest-cookies", "ruff"]
 docs = ["mkdocs", "mkdocs-material", "mkdocs-include-markdown-plugin"]
 
 [project.urls]
-# TODO: Update to nhsengland organization once transferred
-# "Homepage" = "https://github.com/nhsengland/nhs-rap-cookiecutter"
-# "Source Code" = "https://github.com/nhsengland/nhs-rap-cookiecutter"
-# "Bug Tracker" = "https://github.com/nhsengland/nhs-rap-cookiecutter/issues"
-"Homepage" = "https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter"
-"Source Code" = "https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter"
-"Bug Tracker" = "https://github.com/josephwilson8-nhs/nhse-rap-cookiecutter/issues"
+"Homepage" = "https://github.com/nhsengland/nhse-rap-cookiecutter"
+"Source Code" = "https://github.com/nhsengland/nhse-rap-cookiecutter"
+"Bug Tracker" = "https://github.com/nhsengland/nhse-rap-cookiecutter/issues"
 
 [tool.ruff]
 line-length = 99
 target-version = "py310"
 extend-exclude = [
-  "{{ cookiecutter.repo_name }}",
-  ".venv",
-  "venv",
-  "dist",
-  "build",
-  "*.egg-info",
+    "[{][{] cookiecutter.repo_name [}][}]",
 ]
 
 [tool.ruff.lint]
