@@ -7,6 +7,7 @@ from pathlib import Path
 replace_list = [
     Path("_pyproject.toml"),
     Path("_data"),
+    Path("_.env"),
 ]
 
 for path in replace_list:
