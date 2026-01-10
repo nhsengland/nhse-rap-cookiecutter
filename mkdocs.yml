@@ -1,6 +1,9 @@
 site_name: NHS RAP Cookiecutter Template
 site_description: A standardized project structure for NHS England Reproducible Analytical Pipelines (RAP)
 site_author: NHS England - Data Science Team
+# TODO: Update to nhsengland organization once transferred
+# site_url: https://nhsengland.github.io/nhs-rap-cookiecutter
+# repo_url: https://github.com/nhsengland/nhs-rap-cookiecutter
 site_url: https://nhsengland.github.io/nhse-rap-cookiecutter
 repo_url: https://github.com/nhsengland/nhse-rap-cookiecutter
 repo_name: nhse-rap-cookiecutter
@@ -53,6 +56,8 @@ extra_css:
 extra:
   social:
     - icon: fontawesome/brands/github
+      # TODO: Update to nhsengland organization once transferred
+      # link: https://github.com/nhsengland/nhs-rap-cookiecutter
       link: https://github.com/nhsengland/nhse-rap-cookiecutter
     - icon: fontawesome/solid/envelope
       link: mailto:datascience@nhs.net
