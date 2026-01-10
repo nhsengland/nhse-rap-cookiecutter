@@ -1,0 +1,992 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A standardized project structure for NHS England Reproducible Analytical Pipelines (RAP)">
+      
+      
+        <meta name="author" content="NHS England - Data Science Team">
+      
+      
+        <link rel="canonical" href="https://nhsengland.github.io/nhse-rap-cookiecutter/">
+      
+      
+      
+        <link rel="next" href="getting_started/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="images/favicon/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>NHS RAP Cookiecutter Template</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--<type>:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M13%2014h-2V9h2m0%209h-2v-2h2M1%2021h22L12%202z%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/nhs_style.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nhs-rap-cookiecutter-template" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  NHS England Data Science custom header - based on nhsengland/datascience
+-->
+
+<!-- Determine class according to configuration -->
+
+
+  
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav
+    class="md-header__inner md-grid"
+    aria-label="header.title"
+  >
+
+    <!-- Button to open drawer -->
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="NHS RAP Cookiecutter Template"
+      class="md-header__button md-logo-nhs"
+      aria-label="NHS RAP Cookiecutter Template"
+      data-md-component="logo"
+    >
+      
+  <img src="images/logo/nhs-blue-on-white.jpg" alt="logo">
+
+    </a>
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NHS RAP Cookiecutter Template
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color palette -->
+    
+
+    <!-- Site language selector -->
+    
+
+    <!-- Button to open search modal -->
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository information -->
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nhsengland/nhse-rap-cookiecutter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nhse-rap-cookiecutter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+
+  <!-- Navigation tabs (sticky) -->
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="getting_started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="NHS RAP Cookiecutter Template" class="md-nav__button md-logo" aria-label="NHS RAP Cookiecutter Template" data-md-component="logo">
+      
+  <img src="images/logo/nhs-blue-on-white.jpg" alt="logo">
+
+    </a>
+    NHS RAP Cookiecutter Template
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nhsengland/nhse-rap-cookiecutter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nhse-rap-cookiecutter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-rap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is RAP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generated-project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generated Project Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Licence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acknowledgements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acknowledgements
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+
+
+
+
+
+
+                  
+
+
+  
+  
+
+
+<h1 id="nhs-rap-cookiecutter-template">NHS RAP Cookiecutter Template</h1>
+<p><a href="https://github.com/nhsengland/nhse-rap-cookiecutter"><img alt="Project Status: WIP" src="https://img.shields.io/badge/Status-Work%20In%20Progress-yellow" /></a>
+<a href="https://www.python.org/downloads/"><img alt="Python: 3.10 | 3.11 | 3.12" src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue" /></a>
+<a href="https://github.com/cookiecutter/cookiecutter"><img alt="Cookiecutter" src="https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter" /></a>
+<a href="https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/tests.yml"><img alt="tests" src="https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/tests.yml/badge.svg" /></a>
+<a href="https://github.com/astral-sh/ruff"><img alt="Code Style: Ruff" src="https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg" /></a>
+<a href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a></p>
+<p>A Cookiecutter template for creating standardised NHS England Reproducible Analytical Pipeline (RAP) projects.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This template provides a standardised project structure for developing Reproducible Analytical Pipelines within NHS England. It includes pre-configured tooling for testing, linting, documentation, and dependency management following modern Python development practices.</p>
+<p><strong>What you get:</strong></p>
+<ul>
+<li>Standardised structure following RAP principles</li>
+<li>Pre-configured tooling for testing, linting, and formatting</li>
+<li>Multiple environment options (uv, conda, poetry, virtualenv, etc.)</li>
+<li>NHS-branded documentation ready to customise</li>
+<li>Security scanning with gitleaks pre-commit hook</li>
+<li>Flexible configuration for different project needs</li>
+</ul>
+<hr />
+<h2 id="what-is-rap">What is RAP?</h2>
+<p>Reproducible Analytical Pipelines (RAP) is a set of tools, principles, and techniques to help you improve your analytical processes. With RAP, you leverage open-source tools to make your work more efficient, more reusable, and less error-prone.</p>
+<p>Learn more at the <a href="https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/what_is_RAP/">NHS RAP Community of Practice</a>.</p>
+<p><strong>Core RAP Principles:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Automation</strong></td>
+<td>Minimise manual, error-prone steps. Automate data retrieval, processing, and output generation.</td>
+</tr>
+<tr>
+<td><strong>Modular, reusable code</strong></td>
+<td>Write code in independent, loosely-coupled functions that can be tested and reused.</td>
+</tr>
+<tr>
+<td><strong>Transparency</strong></td>
+<td>Publish code openly under appropriate licences to improve trust and collaboration.</td>
+</tr>
+<tr>
+<td><strong>Open-source tools</strong></td>
+<td>Use Python, R, SQL, and other freely available languages instead of proprietary software.</td>
+</tr>
+<tr>
+<td><strong>Version control</strong></td>
+<td>Use Git to track changes, enable collaboration, and maintain an audit trail.</td>
+</tr>
+<tr>
+<td><strong>Good coding practices</strong></td>
+<td>Follow standards like PEP8, write clear documentation, and use logical project structures.</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Implement automated tests to ensure reliability and catch errors early.</td>
+</tr>
+<tr>
+<td><strong>Peer review</strong></td>
+<td>Review code collaboratively to ensure quality, accuracy, and adherence to standards.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>This package is not published to PyPI. Install directly from GitHub:</p>
+<p><strong>pipx</strong> (recommended for CLI tools):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pipx<span class="w"> </span>install<span class="w"> </span>git+https://github.com/nhsengland/nhse-rap-cookiecutter.git
+</code></pre></div>
+<p>See the <a href="https://pipx.pypa.io/stable/">pipx documentation</a> for installation instructions.</p>
+<p><strong>uv</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>git+https://github.com/nhsengland/nhse-rap-cookiecutter.git
+</code></pre></div>
+<p>See the <a href="https://docs.astral.sh/uv/">uv documentation</a> for installation instructions.</p>
+<p><strong>pip</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/nhsengland/nhse-rap-cookiecutter.git
+</code></pre></div>
+<hr />
+<h2 id="quick-start">Quick Start</h2>
+<p><strong>Using the CLI:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nhs-rap-template
+</code></pre></div>
+<p><strong>Using cookiecutter directly:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+</code></pre></div>
+<hr />
+<h2 id="configuration-options">Configuration Options</h2>
+<p>The template prompts for the following:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Option</th>
+<th>Description</th>
+<th>Choices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project</strong></td>
+<td>project_name</td>
+<td>Human-readable project name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>description</td>
+<td>Brief project description</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>author_name</td>
+<td>Your full name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>author_email</td>
+<td>Your email address</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>organization_name</td>
+<td>Your organisation</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>organization_email</td>
+<td>Organisation contact email</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td>python_version_number</td>
+<td>Minimum Python version</td>
+<td>3.10, 3.11, 3.12</td>
+</tr>
+<tr>
+<td></td>
+<td>environment_manager</td>
+<td>Virtual environment tool</td>
+<td>virtualenv, conda, pipenv, uv, pixi, poetry, none</td>
+</tr>
+<tr>
+<td></td>
+<td>dependency_file</td>
+<td>Dependency management file</td>
+<td>requirements.txt, pyproject.toml, environment.yml, Pipfile</td>
+</tr>
+<tr>
+<td></td>
+<td>pydata_packages</td>
+<td>Include pandas, numpy, matplotlib</td>
+<td>yes, no</td>
+</tr>
+<tr>
+<td><strong>Options</strong></td>
+<td>include_code_scaffold</td>
+<td>Include example code modules</td>
+<td>yes, no</td>
+</tr>
+<tr>
+<td></td>
+<td>testing_framework</td>
+<td>Testing framework</td>
+<td>pytest, unittest</td>
+</tr>
+<tr>
+<td></td>
+<td>license</td>
+<td>Project licence</td>
+<td>MIT, BSD-3-Clause, none</td>
+</tr>
+<tr>
+<td></td>
+<td>documentation</td>
+<td>Documentation tool</td>
+<td>mkdocs, none</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="generated-project-structure">Generated Project Structure</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>your-project/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── data/
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>│   ├── external/        # Data from third-party sources
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>│   ├── interim/         # Intermediate transformed data
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>│   ├── processed/       # Final canonical datasets
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>│   └── raw/             # Original immutable data
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>├── docs/                # MkDocs documentation with NHS styling
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>├── models/              # Trained models and predictions
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>├── notebooks/           # Jupyter notebooks for exploration
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>├── references/          # Data dictionaries and documentation
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>├── reports/
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>│   └── figures/         # Generated graphics
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>├── tests/
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>│   ├── pytest/          # Pytest tests
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>│   └── unittest/        # Unittest tests
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>├── your_module/         # Source code package
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>│   ├── __init__.py
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>│   ├── config.py        # Configuration management
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>│   ├── dataset.py       # Data loading and processing
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>│   ├── features.py      # Feature engineering
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>│   ├── plots.py         # Visualisation functions
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>│   └── modeling/
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>│       ├── train.py     # Model training
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>│       └── predict.py   # Model inference
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>├── LICENSE
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>├── Makefile             # Convenience commands
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>├── README.md
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>└── pyproject.toml       # Project configuration and dependencies
+</code></pre></div>
+<p>Each directory serves a specific purpose in the RAP workflow. The structure follows data science best practices while accommodating NHS-specific requirements.</p>
+<hr />
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="getting_started/">Getting Started</a> - Step-by-step guide to your first project</li>
+<li><a href="usage/">Usage Guide</a> - Configuration options and workflows</li>
+<li><a href="contributing/">Contributing</a> - Help improve the template</li>
+</ul>
+<hr />
+<h2 id="licence">Licence</h2>
+<p>Unless stated otherwise, the codebase is released under the <a href="https://github.com/nhsengland/nhse-rap-cookiecutter/blob/main/LICENSE">MIT Licence</a>. This covers both the codebase and any sample code in the documentation.</p>
+<p>HTML and Markdown documentation is © Crown copyright and available under the terms of the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government 3.0</a> licence.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>This template is based on <a href="https://github.com/drivendataorg/cookiecutter-data-science">Cookiecutter Data Science</a>, adapted for NHS England RAP standards and modern Python tooling.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</head>
+
+<!-- Code for the next arrow from Material for MkDocs -->
+<footer class="md-footer">
+   
+  <nav
+    class="md-footer__inner md-grid"
+    aria-label="footer.title"
+    
+  >
+      
+    <a
+      href="getting_started/"
+      class="md-footer__link md-footer__link--next"
+      aria-label="Next: Getting Started"
+      rel="next"
+    >
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+          <span class="md-footer__direction"> Next </span>
+          Getting Started
+        </div>
+      </div>
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+      </div>
+    </a>
+    
+  </nav>
+  
+</footer>
+
+<footer class="footer">
+  <div class="footer_left">
+    <a href="mailto:datascience@nhs.net">Contact Us</a>
+    <p>Developed by <a href="https://www.england.nhs.uk/">NHS England</a> Direct Commissioning and the Data Science Profession</p>
+    <p>
+      View the Data Science team on
+      <a href="https://github.com/nhsengland/datascience"
+        >GitHub</a
+      >
+    </p>
+  </div>
+
+  <div class="legal">
+    <div class="footer_left">
+    <p>&copy; 2025 Crown Copyright (NHS England)</p>
+    <p>All content is available under the
+        <a
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          >Open Government Licence v3.0</a
+        >, except where otherwise stated.
+      </p>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["search.share", "content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.path", "navigation.top", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="javascripts/mermaid.mjs" type="module"></script>
+      
+    
+  </body>
+</html>
