@@ -1,7 +1,6 @@
 """Tests for NHS RAP Cookiecutter Template."""
 
 
-
 def test_template_generates_successfully(cookies):
     """Test that the template generates successfully with default values."""
     result = cookies.bake()

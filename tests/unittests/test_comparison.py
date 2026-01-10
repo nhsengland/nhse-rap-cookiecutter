@@ -203,11 +203,7 @@ class TestMethodComparison:
             capture_output=True,
         )
 
-        cli_precommit = (
-            cli_output / "project_name" / ".pre-commit-config.yaml"
-        ).read_text()
-        cc_precommit = (
-            cc_output / "project_name" / ".pre-commit-config.yaml"
-        ).read_text()
+        cli_precommit = (cli_output / "project_name" / ".pre-commit-config.yaml").read_text()
+        cc_precommit = (cc_output / "project_name" / ".pre-commit-config.yaml").read_text()
 
         assert cli_precommit == cc_precommit
