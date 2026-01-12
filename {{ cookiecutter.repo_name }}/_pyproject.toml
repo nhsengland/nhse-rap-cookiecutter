@@ -14,7 +14,7 @@ authors = [
 {% endif %}
 {% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }
 {% endif %}classifiers = [
-    "Programming Language :: Python :: 3",
+"Programming Language :: Python :: 3",
     {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
 ]
 version = "0.0.1"

@@ -22,7 +22,7 @@ def main(
     output_path: Path = FIGURES_DIR / "plot.png",
     # -----------------------------------------
 ) -> None:
-    """Generate visualizations from processed data.
+    """Generate visualisations from processed data.
 
     Args:
         input_path: Path to the processed input data file.

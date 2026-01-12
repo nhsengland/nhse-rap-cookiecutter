@@ -10,7 +10,7 @@ The project follows the standard RAP (Reproducible Analytical Pipeline) structur
   - `config.py` - Configuration management
   - `dataset.py` - Data loading and processing
   - `features.py` - Feature engineering
-  - `plots.py` - Visualization utilities
+  - `plots.py` - Visualisation utilities
   - `modeling/` - Machine learning models
 - `data/` - Data storage (raw, interim, processed, external)
 - `notebooks/` - Jupyter notebooks for exploration
@@ -65,7 +65,7 @@ builder = FeatureBuilder()
 features = builder.transform(data)
 ```
 
-### Creating Visualizations
+### Creating Visualisations
 
 ```python
 from {{ cookiecutter.module_name }}.plots import create_plot

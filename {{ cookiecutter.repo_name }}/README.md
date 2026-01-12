@@ -54,7 +54,7 @@
     │   ├── predict.py          <- Code to run model inference with trained models          
     │   └── train.py            <- Code to train models
     │
-    └── plots.py                <- Code to create visualizations
+    └── plots.py                <- Code to create visualisations
 ```
 
 --------
