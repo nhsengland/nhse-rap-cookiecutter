@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "nhse-rap-cookiecutter"
-version = "0.1.0"
+version = "1.0.1"
 description = "A cookiecutter template for NHS England Reproducible Analytical Pipelines (RAP) projects."
 authors = [
   { name = "Joe Wilson", email = "joseph.wilson8@nhs.net" },
@@ -13,7 +13,7 @@ authors = [
 license = { file = "LICENSE" }
 readme = "README.md"
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",

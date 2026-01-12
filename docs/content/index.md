@@ -1,6 +1,6 @@
 # NHS RAP Cookiecutter Template
 
-[![Project Status: WIP](https://img.shields.io/badge/Status-Work%20In%20Progress-yellow)](https://github.com/nhsengland/nhse-rap-cookiecutter)
+[![Project Status: Active](https://img.shields.io/badge/Status-Active-green)](https://github.com/nhsengland/nhse-rap-cookiecutter)
 [![Python: 3.10 | 3.11 | 3.12](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
 [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter)
 [![Checks](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml/badge.svg)](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml)
