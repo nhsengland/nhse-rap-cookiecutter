@@ -148,8 +148,8 @@ Full documentation: [https://nhsengland.github.io/nhse-rap-cookiecutter](https:/
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and contribution guidelines.
 
 ```bash
-uv run pytest tests/unittests/ -v                                              # Run tests
-uv run pytest tests/unittests/ --cov=nhse_rap_cookiecutter --cov-report=term   # With coverage
+uv run pytest tests/ -v                                              # Run tests
+uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term   # With coverage
 uv run ruff format . && uv run ruff check .                                    # Format and lint
 make docs-serve                                                                # Serve docs with live reload
 ```

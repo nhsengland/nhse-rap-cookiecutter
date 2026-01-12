@@ -29,13 +29,13 @@ All tests must pass before submitting changes:
 
 ```bash
 # Run all tests
-uv run pytest tests/unittests/ -v
+uv run pytest tests/ -v
 
 # Run with coverage
-uv run pytest tests/unittests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
+uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
 
 # Run specific test file
-uv run pytest tests/unittests/test_cli.py -v
+uv run pytest tests/test_cli.py -v
 ```
 
 ## Code Quality
