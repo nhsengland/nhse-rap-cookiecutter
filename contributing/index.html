@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A standardized project structure for NHS England Reproducible Analytical Pipelines (RAP)">
+        <meta name="description" content="A standardised project structure for NHS England Reproducible Analytical Pipelines (RAP)">
       
       
         <meta name="author" content="NHS England - Data Science Team">
@@ -754,10 +754,10 @@
 </code></pre></div>
 <h3 id="running-tests">Running Tests</h3>
 <p>All tests must pass before submitting changes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/unittests/<span class="w"> </span>-v
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>-v
 </code></pre></div>
 <p>With coverage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/unittests/<span class="w"> </span>--cov<span class="o">=</span>nhse_rap_cookiecutter<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/<span class="w"> </span>--cov<span class="o">=</span>nhse_rap_cookiecutter<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
 </code></pre></div>
 <h3 id="code-quality">Code Quality</h3>
 <p>Format and lint before committing:</p>
@@ -824,7 +824,7 @@
 <a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
 <h2 id="testing-standards">Testing Standards</h2>
-<p>Tests are organised in <code>tests/unittests/</code> using pytest:</p>
+<p>Tests are organised in <code>tests/</code> using pytest:</p>
 <table>
 <thead>
 <tr>
