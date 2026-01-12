@@ -6,7 +6,7 @@
 
 This project follows NHS England RAP (Reproducible Analytical Pipeline) standards and includes:
 
-- Standardized project structure
+- Standardised project structure
 - Automated testing with pytest
 - Code quality checks with ruff
 - Documentation with MkDocs

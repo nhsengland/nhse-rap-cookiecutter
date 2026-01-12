@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: cookiecutter-validate
         name: Validate cookiecutter template
-        entry: bash -c 'uv run cookiecutter --no-input . --output-dir /tmp/cc-test && rm -rf /tmp/cc-test'
+        entry: bash -c 'rm -rf /tmp/cc-test && uv run cookiecutter --no-input . --output-dir /tmp/cc-test && rm -rf /tmp/cc-test'
         language: system
         pass_filenames: false
         files: 'cookiecutter\.json|{{ cookiecutter\.repo_name }}/.*'

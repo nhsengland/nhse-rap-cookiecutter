@@ -1,3 +1,3 @@
-"""NHS RAP Cookiecutter Template - A standardized project structure for NHS England RAP projects."""
+"""NHS RAP Cookiecutter Template - A standardised project structure for NHS England RAP projects."""
 
-__version__ = "0.1.0"
+__version__ = "1.0.1"

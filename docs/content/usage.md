@@ -105,7 +105,7 @@ When you run `nhs-rap-template`, you'll be prompted for:
 
 ## Generated Project Structure
 
-The template creates a standardized RAP project with:
+The template creates a standardised RAP project with:
 
 - **Data folders**: raw, interim, processed, external
 - **Source code**: Python package structure with your module
@@ -143,7 +143,7 @@ After creating your project:
 
 ## Customizing After Generation
 
-All generated files can be customized:
+All generated files can be customised:
 
 - Edit `pyproject.toml` for dependencies
 - Modify `Makefile` for custom commands
@@ -213,7 +213,8 @@ default_context:
     author_name: "Jane Smith"
     author_email: "jane.smith@nhs.net"
     organization_name: "NHS England"
-    organization_email: "datascience@nhs.net"
+    team_name: "Data Science Team"
+    team_email: "datascience@nhs.net"
     python_version_number: "3.11"
     environment_manager: "uv"
     linting_and_formatting: "ruff"

@@ -1,7 +1,5 @@
 # {{cookiecutter.project_name}}
 
-<!-- TODO: Update to nhsengland organization once transferred -->
-<!-- <a target="_blank" href="https://github.com/nhsengland/nhs-rap-cookiecutter"> -->
 <a target="_blank" href="https://github.com/nhsengland/nhse-rap-cookiecutter">
     <img src="https://img.shields.io/badge/NHS%20RAP-Project%20template-005EB8?logo=cookiecutter" />
 </a>
@@ -56,7 +54,7 @@
     │   ├── predict.py          <- Code to run model inference with trained models          
     │   └── train.py            <- Code to train models
     │
-    └── plots.py                <- Code to create visualizations
+    └── plots.py                <- Code to create visualisations
 ```
 
 --------

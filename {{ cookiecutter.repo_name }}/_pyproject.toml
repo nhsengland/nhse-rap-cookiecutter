@@ -4,24 +4,26 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = {{ cookiecutter.module_name|tojson }}
-version = "0.0.1"
 description = {{ cookiecutter.description|tojson }}
 authors = [
   { name = {{ cookiecutter.author_name|tojson }}, email = {{ cookiecutter.author_email|tojson }} },
 ]
-maintainers = [
-  { name = {{ cookiecutter.organization_name|tojson }}, email = {{ cookiecutter.organization_email|tojson }} },
+{% if cookiecutter.team_email %}maintainers = [
+  { name = {{ cookiecutter.team_name|tojson }}, email = {{ cookiecutter.team_email|tojson }} },
 ]
-requires-python = ">=3.10"
-{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }{% endif %}
-readme = "README.md"
-classifiers = [
-    "Programming Language :: Python :: 3",
+{% endif %}
+{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }
+{% endif %}classifiers = [
+"Programming Language :: Python :: 3",
     {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
 ]
+version = "0.0.1"
+requires-python = ">=3.10"
+readme = "README.md"
 
 [project.optional-dependencies]
 dev = []
+
 {% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 [tool.black]
 line-length = 99
@@ -45,7 +47,7 @@ src = ["{{ cookiecutter.module_name }}"]
 include = ["pyproject.toml", "{{ cookiecutter.module_name }}/**/*.py"]
 
 [tool.ruff.lint]
-extend-select = ["I"]  # Add import sorting
+extend-select = ["I"] # Add import sorting
 
 [tool.ruff.lint.isort]
 known-first-party = ["{{ cookiecutter.module_name }}"]

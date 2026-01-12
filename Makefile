@@ -22,7 +22,7 @@ format-check:
 
 # Run tests
 test:
-	uv run pytest tests/unittests/ -v
+	uv run pytest tests/ -v
 
 # Run all checks (lint + format-check + test)
 check: lint format-check test

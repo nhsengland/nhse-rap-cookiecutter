@@ -1,39 +1,39 @@
 name: Deploy Documentation
 
 on:
-    push:
-        branches: [main]
-        paths:
-            - "docs/**"
-            - "mkdocs.yml"
-            - ".github/workflows/deploy-docs.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - ".github/workflows/deploy-docs.yml"
 
-    workflow_dispatch:
+  workflow_dispatch:
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
-            - name: Install uv
-              uses: astral-sh/setup-uv@v7
-              with:
-                  enable-cache: true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
 
-            - name: Set up Python
-              uses: actions/setup-python@v6
-              with:
-                  python-version-file: "pyproject.toml"
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: "pyproject.toml"
 
-            - name: Install dependencies
-              run: uv sync --extra docs
+      - name: Install dependencies
+        run: uv sync --extra docs
 
-            - name: Deploy to GitHub Pages
-              run: uv run mkdocs gh-deploy --force --clean --verbose
+      - name: Deploy to GitHub Pages
+        run: uv run mkdocs gh-deploy --force --clean --verbose

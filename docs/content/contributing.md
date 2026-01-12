@@ -36,13 +36,13 @@ git checkout -b feature/your-feature-name
 All tests must pass before submitting changes:
 
 ```bash
-uv run pytest tests/unittests/ -v
+uv run pytest tests/ -v
 ```
 
 With coverage:
 
 ```bash
-uv run pytest tests/unittests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
+uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
 ```
 
 ### Code Quality
@@ -95,7 +95,7 @@ def process_data(input_path: Path, config: dict) -> pd.DataFrame:
 
 ## Testing Standards
 
-Tests are organised in `tests/unittests/` using pytest:
+Tests are organised in `tests/` using pytest:
 
 | Guideline | Description |
 |-----------|-------------|

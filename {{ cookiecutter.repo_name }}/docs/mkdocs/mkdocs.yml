@@ -60,9 +60,9 @@ extra_css:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/{{ cookiecutter.organization_name | lower | replace(' ', '') }}/{{ cookiecutter.repo_name }}
+      link: https://github.com/{{ cookiecutter.organization_name | lower | replace(' ', '') }}/{{ cookiecutter.repo_name }}{% if cookiecutter.team_email %}
     - icon: fontawesome/solid/envelope
-      link: mailto:{{ cookiecutter.organization_email }}
+      link: mailto:{{ cookiecutter.team_email }}{% endif %}
   generator: false
 
 copyright: Copyright &copy; {% now 'utc', '%Y' %} Crown Copyright ({{ cookiecutter.organization_name }})

@@ -1,6 +1,6 @@
 # NHS RAP Cookiecutter Template
 
-[![Project Status: WIP](https://img.shields.io/badge/Status-Work%20In%20Progress-yellow)](https://github.com/nhsengland/nhse-rap-cookiecutter)
+[![Project Status: Active](https://img.shields.io/badge/Status-Active-green)](https://github.com/nhsengland/nhse-rap-cookiecutter)
 [![Python: 3.10 | 3.11 | 3.12](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
 [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter)
 [![Checks](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml/badge.svg)](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml)
@@ -83,8 +83,9 @@ The template prompts for the following information:
 | | description | Brief project description | Text |
 | | author_name | Your full name | Text |
 | | author_email | Your email address | Text |
-| | organization_name | Your organisation | Text |
-| | organization_email | Organisation contact email | Text |
+| | organization_name | Your organisation (fixed: NHS England) | Text |
+| | team_name | Your team name | Text |
+| | team_email | Team contact email (optional) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12 |
 | | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
 | | dependency_file | Dependency management file | requirements.txt, pyproject.toml, environment.yml, Pipfile |
@@ -148,8 +149,8 @@ Full documentation: [https://nhsengland.github.io/nhse-rap-cookiecutter](https:/
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and contribution guidelines.
 
 ```bash
-uv run pytest tests/unittests/ -v                                              # Run tests
-uv run pytest tests/unittests/ --cov=nhse_rap_cookiecutter --cov-report=term   # With coverage
+uv run pytest tests/ -v                                              # Run tests
+uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term   # With coverage
 uv run ruff format . && uv run ruff check .                                    # Format and lint
 make docs-serve                                                                # Serve docs with live reload
 ```
