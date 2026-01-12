@@ -7,11 +7,11 @@ This guide covers common tasks and workflows for working with {{ cookiecutter.pr
 The project follows the standard RAP (Reproducible Analytical Pipeline) structure:
 
 - `{{ cookiecutter.module_name }}/` - Main source code
-  - `config.py` - Configuration management
-  - `dataset.py` - Data loading and processing
-  - `features.py` - Feature engineering
-  - `plots.py` - Visualisation utilities
-  - `modeling/` - Machine learning models
+    - `config.py` - Configuration management
+    - `dataset.py` - Data loading and processing
+    - `features.py` - Feature engineering
+    - `plots.py` - Visualisation utilities
+    - `modeling/` - Machine learning models
 - `data/` - Data storage (raw, interim, processed, external)
 - `notebooks/` - Jupyter notebooks for exploration
 - `tests/` - Unit and integration tests
@@ -99,6 +99,7 @@ predictions = predict(new_data, model_path="models/model.pkl")
 ## Running the Pipeline
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Run the full pipeline
 uv run python -m {{ cookiecutter.module_name }}
@@ -107,7 +108,9 @@ uv run python -m {{ cookiecutter.module_name }}
 uv run python -m {{ cookiecutter.module_name }}.dataset
 uv run python -m {{ cookiecutter.module_name }}.modeling.train
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Run the full pipeline
 poetry run python -m {{ cookiecutter.module_name }}
@@ -116,7 +119,9 @@ poetry run python -m {{ cookiecutter.module_name }}
 poetry run python -m {{ cookiecutter.module_name }}.dataset
 poetry run python -m {{ cookiecutter.module_name }}.modeling.train
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 # Run the full pipeline
 pixi run python -m {{ cookiecutter.module_name }}
@@ -125,7 +130,9 @@ pixi run python -m {{ cookiecutter.module_name }}
 pixi run python -m {{ cookiecutter.module_name }}.dataset
 pixi run python -m {{ cookiecutter.module_name }}.modeling.train
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Run the full pipeline
 pipenv run python -m {{ cookiecutter.module_name }}
@@ -134,7 +141,9 @@ pipenv run python -m {{ cookiecutter.module_name }}
 pipenv run python -m {{ cookiecutter.module_name }}.dataset
 pipenv run python -m {{ cookiecutter.module_name }}.modeling.train
 ```
+
 {% else %}
+
 ```bash
 # Run the full pipeline
 python -m {{ cookiecutter.module_name }}
@@ -143,6 +152,7 @@ python -m {{ cookiecutter.module_name }}
 python -m {{ cookiecutter.module_name }}.dataset
 python -m {{ cookiecutter.module_name }}.modeling.train
 ```
+
 {% endif %}
 
 ## Working with Notebooks
@@ -155,30 +165,40 @@ Jupyter notebooks are stored in the `notebooks/` directory. Use them for:
 - Documenting analysis
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Start Jupyter
 uv run jupyter lab
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Start Jupyter
 poetry run jupyter lab
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 # Start Jupyter
 pixi run jupyter lab
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Start Jupyter
 pipenv run jupyter lab
 ```
+
 {% else %}
+
 ```bash
 # Start Jupyter
 jupyter lab
 ```
+
 {% endif %}
 
 ## Code Quality
@@ -186,6 +206,7 @@ jupyter lab
 ### Running Tests
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Run all tests
 uv run pytest
@@ -196,7 +217,9 @@ uv run pytest tests/test_dataset.py
 # Run with coverage
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Run all tests
 poetry run pytest
@@ -207,7 +230,9 @@ poetry run pytest tests/test_dataset.py
 # Run with coverage
 poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 # Run all tests
 pixi run pytest
@@ -218,7 +243,9 @@ pixi run pytest tests/test_dataset.py
 # Run with coverage
 pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Run all tests
 pipenv run pytest
@@ -229,7 +256,9 @@ pipenv run pytest tests/test_dataset.py
 # Run with coverage
 pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
+
 {% else %}
+
 ```bash
 # Run all tests
 pytest
@@ -240,11 +269,13 @@ pytest tests/test_dataset.py
 # Run with coverage
 pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
+
 {% endif %}
 
 ### Code Formatting and Linting
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Check code style
 uv run ruff check .
@@ -255,7 +286,9 @@ uv run ruff format .
 # Run both
 uv run ruff check . && uv run ruff format .
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Check code style
 poetry run ruff check .
@@ -266,7 +299,9 @@ poetry run ruff format .
 # Run both
 poetry run ruff check . && poetry run ruff format .
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 # Check code style
 pixi run ruff check .
@@ -277,7 +312,9 @@ pixi run ruff format .
 # Run both
 pixi run ruff check . && pixi run ruff format .
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Check code style
 pipenv run ruff check .
@@ -288,7 +325,9 @@ pipenv run ruff format .
 # Run both
 pipenv run ruff check . && pipenv run ruff format .
 ```
+
 {% else %}
+
 ```bash
 # Check code style
 ruff check .
@@ -299,6 +338,7 @@ ruff format .
 # Run both
 ruff check . && ruff format .
 ```
+
 {% endif %}
 
 ## Best Practices
