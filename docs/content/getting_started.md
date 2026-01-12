@@ -21,7 +21,7 @@ This package is not yet published to PyPI. Install directly from GitHub:
     ```bash
     pipx install git+https://github.com/nhsengland/nhse-rap-cookiecutter.git
     ```
-    
+
     [Learn more about pipx](https://pipx.pypa.io/stable/)
 
 === "uv"
@@ -29,7 +29,7 @@ This package is not yet published to PyPI. Install directly from GitHub:
     ```bash
     uv tool install git+https://github.com/nhsengland/nhse-rap-cookiecutter.git
     ```
-    
+
     [Learn more about uv](https://docs.astral.sh/uv/)
 
 === "pip"
