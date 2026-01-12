@@ -4,8 +4,9 @@
     "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "author_name": "Your Name",
     "author_email": "your.email@example.com",
-    "organization_name": "Your Organization",
-    "organization_email": "contact@example.com",
+    "organization_name": "NHS England",
+    "team_name": "Your Team",
+    "team_email": "",
     "description": "A short description of the project.",
     "python_version_number": "3.10",
     "environment_manager": [
