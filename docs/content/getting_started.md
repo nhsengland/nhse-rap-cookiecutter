@@ -89,8 +89,9 @@ repo_name [my_nhs_analysis]:
 module_name [my_nhs_analysis]:
 author_name [Your Name]: Jane Smith
 author_email [your.email@example.com]: jane.smith@nhs.net
-organization_name [Your Organization]: NHS England
-organization_email [contact@example.com]: datascience@nhs.net
+organization_name [NHS England]:
+team_name [Your Team]: Data Science Team
+team_email []: datascience@nhs.net
 description [A short description of the project.]: Analysis of patient outcomes
 python_version_number [3.10]: 3.11
 Select environment_manager:

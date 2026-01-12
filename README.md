@@ -83,8 +83,9 @@ The template prompts for the following information:
 | | description | Brief project description | Text |
 | | author_name | Your full name | Text |
 | | author_email | Your email address | Text |
-| | organization_name | Your organisation | Text |
-| | organization_email | Organisation contact email | Text |
+| | organization_name | Your organisation (fixed: NHS England) | Text |
+| | team_name | Your team name | Text |
+| | team_email | Team contact email (optional) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12 |
 | | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
 | | dependency_file | Dependency management file | requirements.txt, pyproject.toml, environment.yml, Pipfile |
