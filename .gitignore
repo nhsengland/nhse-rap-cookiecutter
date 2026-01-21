@@ -6,6 +6,10 @@ docs/docs/_partials/*/*.html
 # test cache
 manual_test/
 
+# tmp folder for testing cookiecutter output
+tmp/*
+!tmp/.gitkeep
+
 # other local dev info
 .vscode/
 
