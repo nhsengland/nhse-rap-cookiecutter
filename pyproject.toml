@@ -30,7 +30,7 @@ dependencies = ["click", "cookiecutter", "tomlkit"]
 nhs-rap-template = "nhse_rap_cookiecutter.cli:main"
 
 [project.optional-dependencies]
-dev = ["build", "pre-commit", "pytest", "pytest-cookies", "ruff"]
+dev = ["build", "pre-commit", "pytest", "pytest-cookies", "ruff", "loguru", "typer", "pyyaml"]
 docs = ["mkdocs", "mkdocs-material", "mkdocs-include-markdown-plugin"]
 
 [project.urls]
