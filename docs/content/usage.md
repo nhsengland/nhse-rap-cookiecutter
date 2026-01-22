@@ -257,3 +257,63 @@ cd nhse-rap-cookiecutter
 # Use your modified template
 cookiecutter ../nhse-rap-cookiecutter
 ```
+
+## Customizing Your Generated Project
+
+### Customizing Badges
+
+The generated project includes a comprehensive set of badges at the top of the README. These provide quick information about the project status, technology, and quality metrics.
+
+#### Default Badges
+
+Your generated project will include these badges automatically:
+
+- **Project Status**: Active (default)
+- **RAP Status**: Work in Progress (default)
+- **Cookiecutter**: Links to cookiecutter project
+- **NHS England RAP**: Links to this template
+- **Python Version**: Automatically populated from your configuration
+- **License**: MIT or BSD-3-Clause (if selected during generation)
+- **Code Style**: Ruff or Black/Flake8/isort (based on your selection)
+- **Pre-commit**: Pre-commit enabled
+
+#### Updating Status Badges
+
+**Project Status**: Change the badge to reflect your project's current state. You can uncomment the appropriate badge from the commented section or edit the default "Active" badge. Status options include:
+
+- **Concept**: Early planning stage
+- **WIP**: Work in progress, under active development
+- **Active**: Actively maintained and used
+- **Suspended**: Temporarily paused
+- **Abandoned**: No longer maintained
+- **Moved**: Relocated to another repository
+- **Unsupported**: No longer officially supported
+
+**RAP Status**: Update to reflect your [Reproducible Analytical Pipeline maturity level](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/):
+
+- **Work in Progress**: Beginning RAP journey
+- **Baseline**: Core RAP requirements met (version control, peer review, documentation)
+- **Silver**: Enhanced capabilities (automated testing, continuous integration, functions/classes)
+- **Gold**: Advanced practices (package/repository, error handling, logging, documentation website)
+
+#### Adding CI/CD Badges
+
+Once you set up GitHub Actions workflows, uncomment the relevant badges in the commented section of your README and ensure the workflow file names match your setup (e.g., `tests.yml`, `lint.yml`, `docs.yml`).
+
+Example workflow badges provided:
+```markdown
+[![Tests](https://github.com/nhsengland/your-project/actions/workflows/tests.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/tests.yml)
+[![Lint](https://github.com/nhsengland/your-project/actions/workflows/lint.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/lint.yml)
+[![Docs](https://github.com/nhsengland/your-project/actions/workflows/docs.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/docs.yml)
+```
+
+#### Additional Optional Badges
+
+The commented section in your generated README includes many optional badges you can add:
+
+- **Documentation Status**: Link to your documentation site
+- **Latest Release**: Show current version from GitHub releases
+- **PyPI Version**: If publishing to PyPI
+- **OGL3 License**: For documentation (if applicable)
+
+For more badge options and customization, see [shields.io](https://shields.io/).
