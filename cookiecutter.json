@@ -5,6 +5,7 @@
     "author_name": "Your Name",
     "author_email": "your.email@example.com",
     "organization_name": "NHS England",
+    "github_organization": "nhsengland",
     "team_name": "Your Team",
     "team_email": "",
     "description": "A short description of the project.",
