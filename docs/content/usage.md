@@ -279,15 +279,15 @@ Your generated project will include these badges automatically:
 
 #### Updating Status Badges
 
-**Project Status**: Change the badge to reflect your project's current state. You can uncomment the appropriate badge from the commented section or edit the default "Active" badge. Status options include:
+**Project Status**: Change the badge to reflect your project's current state. You can uncomment the appropriate badge from the commented section or edit the default "Active" badge. Status options follow a data science repository lifecycle:
 
-- **Concept**: Early planning stage
-- **WIP**: Work in progress, under active development
-- **Active**: Actively maintained and used
-- **Suspended**: Temporarily paused
-- **Abandoned**: No longer maintained
-- **Moved**: Relocated to another repository
-- **Unsupported**: No longer officially supported
+- **Concept**: Brainstorming phase, no code or only rough scripts
+- **WIP**: Work in progress, active development occurring
+- **PoC**: Proof of Concept, code exists to prove hypothesis but not production-ready
+- **MVP**: Minimum Viable Product, functional model/pipeline reliable for initial users
+- **Active**: Actively maintained and updated
+- **On Hold**: Development paused (data availability, shifting priorities, etc.)
+- **Archived**: Project finished or abandoned, read-only
 
 **RAP Status**: Update to reflect your [Reproducible Analytical Pipeline maturity level](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/):
 
@@ -301,6 +301,7 @@ Your generated project will include these badges automatically:
 Once you set up GitHub Actions workflows, uncomment the relevant badges in the commented section of your README and ensure the workflow file names match your setup (e.g., `tests.yml`, `lint.yml`, `docs.yml`).
 
 Example workflow badges provided:
+
 ```markdown
 [![Tests](https://github.com/nhsengland/your-project/actions/workflows/tests.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/tests.yml)
 [![Lint](https://github.com/nhsengland/your-project/actions/workflows/lint.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/lint.yml)
