@@ -92,6 +92,7 @@ class TestCLIProjectGeneration:
             "setup.cfg",
             "LICENSE",
             ".env",
+            "badges.toml",
         }
         actual_files = {f.name for f in project_path.iterdir() if f.is_file()}
 

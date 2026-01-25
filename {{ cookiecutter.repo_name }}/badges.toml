@@ -1,0 +1,53 @@
+# ============================================================================
+# Badge Library
+# ============================================================================
+# Copy and paste badges from this file into your README.md or docs/index.md
+
+# ----------------------------------------------------------------------------
+# Project Status (Data Science Repository Lifecycle)
+# ----------------------------------------------------------------------------
+[project_status]
+concept = "[![Project Status: Concept](https://img.shields.io/badge/Project%20Status-Concept-lightgrey)]({{cookiecutter.repository_url}})"
+wip = "[![Project Status: WIP](https://img.shields.io/badge/Project%20Status-WIP-orange)]({{cookiecutter.repository_url}})"
+poc = "[![Project Status: PoC](https://img.shields.io/badge/Project%20Status-PoC-yellow)]({{cookiecutter.repository_url}})"
+mvp = "[![Project Status: MVP](https://img.shields.io/badge/Project%20Status-MVP-yellowgreen)]({{cookiecutter.repository_url}})"
+active = "[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green)]({{cookiecutter.repository_url}})"
+on_hold = "[![Project Status: On Hold](https://img.shields.io/badge/Project%20Status-On%20Hold-blue)]({{cookiecutter.repository_url}})"
+archived = "[![Project Status: Archived](https://img.shields.io/badge/Project%20Status-Archived-red)]({{cookiecutter.repository_url}})"
+
+# ----------------------------------------------------------------------------
+# RAP Status (Reproducible Analytical Pipeline Maturity)
+# ----------------------------------------------------------------------------
+[rap_status]
+wip = "[![RAP Status: Work in Progress](https://img.shields.io/badge/RAP%20Status-WIP-red)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/)"
+baseline = "[![RAP Status: Baseline](https://img.shields.io/badge/RAP%20Status-Baseline-orange)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/)"
+silver = "[![RAP Status: Silver](https://img.shields.io/badge/RAP%20Status-Silver-silver)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/)"
+gold = "[![RAP Status: Gold](https://img.shields.io/badge/RAP%20Status-Gold-gold)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/)"
+
+{% if cookiecutter.git_hosting_platform == "github" -%}
+# ----------------------------------------------------------------------------
+# GitHub CI/CD Badges
+# ----------------------------------------------------------------------------
+[github]
+tests = "[![Tests]({{cookiecutter.repository_url}}/actions/workflows/tests.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/tests.yml)"
+lint = "[![Lint]({{cookiecutter.repository_url}}/actions/workflows/lint.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/lint.yml)"
+docs = "[![Docs]({{cookiecutter.repository_url}}/actions/workflows/docs.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/docs.yml)"
+release = "[![Latest Release](https://img.shields.io/github/v/release/{{cookiecutter.organization_name | lower | replace(' ', '')}}/{{cookiecutter.repo_name}})]({{cookiecutter.repository_url}}/releases)"
+pages = "[![Documentation Status](https://img.shields.io/badge/docs-live-brightgreen)](https://{{cookiecutter.organization_name | lower | replace(' ', '')}}.github.io/{{cookiecutter.repo_name}}/)"
+
+{% endif -%}
+{% if cookiecutter.git_hosting_platform == "gitlab" -%}
+# ----------------------------------------------------------------------------
+# GitLab CI/CD Badges
+# ----------------------------------------------------------------------------
+[gitlab]
+pipeline = "[![Pipeline Status]({{cookiecutter.repository_url}}/badges/main/pipeline.svg)]({{cookiecutter.repository_url}}/-/commits/main)"
+coverage = "[![Coverage]({{cookiecutter.repository_url}}/badges/main/coverage.svg)]({{cookiecutter.repository_url}}/-/commits/main)"
+
+{% endif -%}
+# ----------------------------------------------------------------------------
+# Other Badges
+# ----------------------------------------------------------------------------
+[other]
+pypi = "[![PyPI Version](https://img.shields.io/pypi/v/{{cookiecutter.repo_name}})](https://pypi.org/project/{{cookiecutter.repo_name}}/)"
+ogl3 = "[![Licence: OGL3](https://img.shields.io/badge/Licence-OGL3-darkgrey)](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)"
