@@ -36,8 +36,8 @@ def sample_cookiecutter_config():
         "environment_manager": ["uv", "conda", "poetry", "none"],
         "linting_and_formatting": ["ruff", "flake8+black+isort"],
         "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
-        "docs": ["yes", "no"],
-        "include_code_scaffold": ["yes", "no"],
+        "docs": ["mkdocs", "none"],
+        "include_code_scaffold": ["Yes", "No"],
     }
 
 
@@ -60,7 +60,7 @@ def sample_test_configs():
         "full": {
             "project_name": "Full Project",
             "environment_manager": "conda",
-            "docs": "yes",
+            "docs": "mkdocs",
             "config_description": "Full test config",
         },
     }

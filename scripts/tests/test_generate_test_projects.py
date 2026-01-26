@@ -65,7 +65,7 @@ class TestLoadTestConfigs:
         assert "2" in str(mock_logger["info"].call_args)
 
     def test_returns_empty_dict_for_empty_yaml(self, tmp_path, mocker, mock_logger):
-        """Empty YAML file returns None."""
+        """Empty YAML file causes TypeError because yaml.safe_load returns None and len(None) fails."""
         config_file = tmp_path / "test_configs.yaml"
         config_file.write_text("")
 
