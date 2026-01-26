@@ -86,4 +86,5 @@ def test_template_with_mkdocs_documentation(cookies):
 
     assert result.exit_code == 0
     assert (result.project_path / "docs").is_dir()
-    assert (result.project_path / "docs" / "mkdocs").is_dir()
+    assert (result.project_path / "docs" / "content").is_dir()
+    assert (result.project_path / "mkdocs.yml").is_file()
