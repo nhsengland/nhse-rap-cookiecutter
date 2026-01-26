@@ -90,6 +90,7 @@ class TestCLIProjectGeneration:
             ".gitignore",
             ".pre-commit-config.yaml",
             "LICENSE",
+            "LICENSE-OGL",
             ".env",
             "badges.toml",
             "mkdocs.yml",
