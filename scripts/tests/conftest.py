@@ -1,4 +1,4 @@
-"""Shared pytest fixtures for generate_test_projects tests."""
+"""Shared pytest fixtures for generate_projects tests."""
 
 import pytest
 
@@ -14,11 +14,11 @@ def mock_logger(mocker):
         Each value is a MagicMock for that logger level
     """
     return {
-        "info": mocker.patch("scripts.generate_test_projects.logger.info"),
-        "warning": mocker.patch("scripts.generate_test_projects.logger.warning"),
-        "error": mocker.patch("scripts.generate_test_projects.logger.error"),
-        "success": mocker.patch("scripts.generate_test_projects.logger.success"),
-        "debug": mocker.patch("scripts.generate_test_projects.logger.debug"),
+        "info": mocker.patch("scripts.generate_projects.logger.info"),
+        "warning": mocker.patch("scripts.generate_projects.logger.warning"),
+        "error": mocker.patch("scripts.generate_projects.logger.error"),
+        "success": mocker.patch("scripts.generate_projects.logger.success"),
+        "debug": mocker.patch("scripts.generate_projects.logger.debug"),
     }
 
 
@@ -43,7 +43,7 @@ def sample_cookiecutter_config():
 
 @pytest.fixture
 def sample_test_configs():
-    """Sample test_configs.yaml data for testing.
+    """Sample configs.yaml data for testing.
 
     Returns
     -------
