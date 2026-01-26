@@ -65,6 +65,39 @@ uv run nhs-rap-template --no-input
 cookiecutter . --no-input
 ```
 
+## Template Development Guidelines
+
+### Dynamic Year Values
+
+Always use dynamic year values instead of hardcoding them. The approach depends on whether the file is processed by cookiecutter or by MkDocs:
+
+**For cookiecutter-processed files** (e.g., LICENSE, Python files):
+
+```jinja
+{# CORRECT - Processed by cookiecutter during generation #}
+Copyright (c) {% now 'utc', '%Y' %} NHS England
+
+{# WRONG - Hardcoded year #}
+Copyright (c) 2026 NHS England
+```
+
+**For MkDocs template files** (e.g., footer.html):
+
+```jinja
+{# CORRECT - Evaluated by MkDocs at build time #}
+&copy; {{ "now().year" }} Crown Copyright (NHS England)
+
+{# WRONG - Hardcoded year #}
+&copy; 2026 Crown Copyright (NHS England)
+```
+
+This ensures generated projects always display the current year without manual updates.
+
+**Files using dynamic years:**
+- `{{ cookiecutter.repo_name }}/LICENSE` - Uses cookiecutter's `{% now 'utc', '%Y' %}`
+- `{{ cookiecutter.repo_name }}/docs/content/overrides/partials/footer.html` - Uses MkDocs' `{{ "now().year" }}`
+- `docs/overrides/partials/footer.html` - Cookiecutter repo footer, uses MkDocs' `{{ "now().year" }}`
+
 ## Making Changes
 
 1. Create a new branch for your changes:
