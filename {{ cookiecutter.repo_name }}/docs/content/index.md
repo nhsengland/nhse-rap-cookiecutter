@@ -14,19 +14,40 @@ Copy badges from badges.toml and paste them above to customize your documentatio
 
 {{ cookiecutter.description }}
 
-## Overview
+| **Development Status** | **Intended Users** | **Environment** |
+|------------------------|-------------------|------------------|
+| Active | [Specify target audience - analysts, data scientists, clinicians, etc.] | [Development/Testing/Production] |
+
+**Primary Contact**: [{{cookiecutter.team_name}}](mailto:{{cookiecutter.team_email}}) | **Issues**: [Report a bug or request a feature]({{cookiecutter.repository_url}}/issues)
+
+## What does this project do?
+
+[Describe the project's intended purpose when implemented, its operating environment (or clinical use, if any), and the specific problems it solves or analysis it performs.]
 
 This project follows NHS England RAP (Reproducible Analytical Pipeline) standards and includes:
 
-- Standardised project structure
-- Automated testing with pytest
-- Code quality checks with ruff
-- Documentation with MkDocs
+- Standardised project structure following best practices
+- Automated testing with {{ cookiecutter.testing_framework }}
+{% if cookiecutter.linting_and_formatting == "ruff" %}- Code quality checks with ruff (linting and formatting){% else %}- Code quality checks with flake8, black, and isort{% endif %}
+- Comprehensive documentation with MkDocs
 - Environment management with {{ cookiecutter.environment_manager }}
+- Pre-commit hooks for code quality
+
+## Data
+
+**Data sources**: [List data sources, formats, and any prerequisites]
+
+**Data handling**: [Note any sensitive data handling requirements, data dictionaries, or dummy data for testing]
 
 ## Getting Started
 
-See the [Getting Started](getting_started.md) guide for installation and setup instructions.
+See the [Getting Started](getting_started.md) guide for detailed installation and setup instructions.
+
+### Quick Start
+
+1. Clone the repository
+2. Set up your environment (see [Getting Started](getting_started.md))
+3. Review the [Usage Guide](usage.md) for examples
 
 ## Usage
 
@@ -34,7 +55,11 @@ Learn how to use this project in the [Usage Guide](usage.md).
 
 ## Contributing
 
-Contributions are welcome! See the [Contributing Guide](contributing.md) for details.
+Contributions are welcome! See the [Contributing Guide](contributing.md) for details on:
+
+- How to submit issues and feature requests
+- Our code review process
+- Coding standards and style guides
 
 ## API Reference
 
