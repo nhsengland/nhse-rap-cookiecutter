@@ -53,6 +53,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - Project Summary: project_summary.md
   - Getting Started: getting_started.md
   - Usage: usage.md
   - Contributing: contributing.md
