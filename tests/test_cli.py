@@ -91,6 +91,7 @@ class TestCLIProjectGeneration:
             ".pre-commit-config.yaml",
             "LICENSE",
             "LICENSE-OGL",
+            "CODE_OF_CONDUCT.md",
             ".env",
             "badges.toml",
             "mkdocs.yml",
