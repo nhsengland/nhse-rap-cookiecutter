@@ -13,18 +13,25 @@ structure that WOULD use them.
 Examples
 --------
 Generate all test projects:
-    $ uv run python scripts/generate_test_projects.py
+    $ uv run python scripts/generate_test_projects.py generate
 
 Generate specific configuration:
-    $ uv run python scripts/generate_test_projects.py --config minimal
+    $ uv run python scripts/generate_test_projects.py generate --config minimal
 
 Auto-cleanup after successful generation:
-    $ uv run python scripts/generate_test_projects.py --auto-cleanup
+    $ uv run python scripts/generate_test_projects.py generate --auto-cleanup
 
 Handle existing projects differently:
-    $ uv run python scripts/generate_test_projects.py --exists skip
-    $ uv run python scripts/generate_test_projects.py --exists fail
-    $ uv run python scripts/generate_test_projects.py --exists clean
+    $ uv run python scripts/generate_test_projects.py generate --exists skip
+    $ uv run python scripts/generate_test_projects.py generate --exists fail
+    $ uv run python scripts/generate_test_projects.py generate --exists clean
+
+List available configurations:
+    $ uv run python scripts/generate_test_projects.py list-configs
+
+Cleanup generated projects:
+    $ uv run python scripts/generate_test_projects.py cleanup
+    $ uv run python scripts/generate_test_projects.py cleanup --config minimal
 """
 
 import json
