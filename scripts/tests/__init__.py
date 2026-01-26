@@ -1,1 +1,1 @@
-"""Tests for generate_test_projects script."""
+"""Tests for generate_projects script."""

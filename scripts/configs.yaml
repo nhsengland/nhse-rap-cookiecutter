@@ -61,7 +61,7 @@ conda_env:
   pydata_packages: "basic"
   testing_framework: "pytest"
   linting_and_formatting: "ruff"
-  open_source_license: "BSD-3-Clause"
+  open_source_license: "Apache-2.0"
   docs: "mkdocs"
   include_code_scaffold: "Yes"
 
@@ -187,7 +187,7 @@ docs_no_scaffold:
   pydata_packages: "basic"
   testing_framework: "pytest"
   linting_and_formatting: "ruff"
-  open_source_license: "BSD-3-Clause"
+  open_source_license: "GPL-3.0"
   docs: "mkdocs"
   include_code_scaffold: "No"
 

@@ -1,6 +1,6 @@
 # {{ cookiecutter.project_name }}
 
-[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green)]({{cookiecutter.repository_url}}) [![RAP Status: Work in Progress](https://img.shields.io/badge/RAP%20Status-WIP-red)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/) [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter) [![NHS England RAP](https://img.shields.io/badge/NHS%20RAP-Project%20template-005EB8?logo=cookiecutter)](https://github.com/nhsengland/nhse-rap-cookiecutter) [![Python {{cookiecutter.python_version_number}}](https://img.shields.io/badge/Python-{{cookiecutter.python_version_number}}-blue)](https://www.python.org/downloads/){% if cookiecutter.open_source_license == "MIT" %} [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licenses/MIT){% elif cookiecutter.open_source_license == "BSD-3-Clause" %} [![Licence: BSD-3-Clause](https://img.shields.io/badge/Licence-BSD--3--Clause-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause){% endif %}{% if cookiecutter.linting_and_formatting == "ruff" %} [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff){% elif cookiecutter.linting_and_formatting == "flake8+black+isort" %} [![Code Style: Black](https://img.shields.io/badge/Code%20Style-Black-000000.svg)](https://github.com/psf/black) [![Linting: Flake8](https://img.shields.io/badge/Linting-Flake8-blue)](https://flake8.pycqa.org/) [![Import Sort: isort](https://img.shields.io/badge/Import%20Sort-isort-blue)](https://pycqa.github.io/isort/){% endif %} [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green)]({{cookiecutter.repository_url}}) [![RAP Status: Work in Progress](https://img.shields.io/badge/RAP%20Status-WIP-red)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/) [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter) [![NHS England RAP](https://img.shields.io/badge/NHS%20RAP-Project%20template-005EB8?logo=cookiecutter)](https://github.com/nhsengland/nhse-rap-cookiecutter) [![Python {{cookiecutter.python_version_number}}](https://img.shields.io/badge/Python-{{cookiecutter.python_version_number}}-blue)](https://www.python.org/downloads/){% if cookiecutter.open_source_license == "MIT" %} [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licenses/MIT){% elif cookiecutter.open_source_license == "Apache-2.0" %} [![Licence: Apache-2.0](https://img.shields.io/badge/Licence-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0){% elif cookiecutter.open_source_license == "GPL-3.0" %} [![Licence: GPL-3.0](https://img.shields.io/badge/Licence-GPL--3.0-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0){% endif %}{% if cookiecutter.linting_and_formatting == "ruff" %} [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff){% elif cookiecutter.linting_and_formatting == "flake8+black+isort" %} [![Code Style: Black](https://img.shields.io/badge/Code%20Style-Black-000000.svg)](https://github.com/psf/black) [![Linting: Flake8](https://img.shields.io/badge/Linting-Flake8-blue)](https://flake8.pycqa.org/) [![Import Sort: isort](https://img.shields.io/badge/Import%20Sort-isort-blue)](https://pycqa.github.io/isort/){% endif %} [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 <!-- 
 Additional badge options available in badges.toml:
@@ -14,19 +14,40 @@ Copy badges from badges.toml and paste them above to customize your documentatio
 
 {{ cookiecutter.description }}
 
-## Overview
+| **Development Status** | **Intended Users** | **Environment** |
+|------------------------|-------------------|------------------|
+| Active | [Specify target audience - analysts, data scientists, clinicians, etc.] | [Development/Testing/Production] |
+
+**Primary Contact**: [{{cookiecutter.team_name}}](mailto:{{cookiecutter.team_email}}) | **Issues**: [Report a bug or request a feature]({{cookiecutter.repository_url}}/issues)
+
+## What does this project do?
+
+[Describe the project's intended purpose when implemented, its operating environment (or clinical use, if any), and the specific problems it solves or analysis it performs.]
 
 This project follows NHS England RAP (Reproducible Analytical Pipeline) standards and includes:
 
-- Standardised project structure
-- Automated testing with pytest
-- Code quality checks with ruff
-- Documentation with MkDocs
+- Standardised project structure following best practices
+- Automated testing with {{ cookiecutter.testing_framework }}
+{% if cookiecutter.linting_and_formatting == "ruff" %}- Code quality checks with ruff (linting and formatting){% else %}- Code quality checks with flake8, black, and isort{% endif %}
+- Comprehensive documentation with MkDocs
 - Environment management with {{ cookiecutter.environment_manager }}
+- Pre-commit hooks for code quality
+
+## Data
+
+**Data sources**: [List data sources, formats, and any prerequisites]
+
+**Data handling**: [Note any sensitive data handling requirements, data dictionaries, or dummy data for testing]
 
 ## Getting Started
 
-See the [Getting Started](getting_started.md) guide for installation and setup instructions.
+See the [Getting Started](getting_started.md) guide for detailed installation and setup instructions.
+
+### Quick Start
+
+1. Clone the repository
+2. Set up your environment (see [Getting Started](getting_started.md))
+3. Review the [Usage Guide](usage.md) for examples
 
 ## Usage
 
@@ -34,7 +55,11 @@ Learn how to use this project in the [Usage Guide](usage.md).
 
 ## Contributing
 
-Contributions are welcome! See the [Contributing Guide](contributing.md) for details.
+Contributions are welcome! See the [Contributing Guide](contributing.md) for details on:
+
+- How to submit issues and feature requests
+- Our code review process
+- Coding standards and style guides
 
 ## API Reference
 
@@ -42,4 +67,10 @@ For detailed API documentation, see the [API Reference](api_reference/index.md).
 
 ## License
 
-{% if cookiecutter.open_source_license != 'No license file' %}This project is licensed under the {{ cookiecutter.open_source_license }} license.{% else %}This project does not include an open source license.{% endif %}
+{% if cookiecutter.open_source_license == 'MIT' %}Unless stated otherwise, the codebase is released under the [MIT License](../LICENSE). This covers both the codebase and any sample code in the documentation.
+{% elif cookiecutter.open_source_license == 'Apache-2.0' %}Unless stated otherwise, the codebase is released under the [Apache License 2.0](../LICENSE). This covers both the codebase and any sample code in the documentation.
+{% elif cookiecutter.open_source_license == 'GPL-3.0' %}Unless stated otherwise, the codebase is released under the [GNU General Public License v3.0](../LICENSE). This covers both the codebase and any sample code in the documentation.
+{% else %}This project does not currently have an open source license.
+{% endif %}
+
+The documentation is © Crown copyright and available under the terms of the [Open Government License v3.0](../LICENSE-OGL).

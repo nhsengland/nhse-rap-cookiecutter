@@ -1,8 +1,8 @@
 # ruff: noqa: B008
-"""Generate test cookiecutter projects with different configurations.
+"""Generate cookiecutter projects with different configurations.
 
 This script creates multiple cookiecutter projects in the tmp/ folder,
-each with different combinations of configuration options from test_configs.yaml.
+each with different combinations of configuration options from configs.yaml.
 This validates that the template works correctly with all option combinations.
 
 NOTE: This script only GENERATES the template files. It does NOT install
@@ -12,26 +12,26 @@ structure that WOULD use them.
 
 Examples
 --------
-Generate all test projects:
-    $ uv run python scripts/generate_test_projects.py generate
+Generate all projects:
+    $ uv run python scripts/generate_projects.py generate
 
 Generate specific configuration:
-    $ uv run python scripts/generate_test_projects.py generate --config minimal
+    $ uv run python scripts/generate_projects.py generate --config minimal
 
 Auto-cleanup after successful generation:
-    $ uv run python scripts/generate_test_projects.py generate --auto-cleanup
+    $ uv run python scripts/generate_projects.py generate --auto-cleanup
 
 Handle existing projects differently:
-    $ uv run python scripts/generate_test_projects.py generate --exists skip
-    $ uv run python scripts/generate_test_projects.py generate --exists fail
-    $ uv run python scripts/generate_test_projects.py generate --exists clean
+    $ uv run python scripts/generate_projects.py generate --exists skip
+    $ uv run python scripts/generate_projects.py generate --exists fail
+    $ uv run python scripts/generate_projects.py generate --exists clean
 
 List available configurations:
-    $ uv run python scripts/generate_test_projects.py list-configs
+    $ uv run python scripts/generate_projects.py list-configs
 
 Cleanup generated projects:
-    $ uv run python scripts/generate_test_projects.py cleanup
-    $ uv run python scripts/generate_test_projects.py cleanup --config minimal
+    $ uv run python scripts/generate_projects.py cleanup
+    $ uv run python scripts/generate_projects.py cleanup --config minimal
 """
 
 import json
@@ -46,7 +46,7 @@ import typer
 import yaml
 from loguru import logger
 
-app = typer.Typer(help="Generate test cookiecutter projects")
+app = typer.Typer(help="Generate cookiecutter projects")
 
 
 class ExistsStrategy(str, Enum):
@@ -79,7 +79,7 @@ def load_test_configs() -> dict[str, dict[str, Any]]:
     dict[str, dict[str, Any]]
         Dictionary of test configuration name to configuration values
     """
-    config_path = Path(__file__).parent / "test_configs.yaml"
+    config_path = Path(__file__).parent / "configs.yaml"
     logger.debug(f"Loading test configs from {config_path}")
     with open(config_path) as f:
         configs = yaml.safe_load(f)
@@ -454,7 +454,7 @@ def generate(  # noqa: B008
 
     if config:
         if config not in test_configs:
-            logger.error(f"Configuration '{config}' not found in test_configs.yaml")
+            logger.error(f"Configuration '{config}' not found in configs.yaml")
             logger.info(f"Available configurations: {', '.join(test_configs.keys())}")
             raise typer.Exit(code=1)
         test_configs = {config: test_configs[config]}

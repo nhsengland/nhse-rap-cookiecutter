@@ -1,11 +1,11 @@
-"""Tests for configuration loading and validation in generate_test_projects."""
+"""Tests for configuration loading and validation in generate_projects."""
 
 import json
 
 import pytest
 import yaml
 
-from scripts.generate_test_projects import (
+from scripts.generate_projects import (
     ExistsStrategy,
     cleanup_project,
     handle_existing_project,
