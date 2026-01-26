@@ -36,7 +36,7 @@
         "ruff",
         "flake8+black+isort"
     ],
-    "open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
+    "open_source_license": ["MIT", "Apache-2.0", "GPL-3.0", "No license file"],
     "docs": ["mkdocs", "none"],
     "include_code_scaffold": ["Yes", "No"],
     "_copy_without_render": [
