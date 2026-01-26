@@ -23,6 +23,7 @@ readme = "README.md"
 
 [project.optional-dependencies]
 dev = []
+docs = ["mkdocs", "mkdocs-material", "mkdocstrings[python]"]
 
 {% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 [tool.black]
