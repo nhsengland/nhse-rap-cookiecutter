@@ -4,20 +4,25 @@ site_author: {{ cookiecutter.organization_name }}
 site_url: https://{{ cookiecutter.organization_name | lower | replace(' ', '') }}.github.io/{{ cookiecutter.repo_name }}
 repo_url: https://github.com/{{ cookiecutter.organization_name | lower | replace(' ', '') }}/{{ cookiecutter.repo_name }}
 repo_name: {{ cookiecutter.repo_name }}
-edit_uri: edit/main/docs/docs/
-docs_dir: docs
+edit_uri: edit/main/docs/content/
+docs_dir: docs/content
+
+# Watch additional directories for changes
+watch:
+  - docs/content
+  - {{ cookiecutter.module_name }}
 
 theme:
   name: material
   language: en
-  custom_dir: docs/overrides
+  custom_dir: docs/content/overrides
   palette:
     scheme: default
     primary: indigo
   font:
     text: Roboto
-  logo: docs/images/logo/nhs-blue-on-white.jpg
-  favicon: docs/images/favicon/favicon.ico
+  logo: images/logo/nhs-blue-on-white.jpg
+  favicon: images/favicon/favicon.ico
   features:
     - search.share
     - content.code.annotate
@@ -55,7 +60,7 @@ nav:
     - api_reference/index.md
 
 extra_css:
-  - docs/stylesheets/nhs_style.css
+  - stylesheets/nhs_style.css
 
 extra:
   social:
@@ -98,8 +103,4 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra_javascript:
-  - docs/javascripts/mermaid.mjs
-
-watch:
-  - docs/overrides
-  - {{ cookiecutter.module_name }}
+  - javascripts/mermaid.mjs
