@@ -155,11 +155,13 @@ mkdocs serve
 Let's say you add a new file `{{ cookiecutter.module_name }}/preprocessing.py`:
 
 1. **Create the documentation file:**
+
    ```bash
    touch docs/content/api_reference/preprocessing.md
    ```
 
 2. **Add content to `preprocessing.md`:**
+
    ```markdown
    # Preprocessing
    
@@ -173,6 +175,7 @@ Let's say you add a new file `{{ cookiecutter.module_name }}/preprocessing.py`:
    ```
 
 3. **Update `mkdocs.yml`:**
+
    ```yaml
    - API Reference:
        - Overview: api_reference/index.md
@@ -183,6 +186,7 @@ Let's say you add a new file `{{ cookiecutter.module_name }}/preprocessing.py`:
    ```
 
 4. **Write good docstrings in your Python code:**
+
    ```python
    # {{ cookiecutter.module_name }}/preprocessing.py
    
@@ -204,6 +208,7 @@ Let's say you add a new file `{{ cookiecutter.module_name }}/preprocessing.py`:
    ```
 
 5. **Test it:**
+
    ```bash
    mkdocs serve
    # Visit http://127.0.0.1:8000/api_reference/preprocessing/
@@ -214,6 +219,7 @@ Let's say you add a new file `{{ cookiecutter.module_name }}/preprocessing.py`:
 Below is a working example showing how to document all modules in this project:
 
 ### config.md
+
 ```markdown
 # Configuration
 
@@ -227,6 +233,7 @@ Configuration management and settings.
 ```
 
 ### dataset.md
+
 ```markdown
 # Dataset
 
@@ -240,6 +247,7 @@ Data loading, processing, and saving utilities.
 ```
 
 ### features.md
+
 ```markdown
 # Features
 
@@ -253,6 +261,7 @@ Feature engineering and transformation functions.
 ```
 
 ### plots.md
+
 ```markdown
 # Plots
 
@@ -266,6 +275,7 @@ Visualization and plotting utilities.
 ```
 
 ### modeling/index.md
+
 ```markdown
 # Modeling
 
@@ -278,6 +288,7 @@ Machine learning models and training pipelines.
 ```
 
 ### modeling/train.md
+
 ```markdown
 # Train
 
@@ -291,6 +302,7 @@ Model training functions.
 ```
 
 ### modeling/predict.md
+
 ```markdown
 # Predict
 
