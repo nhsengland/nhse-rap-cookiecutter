@@ -52,7 +52,6 @@ class TestCookiecutterProjectGeneration:
             "Makefile",
             ".gitignore",
             ".pre-commit-config.yaml",
-            "setup.cfg",
             "LICENSE",
             ".env",
             "badges.toml",
