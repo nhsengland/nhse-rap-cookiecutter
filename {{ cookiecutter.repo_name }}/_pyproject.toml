@@ -18,7 +18,7 @@ authors = [
     {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
 ]
 version = "0.0.1"
-requires-python = ">=3.10"
+requires-python = ">={{ cookiecutter.python_version_number }},<3.14"
 readme = "README.md"
 
 [project.optional-dependencies]

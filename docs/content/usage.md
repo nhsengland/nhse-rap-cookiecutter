@@ -95,7 +95,7 @@ When you run `nhs-rap-template`, you'll be prompted for:
 - **Project Name**: Human-readable name (e.g., "My Analysis Project")
 - **Author Details**: Your name and email
 - **Organization**: Organization name and contact email (used in LICENSE)
-- **Python Version**: Minimum Python version (3.10+)
+- **Python Version**: Minimum Python version (3.10-3.13)
 - **Environment Manager**: virtualenv, conda, pipenv, uv, pixi, poetry, or none
 - **Dependency File**: requirements.txt, pyproject.toml, environment.yml, Pipfile, or pixi.toml
 - **PyData Packages**: Include pandas, numpy, matplotlib, etc.

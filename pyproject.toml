@@ -21,16 +21,17 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.14"
 dependencies = ["click", "cookiecutter", "tomlkit"]
 
 [project.scripts]
 nhs-rap-template = "nhse_rap_cookiecutter.cli:main"
 
 [project.optional-dependencies]
-dev = ["build", "pre-commit", "pytest", "pytest-cookies", "ruff", "loguru", "typer", "pyyaml"]
+dev = ["build", "pre-commit", "pytest", "pytest-cookies", "ruff", "loguru", "typer", "pyyaml", "tox", "tox-uv"]
 docs = ["mkdocs", "mkdocs-material", "mkdocs-include-markdown-plugin"]
 
 [project.urls]
