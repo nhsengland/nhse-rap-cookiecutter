@@ -51,27 +51,74 @@ clean:
 ## Lint using ruff (use `make format` to do formatting)
 .PHONY: lint
 lint:
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run ruff format --check
+	uv run ruff check
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run ruff format --check
+	poetry run ruff check
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run ruff format --check
+	pixi run ruff check
+	{% else -%}
 	ruff format --check
 	ruff check
+	{% endif %}
 
 ## Format source code with ruff
 .PHONY: format
 format:
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run ruff check --fix
+	uv run ruff format
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run ruff check --fix
+	poetry run ruff format
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run ruff check --fix
+	pixi run ruff format
+	{% else -%}
 	ruff check --fix
 	ruff format
+	{% endif %}
 {% elif cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
 lint:
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run flake8 {{ cookiecutter.module_name }}
+	uv run isort --check --diff {{ cookiecutter.module_name }}
+	uv run black --check {{ cookiecutter.module_name }}
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run flake8 {{ cookiecutter.module_name }}
+	poetry run isort --check --diff {{ cookiecutter.module_name }}
+	poetry run black --check {{ cookiecutter.module_name }}
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run flake8 {{ cookiecutter.module_name }}
+	pixi run isort --check --diff {{ cookiecutter.module_name }}
+	pixi run black --check {{ cookiecutter.module_name }}
+	{% else -%}
 	flake8 {{ cookiecutter.module_name }}
 	isort --check --diff {{ cookiecutter.module_name }}
 	black --check {{ cookiecutter.module_name }}
+	{% endif %}
 
 ## Format source code with black
 .PHONY: format
 format:
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run isort {{ cookiecutter.module_name }}
+	uv run black {{ cookiecutter.module_name }}
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run isort {{ cookiecutter.module_name }}
+	poetry run black {{ cookiecutter.module_name }}
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run isort {{ cookiecutter.module_name }}
+	pixi run black {{ cookiecutter.module_name }}
+	{% else -%}
 	isort {{ cookiecutter.module_name }}
 	black {{ cookiecutter.module_name }}
+	{% endif %}
 {% endif %}
 
 {% if cookiecutter.testing_framework != 'none' %}
@@ -79,11 +126,47 @@ format:
 .PHONY: test
 test:
 {%- if cookiecutter.testing_framework == 'unittest' %}
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run python -m unittest discover -s tests
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run python -m unittest discover -s tests
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run python -m unittest discover -s tests
+	{% else -%}
 	python -m unittest discover -s tests
+	{% endif %}
 {%- elif cookiecutter.testing_framework == 'pytest' %}
-	python -m pytest tests
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run pytest tests
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run pytest tests
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run pytest tests
+	{% else -%}
+	pytest tests
+	{% endif %}
 {%- endif -%}
 {%- endif -%}
+
+{% if cookiecutter.docs == 'mkdocs' %}
+## Serve documentation with live reload
+.PHONY: docs
+docs:
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run mkdocs serve --livereload
+	{% else -%}
+	mkdocs serve --livereload
+	{% endif %}
+
+## Build documentation
+.PHONY: docs-build
+docs-build:
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run mkdocs build
+	{% else -%}
+	mkdocs build
+	{% endif %}
+{% endif %}
 
 {% if cookiecutter.environment_manager != 'none' %}
 ## Set up Python interpreter environment
@@ -131,7 +214,15 @@ create_environment:
 ## Make dataset
 .PHONY: data
 data: requirements
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv run python {{ cookiecutter.module_name }}/dataset.py
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry run python {{ cookiecutter.module_name }}/dataset.py
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	pixi run python {{ cookiecutter.module_name }}/dataset.py
+	{% else -%}
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
+	{% endif %}
 {% endif %}
 
 #################################################################################

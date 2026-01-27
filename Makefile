@@ -1,12 +1,15 @@
-.PHONY: docs-serve docs-build lint format format-check test check
+.PHONY: docs docs-serve docs-build lint format format-check test check
 
-# Serve documentation with livereload (required for mkdocs bug)
+# Serve documentation (default docs command)
+docs: docs-serve
+
+# Serve documentation with livereload (workaround for mkdocs issue)
 docs-serve:
-	mkdocs serve --livereload
+	uv run mkdocs serve --livereload
 
 # Build documentation
 docs-build:
-	mkdocs build
+	uv run mkdocs build
 
 # Run ruff linting on source code
 lint:

@@ -178,6 +178,9 @@ uv run pytest tests/
 ### Building Documentation
 
 ```bash
+make docs        # Serve with live reload
+make docs-build  # Build static site
+# or
 uv run mkdocs serve
 ```
 
