@@ -931,7 +931,7 @@
 <li><strong>Project Name</strong>: Human-readable name (e.g., "My Analysis Project")</li>
 <li><strong>Author Details</strong>: Your name and email</li>
 <li><strong>Organization</strong>: Organization name and contact email (used in LICENSE)</li>
-<li><strong>Python Version</strong>: Minimum Python version (3.10+)</li>
+<li><strong>Python Version</strong>: Minimum Python version (3.10-3.13)</li>
 <li><strong>Environment Manager</strong>: virtualenv, conda, pipenv, uv, pixi, poetry, or none</li>
 <li><strong>Dependency File</strong>: requirements.txt, pyproject.toml, environment.yml, Pipfile, or pixi.toml</li>
 <li><strong>PyData Packages</strong>: Include pandas, numpy, matplotlib, etc.</li>
@@ -995,8 +995,12 @@
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/
 </code></pre></div>
 <h3 id="building-documentation">Building Documentation</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Serve with live reload</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>make<span class="w"> </span>docs-build<span class="w">  </span><span class="c1"># Build static site</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># or</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
 </code></pre></div>
+<p>For projects using <code>poetry</code> or <code>pixi</code>, <code>make docs</code> and <code>make docs-build</code> assume your environment is already activated (for example, via <code>poetry shell</code> or <code>pixi shell</code>).</p>
 <h3 id="code-quality-checks">Code Quality Checks</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span>lint<span class="w">    </span><span class="c1"># Check code</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>format<span class="w">  </span><span class="c1"># Format code</span>
