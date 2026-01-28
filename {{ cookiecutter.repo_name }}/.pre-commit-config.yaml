@@ -24,6 +24,7 @@ repos:
       - id: check-merge-conflict
       - id: check-added-large-files
       - id: check-yaml
+        args: [--unsafe]
       - id: check-toml
   # Gitleaks for detecting hardcoded secrets
   - repo: https://github.com/gitleaks/gitleaks
