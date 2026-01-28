@@ -560,6 +560,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#included-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Included Packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency File Format
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -933,12 +961,23 @@
 <li><strong>Organization</strong>: Organization name and contact email (used in LICENSE)</li>
 <li><strong>Python Version</strong>: Minimum Python version (3.10-3.13)</li>
 <li><strong>Environment Manager</strong>: virtualenv, conda, pipenv, uv, pixi, poetry, or none</li>
-<li><strong>Dependency File</strong>: requirements.txt, pyproject.toml, environment.yml, Pipfile, or pixi.toml</li>
-<li><strong>PyData Packages</strong>: Include pandas, numpy, matplotlib, etc.</li>
-<li><strong>Dataset Storage</strong>: Azure, S3, GCS, or none</li>
-<li><strong>License</strong>: MIT, BSD-3-Clause, or no license</li>
+<li><strong>License</strong>: MIT, Apache-2.0, GPL-3.0, or no license</li>
 <li><strong>Documentation</strong>: mkdocs or none</li>
+<li><strong>Linting/Formatting</strong>: ruff or flake8+black+isort</li>
+<li><strong>Code Scaffold</strong>: Include example code modules</li>
 </ul>
+<h3 id="included-packages">Included Packages</h3>
+<p><strong>All generated projects automatically include:</strong></p>
+<p><strong>Runtime packages</strong>: pandas, numpy, matplotlib, seaborn, plotly, scipy, scikit-learn, jupyterlab, notebook, ipython, loguru, tqdm, requests, openpyxl</p>
+<p><strong>Development packages</strong>: pytest, pytest-cov, pre-commit, and your chosen linting/formatting tools (ruff or flake8+black+isort)</p>
+<p><strong>Documentation packages</strong>: mkdocs, mkdocs-material, mkdocstrings (if docs enabled)</p>
+<h3 id="dependency-file-format">Dependency File Format</h3>
+<p>The dependency file format is determined automatically by your environment manager choice:</p>
+<ul>
+<li><strong>virtualenv, uv, pixi, poetry, pipenv, none</strong>: <code>pyproject.toml</code> (modern Python standard)</li>
+<li><strong>conda</strong>: <code>environment.yml</code> (conda-specific format)</li>
+</ul>
+<p>Both formats include the same packages - the difference is only in file format to match your chosen tool.</p>
 <h2 id="generated-project-structure">Generated Project Structure</h2>
 <p>The template creates a standardised RAP project with:</p>
 <ul>
