@@ -203,7 +203,16 @@ jupyter lab
 
 ## Code Quality
 
-### Running Tests
+### Testing
+
+The project uses pytest for testing. Tests are organized into:
+
+- `tests/unittests/` - Unit tests for individual functions and classes
+- `tests/e2e/` - End-to-end integration tests for complete workflows
+
+For detailed guidance on writing tests, see the [Testing Guide](testing.md).
+
+#### Running Tests
 
 {% if cookiecutter.environment_manager == 'uv' %}
 
@@ -211,8 +220,8 @@ jupyter lab
 # Run all tests
 uv run pytest
 
-# Run specific test file
-uv run pytest tests/test_dataset.py
+# Run unit tests only
+uv run pytest tests/unittests/
 
 # Run with coverage
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
@@ -224,8 +233,8 @@ uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 # Run all tests
 poetry run pytest
 
-# Run specific test file
-poetry run pytest tests/test_dataset.py
+# Run unit tests only
+poetry run pytest tests/unittests/
 
 # Run with coverage
 poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
@@ -237,8 +246,8 @@ poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 # Run all tests
 pixi run pytest
 
-# Run specific test file
-pixi run pytest tests/test_dataset.py
+# Run unit tests only
+pixi run pytest tests/unittests/
 
 # Run with coverage
 pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
@@ -250,8 +259,8 @@ pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 # Run all tests
 pipenv run pytest
 
-# Run specific test file
-pipenv run pytest tests/test_dataset.py
+# Run unit tests only
+pipenv run pytest tests/unittests/
 
 # Run with coverage
 pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
@@ -263,8 +272,8 @@ pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 # Run all tests
 pytest
 
-# Run specific test file
-pytest tests/test_dataset.py
+# Run unit tests only
+pytest tests/unittests/
 
 # Run with coverage
 pytest --cov={{ cookiecutter.module_name }} --cov-report=html

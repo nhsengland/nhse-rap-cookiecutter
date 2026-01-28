@@ -22,6 +22,7 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
 ### Setting Up Development Environment
 
 1. Clone the repository:
+
    ```bash
    git clone {{ cookiecutter.repo_name }}
    cd {{ cookiecutter.repo_name }}
@@ -29,61 +30,85 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
 
 2. Set up the development environment:
 {% if cookiecutter.environment_manager == 'uv' %}
+
    ```bash
    uv sync
    ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
    ```bash
    poetry install
    ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
    ```bash
    pixi install
    ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
    ```bash
    pipenv install --dev
    ```
+
 {% elif cookiecutter.environment_manager == 'conda' %}
+
    ```bash
    conda env create -f environment.yml
    conda activate {{ cookiecutter.repo_name }}
    ```
+
 {% elif cookiecutter.environment_manager == 'virtualenv' %}
+
    ```bash
    python -m venv venv
    source venv/bin/activate
    pip install -r requirements.txt
    pip install -e .
    ```
+
 {% else %}
+
    ```bash
    pip install -r requirements.txt
    pip install -e .
    ```
+
 {% endif %}
 
-3. Verify the setup:
+1. Verify the setup:
 {% if cookiecutter.environment_manager == 'uv' %}
+
    ```bash
    uv run pytest
    ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
    ```bash
    poetry run pytest
    ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
    ```bash
    pixi run pytest
    ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
    ```bash
    pipenv run pytest
    ```
+
 {% else %}
+
    ```bash
    pytest
    ```
+
 {% endif %}
 
 ## Code Standards
@@ -160,106 +185,60 @@ def calculate_metric(data: pd.DataFrame, metric_type: str) -> float:
 
 ## Testing
 
-### Writing Tests
+This project uses pytest for testing. See the [Testing Guide](testing.md) for detailed information on writing and running tests.
 
-- Use pytest for all tests
-- Aim for high test coverage (>80%)
-- Test edge cases and error conditions
-- Use fixtures for common test data
-
-```python
-import pytest
-import pandas as pd
-from {{ cookiecutter.module_name }}.dataset import Dataset
-
-@pytest.fixture
-def sample_data():
-    """Create sample data for testing."""
-    return pd.DataFrame({
-        'col1': [1, 2, 3],
-        'col2': ['a', 'b', 'c']
-    })
-
-def test_load_data(sample_data):
-    """Test data loading."""
-    dataset = Dataset()
-    result = dataset.process(sample_data)
-    assert len(result) == 3
-    assert 'col1' in result.columns
-```
-
-### Running Tests
+Quick reference:
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Run all tests
 uv run pytest
 
-# Run specific test file
-uv run pytest tests/test_dataset.py
-
 # Run with coverage
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-
-# View coverage report
-open htmlcov/index.html
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Run all tests
 poetry run pytest
 
-# Run specific test file
-poetry run pytest tests/test_dataset.py
-
 # Run with coverage
 poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
+```
 
-# View coverage report
-open htmlcov/index.html
 ```
 {% elif cookiecutter.environment_manager == 'pixi' %}
 ```bash
 # Run all tests
 pixi run pytest
 
-# Run specific test file
-pixi run pytest tests/test_dataset.py
-
 # Run with coverage
 pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-
-# View coverage report
-open htmlcov/index.html
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Run all tests
 pipenv run pytest
 
-# Run specific test file
-pipenv run pytest tests/test_dataset.py
-
 # Run with coverage
 pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-
-# View coverage report
-open htmlcov/index.html
 ```
+
 {% else %}
+
 ```bash
 # Run all tests
 pytest
 
-# Run specific test file
-pytest tests/test_dataset.py
-
 # Run with coverage
 pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-
-# View coverage report
-open htmlcov/index.html
 ```
+
 {% endif %}
 
 ## Code Quality Checks
@@ -267,6 +246,7 @@ open htmlcov/index.html
 ### Linting and Formatting
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Check code style
 uv run ruff check .
@@ -277,7 +257,9 @@ uv run ruff format .
 # Fix auto-fixable issues
 uv run ruff check --fix .
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Check code style
 poetry run ruff check .
@@ -288,7 +270,9 @@ poetry run ruff format .
 # Fix auto-fixable issues
 poetry run ruff check --fix .
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 # Check code style
 pixi run ruff check .
@@ -299,7 +283,9 @@ pixi run ruff format .
 # Fix auto-fixable issues
 pixi run ruff check --fix .
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Check code style
 pipenv run ruff check .
@@ -310,7 +296,9 @@ pipenv run ruff format .
 # Fix auto-fixable issues
 pipenv run ruff check --fix .
 ```
+
 {% else %}
+
 ```bash
 # Check code style
 ruff check .
@@ -321,6 +309,7 @@ ruff format .
 # Fix auto-fixable issues
 ruff check --fix .
 ```
+
 {% endif %}
 
 ## Contribution Workflow
@@ -342,6 +331,7 @@ git checkout -b fix/bug-description
 ### 3. Test Your Changes
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 # Run tests
 uv run pytest
@@ -350,7 +340,9 @@ uv run pytest
 uv run ruff check .
 uv run ruff format .
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 # Run tests
 poetry run pytest
@@ -359,7 +351,9 @@ poetry run pytest
 poetry run ruff check .
 poetry run ruff format .
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 # Run tests
 pixi run pytest
@@ -368,7 +362,9 @@ pixi run pytest
 pixi run ruff check .
 pixi run ruff format .
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 # Run tests
 pipenv run pytest
@@ -377,7 +373,9 @@ pipenv run pytest
 pipenv run ruff check .
 pipenv run ruff format .
 ```
+
 {% else %}
+
 ```bash
 # Run tests
 pytest
@@ -386,6 +384,7 @@ pytest
 ruff check .
 ruff format .
 ```
+
 {% endif %}
 
 ### 4. Commit Your Changes
@@ -396,6 +395,7 @@ git commit -m "Add feature: description of changes"
 ```
 
 Use clear commit messages:
+
 - `feat:` for new features
 - `fix:` for bug fixes
 - `docs:` for documentation changes
@@ -415,33 +415,43 @@ Then create a pull request on the repository.
 ### Building Documentation
 
 {% if cookiecutter.environment_manager == 'uv' %}
+
 ```bash
 cd docs/mkdocs
 uv run mkdocs serve
 ```
+
 {% elif cookiecutter.environment_manager == 'poetry' %}
+
 ```bash
 cd docs/mkdocs
 poetry run mkdocs serve
 ```
+
 {% elif cookiecutter.environment_manager == 'pixi' %}
+
 ```bash
 cd docs/mkdocs
 pixi run mkdocs serve
 ```
+
 {% elif cookiecutter.environment_manager == 'pipenv' %}
+
 ```bash
 cd docs/mkdocs
 pipenv run mkdocs serve
 ```
+
 {% else %}
+
 ```bash
 cd docs/mkdocs
 mkdocs serve
 ```
+
 {% endif %}
 
-Visit http://127.0.0.1:8000 to view the documentation.
+Visit <http://127.0.0.1:8000> to view the documentation.
 
 ### Writing Documentation
 

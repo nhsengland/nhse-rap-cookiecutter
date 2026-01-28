@@ -111,21 +111,9 @@ format:
 	{% endif %}
 {% endif %}
 
-{% if cookiecutter.testing_framework != 'none' %}
 ## Run tests
 .PHONY: test
 test:
-{%- if cookiecutter.testing_framework == 'unittest' %}
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run python -m unittest discover -s tests
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run python -m unittest discover -s tests
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run python -m unittest discover -s tests
-	{% else -%}
-	python -m unittest discover -s tests
-	{% endif %}
-{%- elif cookiecutter.testing_framework == 'pytest' %}
 	{% if cookiecutter.environment_manager == 'uv' -%}
 	uv run pytest tests
 	{% elif cookiecutter.environment_manager == 'poetry' -%}
@@ -135,8 +123,6 @@ test:
 	{% else -%}
 	pytest tests
 	{% endif %}
-{%- endif -%}
-{%- endif -%}
 
 {% if cookiecutter.docs == 'mkdocs' %}
 ## Serve documentation with live reload

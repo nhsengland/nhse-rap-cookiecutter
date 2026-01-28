@@ -52,6 +52,7 @@ class TestCLIProjectGeneration:
                 "uv",
                 "run",
                 "nhs-rap-template",
+                str(Path.cwd()),  # Use local template
                 "--no-input",
                 "-o",
                 str(output_dir),
@@ -74,6 +75,7 @@ class TestCLIProjectGeneration:
                 "uv",
                 "run",
                 "nhs-rap-template",
+                str(Path.cwd()),  # Use local template
                 "--no-input",
                 "-o",
                 str(output_dir),
@@ -110,6 +112,7 @@ class TestCLIProjectGeneration:
                 "uv",
                 "run",
                 "nhs-rap-template",
+                str(Path.cwd()),  # Use local template
                 "--no-input",
                 "-o",
                 str(output_dir),
@@ -143,6 +146,7 @@ class TestCLIProjectGeneration:
                 "uv",
                 "run",
                 "nhs-rap-template",
+                str(Path.cwd()),  # Use local template
                 "--no-input",
                 "-o",
                 str(custom_dir),
@@ -170,6 +174,7 @@ class TestCLIModuleStructure:
                 "uv",
                 "run",
                 "nhs-rap-template",
+                str(Path.cwd()),  # Use local template
                 "--no-input",
                 "-o",
                 str(output_dir),
@@ -200,6 +205,7 @@ class TestCLIModuleStructure:
                 "uv",
                 "run",
                 "nhs-rap-template",
+                str(Path.cwd()),  # Use local template
                 "--no-input",
                 "-o",
                 str(output_dir),

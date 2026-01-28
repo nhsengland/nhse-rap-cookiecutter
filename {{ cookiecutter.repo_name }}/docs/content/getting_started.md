@@ -20,7 +20,7 @@ This project comes pre-configured with:
 
 **Development tools**:
 
-- {{ cookiecutter.testing_framework }} and pytest-cov (testing)
+- pytest and pytest-cov (testing)
 - pre-commit (git hooks)
 {% if cookiecutter.linting_and_formatting == "ruff" %}- ruff (linting and formatting){% else %}- flake8 (linting), black (formatting), isort (import sorting){% endif %}
 

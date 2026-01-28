@@ -56,7 +56,9 @@ nav:
   - Project Summary: project_summary.md
   - Getting Started: getting_started.md
   - Usage: usage.md
-  - Contributing: contributing.md
+  - Contributing:
+    - contributing.md
+    - Testing: testing.md
   - API Reference:
     - api_reference/index.md
 

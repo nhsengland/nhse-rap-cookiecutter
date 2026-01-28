@@ -85,3 +85,14 @@ extend-select = ["I"] # Add import sorting
 known-first-party = ["{{ cookiecutter.module_name }}"]
 force-sort-within-sections = true
 {% endif %}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+]
