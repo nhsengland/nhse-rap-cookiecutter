@@ -1,6 +1,6 @@
 # NHS RAP Cookiecutter Template
 
-[![Project Status: Active](https://img.shields.io/badge/Status-Active-green)](https://github.com/nhsengland/nhse-rap-cookiecutter) [![Python: 3.10 | 3.11 | 3.12](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/) [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter) [![Checks](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml/badge.svg)](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml) [![Deploy Docs](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/deploy-docs.yml/badge.svg)](https://nhsengland.github.io/nhse-rap-cookiecutter/) [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Project Status: Active](https://img.shields.io/badge/Status-Active-green)](https://github.com/nhsengland/nhse-rap-cookiecutter) [![Python: 3.10 | 3.11 | 3.12 | 3.13](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/downloads/) [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter) [![Checks](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml/badge.svg)](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml) [![Deploy Docs](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/deploy-docs.yml/badge.svg)](https://nhsengland.github.io/nhse-rap-cookiecutter/) [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 A Cookiecutter template for creating standardised NHS England Reproducible Analytical Pipeline (RAP) projects.
 
@@ -99,7 +99,7 @@ The template prompts for the following:
 | | organization_name | Your organisation (fixed: NHS England) | Text |
 | | team_name | Your team name | Text |
 | | team_email | Team contact email (optional) | Text |
-| **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12 |
+| **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
 | | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
 | | dependency_file | Dependency management file | requirements.txt, pyproject.toml, environment.yml, Pipfile |
 | | pydata_packages | Include pandas, numpy, matplotlib | yes, no |

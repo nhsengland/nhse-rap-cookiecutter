@@ -10,7 +10,7 @@
     "git_hosting_platform": ["github", "gitlab", "azure_devops", "other"],
     "repository_url": "https://github.com/{{ cookiecutter.organization_name.lower().replace(' ', '') }}/{{ cookiecutter.repo_name }}",
     "description": "A short description of the project.",
-    "python_version_number": "3.10",
+    "python_version_number": ["3.10", "3.11", "3.12", "3.13"],
     "environment_manager": [
         "virtualenv",
         "conda",
