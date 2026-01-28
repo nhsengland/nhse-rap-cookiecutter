@@ -1,10 +1,12 @@
 """Command-line interface for NHS RAP Cookiecutter Template."""
 
 import sys
-from pathlib import Path
 
 import click
 from cookiecutter.main import cookiecutter
+
+# GitHub repository URL for the template
+TEMPLATE_REPO = "gh:nhsengland/nhse-rap-cookiecutter"
 
 
 @click.command()
@@ -33,12 +35,9 @@ from cookiecutter.main import cookiecutter
 )
 def main(checkout, no_input, config_file, output_dir):
     """Generate a new NHS RAP project from the cookiecutter template."""
-    # Get the template directory (parent of this package)
-    template_dir = Path(__file__).parent.parent
-
     try:
         cookiecutter(
-            str(template_dir),
+            TEMPLATE_REPO,
             checkout=checkout,
             no_input=no_input,
             extra_context=None,
