@@ -103,7 +103,6 @@ The template prompts for the following:
 | | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
 | **Options** | include_code_scaffold | Include example code modules | yes, no |
 | | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
-| | testing_framework | Testing framework | pytest, unittest |
 | | license | Project licence | MIT, BSD-3-Clause, none |
 | | documentation | Documentation tool | mkdocs, none |
 
