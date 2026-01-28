@@ -205,38 +205,12 @@ jupyter lab
 
 ### Testing
 
-The project uses pytest for all testing. Tests are organized into two categories:
+The project uses pytest for testing. Tests are organized into:
 
 - `tests/unittests/` - Unit tests for individual functions and classes
 - `tests/e2e/` - End-to-end integration tests for complete workflows
 
-#### Writing Unit Tests
-
-Unit tests should:
-
-- Be organized in test classes (one class per function/object being tested)
-- Test one behavior per test method
-- Use descriptive names: `test_<what>_<expected_behavior>`
-- Use `pytest.mark.parametrize` for testing multiple input variations
-
-Example:
-
-```python
-import pytest
-
-class TestDataLoading:
-    """Tests for data loading functionality."""
-    
-    def test_loads_csv_file(self):
-        """Loading valid CSV returns DataFrame."""
-        result = load_data("test.csv")
-        assert len(result) > 0
-    
-    @pytest.mark.parametrize("value", [1, 2, 3])
-    def test_validates_positive_values(self, value):
-        """Validation accepts positive values."""
-        assert validate(value) is True
-```
+For detailed guidance on writing tests, see the [Testing Guide](testing.md).
 
 #### Running Tests
 
@@ -248,9 +222,6 @@ uv run pytest
 
 # Run unit tests only
 uv run pytest tests/unittests/
-
-# Run specific test file
-uv run pytest tests/unittests/test_dataset.py
 
 # Run with coverage
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
@@ -265,9 +236,6 @@ poetry run pytest
 # Run unit tests only
 poetry run pytest tests/unittests/
 
-# Run specific test file
-poetry run pytest tests/unittests/test_dataset.py
-
 # Run with coverage
 poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
@@ -280,9 +248,6 @@ pixi run pytest
 
 # Run unit tests only
 pixi run pytest tests/unittests/
-
-# Run specific test file
-pixi run pytest tests/unittests/test_dataset.py
 
 # Run with coverage
 pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
@@ -297,9 +262,6 @@ pipenv run pytest
 # Run unit tests only
 pipenv run pytest tests/unittests/
 
-# Run specific test file
-pipenv run pytest tests/unittests/test_dataset.py
-
 # Run with coverage
 pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
@@ -312,9 +274,6 @@ pytest
 
 # Run unit tests only
 pytest tests/unittests/
-
-# Run specific test file
-pytest tests/unittests/test_dataset.py
 
 # Run with coverage
 pytest --cov={{ cookiecutter.module_name }} --cov-report=html

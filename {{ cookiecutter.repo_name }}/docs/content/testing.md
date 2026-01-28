@@ -1,8 +1,8 @@
-# Tests
+# Testing
 
-This directory contains all tests for {{ cookiecutter.project_name }}.
+This project uses pytest for all testing. Tests are organized to separate fast unit tests from slower integration tests.
 
-## Structure
+## Test Structure
 
 ```
 tests/
@@ -146,14 +146,71 @@ pytest tests/unittests/test_dataset.py
 
 ## Best Practices
 
-1. **NEVER use unittest.mock** - Use `pytest-mock` and the `mocker` fixture instead
-2. **Organize in test classes** - One class per function/object being tested
-3. **Single responsibility** - Each test tests exactly one thing
-4. **Hard assertions** - Assert exact expected values, not fuzzy matching
-5. **Use parametrize** - Test multiple inputs with `@pytest.mark.parametrize`
-6. **Mock external I/O** - Mock file operations, database calls, API requests
-7. **Use fixtures** - Share test data and setup with pytest fixtures
-8. **Document transformations** - Comment input → output in docstrings
+### Leverage pytest Features
+
+pytest provides powerful features that make testing easier:
+
+- **[Fixtures](https://docs.pytest.org/en/stable/fixture.html)** - Share test data and setup logic across tests
+- **[Parametrize](https://docs.pytest.org/en/stable/parametrize.html)** - Run the same test with multiple inputs using `@pytest.mark.parametrize`
+- **[tmp_path](https://docs.pytest.org/en/stable/tmpdir.html)** - Built-in fixture for temporary directories/files
+- **[monkeypatch](https://docs.pytest.org/en/stable/monkeypatch.html)** - Modify objects, dictionaries, environment variables
+- **[pytest-mock](https://pytest-mock.readthedocs.io/)** - Mocking library (avoid `unittest.mock`)
+- **[Marks](https://docs.pytest.org/en/stable/mark.html)** - Categorize tests (e.g., `@pytest.mark.slow`, `@pytest.mark.skip`)
+- **[pytest-cov](https://pytest-cov.readthedocs.io/)** - Generate coverage reports
+
+### Writing Effective Tests
+
+**Organize with test classes** - Group related tests in classes, typically one class per function/object:
+
+```python
+class TestLoadData:
+    """Tests for load_data function."""
+    
+    def test_loads_csv_file(self, tmp_path):
+        """Test CSV loading."""
+        # test implementation
+    
+    def test_handles_missing_file(self):
+        """Test error handling."""
+        # test implementation
+```
+
+**Use parametrize for multiple scenarios** - Test variations efficiently:
+
+```python
+@pytest.mark.parametrize("extension,expected", [
+    (".csv", "csv"),
+    (".parquet", "parquet"),
+    (".xlsx", "excel"),
+])
+def test_detects_file_format(extension, expected, tmp_path):
+    """Correctly identifies file formats."""
+    # test implementation
+```
+
+**Mock external dependencies** - Isolate your code from external systems:
+
+```python
+def test_api_call(mocker):
+    """Test without making real API calls."""
+    mock_get = mocker.patch("requests.get")
+    mock_get.return_value.json.return_value = {"data": "test"}
+    # test implementation
+```
+
+**Assert exact values** - Be specific about what you expect:
+
+```python
+# Good - exact assertion
+assert result == {"name": "Alice", "age": 30}
+assert list(df.columns) == ["id", "name", "value"]
+
+# Avoid - vague assertions
+assert len(result) > 0  # What should the exact length be?
+assert "name" in result  # What else should be in result?
+```
+
+**Keep tests simple** - Each test should verify one specific behavior with clear arrange/act/assert phases.
 
 ## Coverage
 
