@@ -1,0 +1,34 @@
+name: {{ cookiecutter.repo_name }}
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python={{ cookiecutter.python_version_number }}.*
+  # Core dependencies
+  - ipython
+  - jupyterlab
+  - loguru
+  - matplotlib
+  - notebook
+  - numpy
+  - openpyxl
+  - pandas
+  - plotly
+  - requests
+  - scikit-learn
+  - scipy
+  - seaborn
+  - tqdm
+  # Development dependencies
+  - pre-commit
+  - pytest
+  - pytest-cov
+  {% if cookiecutter.linting_and_formatting == 'ruff' %}- ruff
+  {% else %}- black
+  - flake8
+  - isort
+  {% endif %}{% if cookiecutter.docs == 'mkdocs' %}# Documentation dependencies
+  - mkdocs
+  - mkdocs-material
+  - mkdocstrings-python
+  {% endif %}

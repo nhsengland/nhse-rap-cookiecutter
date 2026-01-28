@@ -21,9 +21,40 @@ version = "0.0.1"
 requires-python = ">={{ cookiecutter.python_version_number }},<3.14"
 readme = "README.md"
 
+dependencies = [
+    "ipython",
+    "jupyterlab",
+    "loguru",
+    "matplotlib",
+    "notebook",
+    "numpy",
+    "openpyxl",
+    "pandas",
+    "plotly",
+    "requests",
+    "scikit-learn",
+    "scipy",
+    "seaborn",
+    "tqdm",
+]
+
 [project.optional-dependencies]
-dev = []
-docs = ["mkdocs", "mkdocs-material", "mkdocstrings[python]"]
+dev = [
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    {% if cookiecutter.linting_and_formatting == 'ruff' %}"ruff",
+    {% else %}"black",
+    "flake8",
+    "isort",
+    {% endif %}
+]
+{% if cookiecutter.docs == 'mkdocs' %}docs = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+]
+{% endif %}
 
 {% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 [tool.black]
