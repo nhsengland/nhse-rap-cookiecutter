@@ -31,7 +31,6 @@
         "none",
         "basic"
     ],
-    "testing_framework": "pytest",
     "linting_and_formatting": [
         "ruff",
         "flake8+black+isort"

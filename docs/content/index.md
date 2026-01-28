@@ -104,7 +104,6 @@ The template prompts for the following:
 | | dependency_file | Dependency management file | requirements.txt, pyproject.toml, environment.yml, Pipfile |
 | | pydata_packages | Include pandas, numpy, matplotlib | yes, no |
 | **Options** | include_code_scaffold | Include example code modules | yes, no |
-| | testing_framework | Testing framework | pytest, unittest |
 | | license | Project licence | MIT, BSD-3-Clause, none |
 | | documentation | Documentation tool | mkdocs, none |
 
@@ -126,8 +125,8 @@ your-project/
 ├── reports/
 │   └── figures/         # Generated graphics
 ├── tests/
-│   ├── pytest/          # Pytest tests
-│   └── unittest/        # Unittest tests
+│   ├── unittests/       # Unit tests (pytest)
+│   └── e2e/             # End-to-end integration tests
 ├── your_module/         # Source code package
 │   ├── __init__.py
 │   ├── config.py        # Configuration management

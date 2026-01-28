@@ -22,7 +22,7 @@ requires-python = ">={{ cookiecutter.python_version_number }},<3.14"
 readme = "README.md"
 
 [project.optional-dependencies]
-dev = []
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
 docs = ["mkdocs", "mkdocs-material", "mkdocstrings[python]"]
 
 {% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
@@ -54,3 +54,14 @@ extend-select = ["I"] # Add import sorting
 known-first-party = ["{{ cookiecutter.module_name }}"]
 force-sort-within-sections = true
 {% endif %}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+]

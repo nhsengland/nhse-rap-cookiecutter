@@ -52,11 +52,17 @@ def test_template_with_uv_environment(cookies):
 
 
 def test_template_with_pytest_framework(cookies):
-    """Test template generation with pytest testing framework."""
-    result = cookies.bake(extra_context={"testing_framework": "pytest"})
+    """Test template generation always uses pytest with unittests and e2e folders."""
+    result = cookies.bake()
 
     assert result.exit_code == 0
-    assert (result.project_path / "tests" / "pytest").is_dir()
+    assert (result.project_path / "tests" / "unittests").is_dir()
+    assert (result.project_path / "tests" / "e2e").is_dir()
+    assert (result.project_path / "tests" / "README.md").exists()
+
+    # Verify pytest is in dependencies
+    pyproject_content = (result.project_path / "pyproject.toml").read_text()
+    assert "pytest" in pyproject_content
 
 
 def test_template_with_mit_license(cookies):

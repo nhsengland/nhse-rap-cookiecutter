@@ -27,7 +27,7 @@ Copy badges from badges.toml and paste them above to customize your documentatio
 This project follows NHS England RAP (Reproducible Analytical Pipeline) standards and includes:
 
 - Standardised project structure following best practices
-- Automated testing with {{ cookiecutter.testing_framework }}
+- Automated testing with pytest
 {% if cookiecutter.linting_and_formatting == "ruff" %}- Code quality checks with ruff (linting and formatting){% else %}- Code quality checks with flake8, black, and isort{% endif %}
 - Comprehensive documentation with MkDocs
 - Environment management with {{ cookiecutter.environment_manager }}
