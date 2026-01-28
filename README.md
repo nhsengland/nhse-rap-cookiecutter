@@ -1,7 +1,7 @@
 # NHS RAP Cookiecutter Template
 
 [![Project Status: Active](https://img.shields.io/badge/Status-Active-green)](https://github.com/nhsengland/nhse-rap-cookiecutter)
-[![Python: 3.10 | 3.11 | 3.12](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)
+[![Python: 3.10 | 3.11 | 3.12 | 3.13](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/downloads/)
 [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter)
 [![Checks](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml/badge.svg)](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/checks.yml)
 [![Deploy Docs](https://github.com/nhsengland/nhse-rap-cookiecutter/actions/workflows/deploy-docs.yml/badge.svg)](https://nhsengland.github.io/nhse-rap-cookiecutter/)
@@ -35,7 +35,7 @@ Learn more about RAP at the [NHS RAP Community of Practice website](https://nhsd
 
 ## Installation
 
-This template requires Python 3.10 or higher. This package is not published to PyPI, so install directly from GitHub:
+This template requires Python 3.10 to 3.13. This package is not published to PyPI, so install directly from GitHub:
 
 **pipx** (recommended for CLI tools):
 
@@ -86,7 +86,7 @@ The template prompts for the following information:
 | | organization_name | Your organisation (fixed: NHS England) | Text |
 | | team_name | Your team name | Text |
 | | team_email | Team contact email (optional) | Text |
-| **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12 |
+| **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
 | | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
 | | dependency_file | Dependency management file | requirements.txt, pyproject.toml, environment.yml, Pipfile |
 | | pydata_packages | Include pandas, numpy, matplotlib | yes, no |

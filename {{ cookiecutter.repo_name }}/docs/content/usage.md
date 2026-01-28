@@ -341,6 +341,36 @@ ruff check . && ruff format .
 
 {% endif %}
 
+## Make Commands
+
+The project includes a Makefile with convenient commands for common tasks:
+
+```bash
+# Run tests
+make test
+
+# Lint and format code
+make lint     # Check code style without changing files
+make format   # Auto-format code
+{% if cookiecutter.docs == 'mkdocs' %}
+# Build and serve documentation
+make docs        # Serve documentation with live reload
+make docs-build  # Build static documentation site
+{% endif %}
+{% if cookiecutter.include_code_scaffold == 'Yes' %}
+# Run data pipeline
+make data     # Execute the data processing pipeline
+{% endif %}
+# Set up environment
+make create_environment  # Create virtual environment
+make requirements        # Install dependencies
+
+# Clean up
+make clean    # Remove compiled Python files
+```
+
+All Make commands automatically use the correct command runner based on your chosen environment manager ({% if cookiecutter.environment_manager == 'uv' %}uv{% elif cookiecutter.environment_manager == 'poetry' %}poetry{% elif cookiecutter.environment_manager == 'pixi' %}pixi{% else %}python{% endif %}).
+
 ## Best Practices
 
 1. **Keep data out of version control** - Use `.gitignore` to exclude data files
