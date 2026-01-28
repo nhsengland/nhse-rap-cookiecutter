@@ -101,9 +101,9 @@ The template prompts for the following:
 | | team_email | Team contact email (optional) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
 | | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
-| | dependency_file | Dependency management file | requirements.txt, pyproject.toml, environment.yml, Pipfile |
-| | pydata_packages | Include pandas, numpy, matplotlib | yes, no |
 | **Options** | include_code_scaffold | Include example code modules | yes, no |
+| | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
+| | testing_framework | Testing framework | pytest, unittest |
 | | license | Project licence | MIT, BSD-3-Clause, none |
 | | documentation | Documentation tool | mkdocs, none |
 

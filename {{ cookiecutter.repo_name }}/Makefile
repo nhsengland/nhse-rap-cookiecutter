@@ -10,35 +10,25 @@ PYTHON_INTERPRETER = python
 # COMMANDS                                                                      #
 #################################################################################
 
-{% if cookiecutter.dependency_file != 'none' %}
 ## Install Python dependencies
 .PHONY: requirements
 requirements:
-	{% if "requirements.txt" == cookiecutter.dependency_file -%}
-	{% if "uv" == cookiecutter.environment_manager -%}
-	uv pip install -r requirements.txt
-	{% else -%}
-	$(PYTHON_INTERPRETER) -m pip install -U pip
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
-	{% endif -%}
-	{% elif "pyproject.toml" == cookiecutter.dependency_file -%}
 	{% if "uv" == cookiecutter.environment_manager -%}
 	uv sync
 	{% elif "pixi" == cookiecutter.environment_manager -%}
 	pixi install
 	{% elif "poetry" == cookiecutter.environment_manager -%}
 	poetry install
-	{% else -%}
+	{% elif "conda" == cookiecutter.environment_manager -%}
+	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
+	{% elif "pipenv" == cookiecutter.environment_manager -%}
+	pipenv install
+	{% elif "virtualenv" == cookiecutter.environment_manager -%}
+	pip install -e .
+	{% elif "none" == cookiecutter.environment_manager -%}
 	pip install -e .
 	{% endif -%}
-	{% elif "environment.yml" == cookiecutter.dependency_file -%}
-	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
-	{% elif "Pipfile" == cookiecutter.dependency_file -%}
-	pipenv install
-	{% elif "pixi.toml" == cookiecutter.dependency_file -%}
-	pixi install
-{% endif %}
-{% endif %}
+
 
 
 ## Delete all compiled Python files
@@ -159,11 +149,7 @@ docs-build:
 .PHONY: create_environment
 create_environment:
 	{% if cookiecutter.environment_manager == 'conda' -%}
-	{% if cookiecutter.dependency_file != 'environment.yml' %}
-	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
-	{% else -%}
 	conda env create --name $(PROJECT_NAME) -f environment.yml
-	{% endif %}
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
 	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
@@ -177,11 +163,7 @@ create_environment:
 	@echo ">>> Windows: .\\\\.venv\\\\Scripts\\\\activate"
 	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
 	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	{% if cookiecutter.dependency_file == 'pixi.toml' %}
-	@echo ">>> Pixi environment will be created when running 'make requirements'"
-	{% else %}
 	@echo ">>> Pixi environment configured in pyproject.toml. Run 'make requirements' to install dependencies."
-	{% endif %}
 	@echo ">>> Activate with:\npixi shell"
 	{% elif cookiecutter.environment_manager == 'poetry' -%}
 	poetry env use $(PYTHON_VERSION)

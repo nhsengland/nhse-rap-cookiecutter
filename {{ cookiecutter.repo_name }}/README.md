@@ -41,6 +41,7 @@ Copy badges from badges.toml and paste them above to customize your README.
 ### Installation
 
 1. Clone this repository:
+
    ```bash
    git clone {{cookiecutter.repository_url}}
    cd {{cookiecutter.repo_name}}
@@ -50,23 +51,30 @@ Copy badges from badges.toml and paste them above to customize your README.
 {% if cookiecutter.environment_manager == "conda" %}   ```bash
    conda env create -f environment.yml
    conda activate {{cookiecutter.module_name}}
+
    ```
+
 {% elif cookiecutter.environment_manager == "uv" %}   ```bash
    uv sync
+
    ```
 {% elif cookiecutter.environment_manager == "poetry" %}   ```bash
    poetry install
    ```
+
 {% elif cookiecutter.environment_manager == "pipenv" %}   ```bash
    pipenv install
+
    ```
 {% elif cookiecutter.environment_manager == "pixi" %}   ```bash
    pixi install
    ```
+
 {% else %}   ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
+   pip install -e .
+
    ```
 {% endif %}
 
