@@ -58,11 +58,13 @@ def test_template_with_pytest_framework(cookies):
     assert result.exit_code == 0
     assert (result.project_path / "tests" / "unittests").is_dir()
     assert (result.project_path / "tests" / "e2e").is_dir()
-    assert (result.project_path / "tests" / "README.md").exists()
 
     # Verify pytest is in dependencies
     pyproject_content = (result.project_path / "pyproject.toml").read_text()
     assert "pytest" in pyproject_content
+
+    # Verify testing.md exists in docs
+    assert (result.project_path / "docs" / "content" / "testing.md").exists()
 
 
 def test_template_with_mit_license(cookies):

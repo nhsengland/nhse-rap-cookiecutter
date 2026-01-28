@@ -34,7 +34,12 @@ TEMPLATE_REPO = "gh:nhsengland/nhse-rap-cookiecutter"
     type=click.Path(),
     help="Where to output the generated project dir",
 )
-def main(template, checkout, no_input, config_file, output_dir):
+@click.option(
+    "--debug",
+    is_flag=True,
+    help="Show full traceback on error",
+)
+def main(template, checkout, no_input, config_file, output_dir, debug):
     """Generate a new NHS RAP project from the cookiecutter template.
 
     TEMPLATE is the path or URL to the template. Defaults to the NHS RAP
@@ -52,7 +57,11 @@ def main(template, checkout, no_input, config_file, output_dir):
             config_file=config_file,
         )
     except Exception as e:
+        import traceback
+
         click.echo(f"Error: {e}", err=True)
+        if debug:
+            traceback.print_exc()
         sys.exit(1)
 
 
