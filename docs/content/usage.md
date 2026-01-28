@@ -184,6 +184,7 @@ make docs-build  # Build static site
 uv run mkdocs serve
 ```
 
+For projects using `poetry` or `pixi`, `make docs` and `make docs-build` assume your environment is already activated (for example, via `poetry shell` or `pixi shell`).
 ### Code Quality Checks
 
 ```bash
