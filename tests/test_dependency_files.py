@@ -133,7 +133,18 @@ class TestEnvironmentYmlContent:
 
     @pytest.mark.parametrize(
         "package",
-        ["pandas", "numpy", "matplotlib", "seaborn", "loguru", "tqdm", "jupyter", "pytest"],
+        [
+            "pandas",
+            "numpy",
+            "matplotlib",
+            "seaborn",
+            "loguru",
+            "tqdm",
+            "jupyterlab",
+            "notebook",
+            "ipython",
+            "pytest",
+        ],
     )
     def test_package_present(self, cookies, package):
         """Package should be in environment.yml."""

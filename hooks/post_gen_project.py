@@ -38,7 +38,7 @@ if dependency_file:
 # Remove unused dependency files
 all_dependency_files = ["_pyproject.toml", "_environment.yml"]
 for dep_file in all_dependency_files:
-    if dep_file != dependency_file:
+    if dependency_file and dep_file != dependency_file:
         dep_path = Path(dep_file)
         if dep_path.exists():
             dep_path.unlink()
