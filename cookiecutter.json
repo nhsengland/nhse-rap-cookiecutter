@@ -20,17 +20,6 @@
         "poetry",
         "none"
     ],
-    "dependency_file": [
-        "requirements.txt",
-        "pyproject.toml",
-        "environment.yml",
-        "Pipfile",
-        "pixi.toml"
-    ],
-    "pydata_packages": [
-        "none",
-        "basic"
-    ],
     "testing_framework": "pytest",
     "linting_and_formatting": [
         "ruff",

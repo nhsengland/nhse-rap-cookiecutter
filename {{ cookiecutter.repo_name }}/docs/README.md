@@ -25,7 +25,7 @@ mkdocs.yml                  # MkDocs configuration (at project root)
 
 ### Locally
 
-Build the documentation:
+{% if cookiecutter.environment_manager == 'uv' %}Build the documentation:
 
 ```bash
 uv run mkdocs build
@@ -36,6 +36,56 @@ Serve the documentation locally with live reload:
 ```bash
 uv run mkdocs serve
 ```
+
+{% elif cookiecutter.environment_manager == 'poetry' %}Build the documentation:
+
+```bash
+poetry run mkdocs build
+```
+
+Serve the documentation locally with live reload:
+
+```bash
+poetry run mkdocs serve
+```
+
+{% elif cookiecutter.environment_manager == 'pixi' %}Build the documentation:
+
+```bash
+pixi run mkdocs build
+```
+
+Serve the documentation locally with live reload:
+
+```bash
+pixi run mkdocs serve
+```
+
+{% elif cookiecutter.environment_manager == 'pipenv' %}Build the documentation:
+
+```bash
+pipenv run mkdocs build
+```
+
+Serve the documentation locally with live reload:
+
+```bash
+pipenv run mkdocs serve
+```
+
+{% else %}Build the documentation:
+
+```bash
+mkdocs build
+```
+
+Serve the documentation locally with live reload:
+
+```bash
+mkdocs serve
+```
+
+{% endif %}
 
 The documentation will be available at <http://127.0.0.1:8000/>
 

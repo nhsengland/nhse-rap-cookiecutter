@@ -97,11 +97,29 @@ When you run `nhs-rap-template`, you'll be prompted for:
 - **Organization**: Organization name and contact email (used in LICENSE)
 - **Python Version**: Minimum Python version (3.10-3.13)
 - **Environment Manager**: virtualenv, conda, pipenv, uv, pixi, poetry, or none
-- **Dependency File**: requirements.txt, pyproject.toml, environment.yml, Pipfile, or pixi.toml
-- **PyData Packages**: Include pandas, numpy, matplotlib, etc.
-- **Dataset Storage**: Azure, S3, GCS, or none
-- **License**: MIT, BSD-3-Clause, or no license
+- **License**: MIT, Apache-2.0, GPL-3.0, or no license
 - **Documentation**: mkdocs or none
+- **Linting/Formatting**: ruff or flake8+black+isort
+- **Code Scaffold**: Include example code modules
+
+### Included Packages
+
+**All generated projects automatically include:**
+
+**Runtime packages**: pandas, numpy, matplotlib, seaborn, plotly, scipy, scikit-learn, jupyterlab, notebook, ipython, loguru, tqdm, requests, openpyxl
+
+**Development packages**: pytest, pytest-cov, pre-commit, and your chosen linting/formatting tools (ruff or flake8+black+isort)
+
+**Documentation packages**: mkdocs, mkdocs-material, mkdocstrings (if docs enabled)
+
+### Dependency File Format
+
+The dependency file format is determined automatically by your environment manager choice:
+
+- **virtualenv, uv, pixi, poetry, pipenv, none**: `pyproject.toml` (modern Python standard)
+- **conda**: `environment.yml` (conda-specific format)
+
+Both formats include the same packages - the difference is only in file format to match your chosen tool.
 
 ## Generated Project Structure
 
@@ -185,6 +203,7 @@ uv run mkdocs serve
 ```
 
 For projects using `poetry` or `pixi`, `make docs` and `make docs-build` assume your environment is already activated (for example, via `poetry shell` or `pixi shell`).
+
 ### Code Quality Checks
 
 ```bash
