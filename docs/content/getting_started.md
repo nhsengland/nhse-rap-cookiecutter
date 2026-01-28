@@ -6,7 +6,7 @@ This guide will help you install **NHS RAP Cookiecutter Template** and create yo
 
 | Requirement | Version | Description |
 |-------------|---------|-------------|
-| **Python** | 3.10+ | Required for running the template tool |
+| **Python** | 3.10-3.13 | Required for running the template tool |
 | **Git** | Latest | Version control system for your projects |
 | **uv** (Recommended) | Latest | Fast Python package manager |
 
