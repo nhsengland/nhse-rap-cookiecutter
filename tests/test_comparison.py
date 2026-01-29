@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 
 
-@pytest.fixture
-def generated_projects(tmp_path):
+@pytest.fixture(scope="class")
+def generated_projects(tmp_path_factory):
     """Generate projects using both CLI and cookiecutter.
 
     Returns
@@ -15,6 +15,7 @@ def generated_projects(tmp_path):
     tuple[Path, Path]
         Tuple of (cli_project_path, cookiecutter_project_path)
     """
+    tmp_path = tmp_path_factory.mktemp("comparison")
     cli_output = tmp_path / "cli"
     cc_output = tmp_path / "cc"
     cli_output.mkdir()
@@ -23,7 +24,7 @@ def generated_projects(tmp_path):
     template_dir = Path.cwd()
 
     # Generate with CLI wrapper
-    subprocess.run(
+    cli_result = subprocess.run(
         [
             "uv",
             "run",
@@ -34,11 +35,13 @@ def generated_projects(tmp_path):
             str(cli_output),
         ],
         capture_output=True,
+        text=True,
         cwd=template_dir,
     )
+    assert cli_result.returncode == 0, f"CLI generation failed: {cli_result.stderr}"
 
     # Generate with cookiecutter
-    subprocess.run(
+    cc_result = subprocess.run(
         [
             "cookiecutter",
             str(template_dir),
@@ -47,7 +50,9 @@ def generated_projects(tmp_path):
             str(cc_output),
         ],
         capture_output=True,
+        text=True,
     )
+    assert cc_result.returncode == 0, f"Cookiecutter generation failed: {cc_result.stderr}"
 
     return cli_output / "project_name", cc_output / "project_name"
 

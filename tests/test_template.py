@@ -111,6 +111,8 @@ class TestLicense:
         """MIT LICENSE file contains MIT license text."""
         result = cookies.bake(extra_context={"open_source_license": "MIT"})
 
+        assert result.exit_code == 0
+        assert (result.project_path / "LICENSE").exists()
         license_content = (result.project_path / "LICENSE").read_text()
         assert "MIT" in license_content
 
