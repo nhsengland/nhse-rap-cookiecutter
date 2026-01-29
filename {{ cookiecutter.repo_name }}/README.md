@@ -166,4 +166,4 @@ Before publishing or sharing code, please review the [Open Code Checklist](OPEN_
 {% else %}This project does not currently have an open source license.
 {% endif %}
 
-The documentation is © Crown copyright and available under the terms of the [Open Government License v3.0](LICENSE-OGL).
+The documentation is © @YEAR_PLACEHOLDER@ Crown copyright and available under the terms of the [Open Government License v3.0](LICENSE-OGL).
