@@ -1,98 +1,160 @@
 """Tests for NHS RAP Cookiecutter Template."""
 
-
-def test_template_generates_successfully(cookies):
-    """Test that the template generates successfully with default values."""
-    result = cookies.bake()
-
-    assert result.exit_code == 0
-    assert result.exception is None
-    assert result.project_path.name == "project_name"
-    assert result.project_path.is_dir()
+import pytest
 
 
-def test_template_has_required_files(cookies):
-    """Test that generated project has all required files."""
-    result = cookies.bake()
+class TestTemplateGeneration:
+    """Tests for basic template generation."""
 
-    assert result.exit_code == 0
+    def test_generates_successfully_with_defaults(self, cookies):
+        """Template generates successfully with default values."""
+        result = cookies.bake()
 
-    # Check for key files
-    assert (result.project_path / "README.md").exists()
-    assert (result.project_path / "pyproject.toml").exists()
-    assert (result.project_path / "Makefile").exists()
-    assert (result.project_path / ".gitignore").exists()
-    assert (result.project_path / ".pre-commit-config.yaml").exists()
-
-
-def test_template_has_required_directories(cookies):
-    """Test that generated project has all required directories."""
-    result = cookies.bake()
-
-    assert result.exit_code == 0
-
-    # Check for key directories
-    assert (result.project_path / "data").is_dir()
-    assert (result.project_path / "docs").is_dir()
-    assert (result.project_path / "models").is_dir()
-    assert (result.project_path / "notebooks").is_dir()
-    assert (result.project_path / "references").is_dir()
-    assert (result.project_path / "reports").is_dir()
-    assert (result.project_path / "tests").is_dir()
-    assert (result.project_path / "project_name").is_dir()
+        assert result.exit_code == 0
+        assert result.exception is None
+        assert result.project_path.name == "project_name"
+        assert result.project_path.is_dir()
 
 
-def test_template_with_uv_environment(cookies):
-    """Test template generation with UV environment manager."""
-    result = cookies.bake(extra_context={"environment_manager": "uv"})
+class TestTemplateFiles:
+    """Tests for required files in generated project."""
 
-    assert result.exit_code == 0
-    makefile_content = (result.project_path / "Makefile").read_text()
-    assert "uv venv" in makefile_content or "uv sync" in makefile_content
+    @pytest.mark.parametrize(
+        "filename",
+        [
+            "README.md",
+            "pyproject.toml",
+            "Makefile",
+            ".gitignore",
+            ".pre-commit-config.yaml",
+        ],
+    )
+    def test_has_required_file(self, cookies, filename):
+        """Generated project contains required file."""
+        result = cookies.bake()
 
-
-def test_template_with_pytest_framework(cookies):
-    """Test template generation always uses pytest with unittests and e2e folders."""
-    result = cookies.bake()
-
-    assert result.exit_code == 0
-    assert (result.project_path / "tests" / "unittests").is_dir()
-    assert (result.project_path / "tests" / "e2e").is_dir()
-
-    # Verify pytest is in dependencies
-    pyproject_content = (result.project_path / "pyproject.toml").read_text()
-    assert "pytest" in pyproject_content
-
-    # Verify testing.md exists in docs
-    assert (result.project_path / "docs" / "content" / "testing.md").exists()
+        assert result.exit_code == 0
+        assert (result.project_path / filename).exists()
 
 
-def test_template_with_mit_license(cookies):
-    """Test template generation with MIT license."""
-    result = cookies.bake(extra_context={"open_source_license": "MIT"})
+class TestTemplateDirectories:
+    """Tests for required directories in generated project."""
 
-    assert result.exit_code == 0
-    assert (result.project_path / "LICENSE").exists()
-    license_content = (result.project_path / "LICENSE").read_text()
-    assert "MIT" in license_content
+    @pytest.mark.parametrize(
+        "dirname",
+        ["data", "docs", "models", "notebooks", "references", "reports", "tests", "project_name"],
+    )
+    def test_has_required_directory(self, cookies, dirname):
+        """Generated project contains required directory."""
+        result = cookies.bake()
 
-
-def test_template_project_name_conversion(cookies):
-    """Test that project name is correctly converted to repo and module names."""
-    result = cookies.bake(extra_context={"project_name": "My Test Project"})
-
-    assert result.exit_code == 0
-    assert result.project_path.name == "my_test_project"
-
-    # Check module directory exists with correct name
-    assert (result.project_path / "my_test_project").is_dir()
+        assert result.exit_code == 0
+        assert (result.project_path / dirname).is_dir()
 
 
-def test_template_with_mkdocs_documentation(cookies):
-    """Test template generation with mkdocs documentation."""
-    result = cookies.bake(extra_context={"docs": "mkdocs"})
+class TestEnvironmentManager:
+    """Tests for environment manager configurations."""
 
-    assert result.exit_code == 0
-    assert (result.project_path / "docs").is_dir()
-    assert (result.project_path / "docs" / "content").is_dir()
-    assert (result.project_path / "mkdocs.yml").is_file()
+    def test_uv_creates_correct_makefile_commands(self, cookies):
+        """UV environment manager includes correct commands in Makefile."""
+        result = cookies.bake(extra_context={"environment_manager": "uv"})
+
+        assert result.exit_code == 0
+        makefile_content = (result.project_path / "Makefile").read_text()
+        assert "uv venv" in makefile_content or "uv sync" in makefile_content
+
+
+class TestTestingFramework:
+    """Tests for pytest testing framework setup."""
+
+    def test_creates_unittests_directory(self, cookies):
+        """Template creates tests/unittests directory."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        assert (result.project_path / "tests" / "unittests").is_dir()
+
+    def test_creates_e2e_directory(self, cookies):
+        """Template creates tests/e2e directory."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        assert (result.project_path / "tests" / "e2e").is_dir()
+
+    def test_includes_pytest_in_dependencies(self, cookies):
+        """Template includes pytest in project dependencies."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        pyproject_content = (result.project_path / "pyproject.toml").read_text()
+        assert "pytest" in pyproject_content
+
+    def test_includes_testing_documentation(self, cookies):
+        """Template includes testing guide in documentation."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        assert (result.project_path / "docs" / "content" / "testing.md").exists()
+
+
+class TestLicense:
+    """Tests for license file generation."""
+
+    def test_mit_license_creates_license_file(self, cookies):
+        """MIT license option creates LICENSE file."""
+        result = cookies.bake(extra_context={"open_source_license": "MIT"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "LICENSE").exists()
+
+    def test_mit_license_contains_mit_text(self, cookies):
+        """MIT LICENSE file contains MIT license text."""
+        result = cookies.bake(extra_context={"open_source_license": "MIT"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "LICENSE").exists()
+        license_content = (result.project_path / "LICENSE").read_text()
+        assert "MIT" in license_content
+
+
+class TestProjectNaming:
+    """Tests for project name conversion."""
+
+    def test_converts_project_name_to_snake_case(self, cookies):
+        """Project name with spaces converts to snake_case for directory."""
+        result = cookies.bake(extra_context={"project_name": "My Test Project"})
+
+        assert result.exit_code == 0
+        assert result.project_path.name == "my_test_project"
+
+    def test_creates_module_with_converted_name(self, cookies):
+        """Module directory uses converted project name."""
+        result = cookies.bake(extra_context={"project_name": "My Test Project"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "my_test_project").is_dir()
+
+
+class TestDocumentation:
+    """Tests for documentation generation."""
+
+    def test_mkdocs_creates_docs_directory(self, cookies):
+        """mkdocs option creates docs directory."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "docs").is_dir()
+
+    def test_mkdocs_creates_content_directory(self, cookies):
+        """mkdocs option creates docs/content directory."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "docs" / "content").is_dir()
+
+    def test_mkdocs_creates_config_file(self, cookies):
+        """mkdocs option creates mkdocs.yml configuration."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "mkdocs.yml").is_file()
