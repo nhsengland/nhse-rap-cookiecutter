@@ -158,3 +158,49 @@ class TestDocumentation:
 
         assert result.exit_code == 0
         assert (result.project_path / "mkdocs.yml").is_file()
+
+
+class TestOpenCodeChecklist:
+    """Tests for Open Code Checklist integration."""
+
+    def test_creates_open_code_checklist_file(self, cookies):
+        """Generated project contains OPEN_CODE_CHECKLIST.md in root."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        assert (result.project_path / "OPEN_CODE_CHECKLIST.md").is_file()
+
+    def test_creates_open_code_checklist_docs_page(self, cookies):
+        """mkdocs option includes open_code_checklist.md in docs."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        assert (result.project_path / "docs" / "content" / "open_code_checklist.md").is_file()
+
+    def test_checklist_included_in_mkdocs_nav(self, cookies):
+        """mkdocs.yml navigation includes the checklist."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        mkdocs_yml = result.project_path / "mkdocs.yml"
+        content = mkdocs_yml.read_text()
+        assert "open_code_checklist.md" in content
+
+    def test_contributing_references_checklist(self, cookies):
+        """Contributing guide references the Open Code Checklist."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        contributing = result.project_path / "docs" / "content" / "contributing.md"
+        content = contributing.read_text()
+        assert "Open Code" in content
+        assert "open_code_checklist.md" in content
+
+    def test_readme_mentions_checklist(self, cookies):
+        """README mentions the Open Code Checklist."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        readme = result.project_path / "README.md"
+        content = readme.read_text()
+        assert "OPEN_CODE_CHECKLIST.md" in content
