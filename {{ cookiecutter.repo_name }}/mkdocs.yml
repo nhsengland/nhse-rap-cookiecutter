@@ -59,6 +59,7 @@ nav:
   - Contributing:
     - contributing.md
     - Testing: testing.md
+    - Open Code Checklist: open_code_checklist.md
   - API Reference:
     - api_reference/index.md
 

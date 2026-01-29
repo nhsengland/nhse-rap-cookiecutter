@@ -101,6 +101,8 @@ See our [Contributing Guidelines](CONTRIBUTING.md) for details on:
 - Our code review process
 - Coding standards and style guides
 
+Before publishing or sharing code, please review the [Open Code Checklist](OPEN_CODE_CHECKLIST.md) to ensure compliance with NHS England standards for security, licensing, and quality.
+
 ## Project Organization
 
 ```
@@ -108,6 +110,7 @@ See our [Contributing Guidelines](CONTRIBUTING.md) for details on:
 ├── LICENSE-OGL            <- Open Government License v3.0 for documentation
 ├── CODE_OF_CONDUCT.md     <- Community guidelines and code of conduct
 ├── CONTRIBUTING.md        <- Contribution guidelines
+├── OPEN_CODE_CHECKLIST.md <- Checklist for publishing code to public repositories
 ├── Makefile               <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md              <- The top-level README for developers using this project
 ├── pyproject.toml         <- Project configuration file with package metadata
