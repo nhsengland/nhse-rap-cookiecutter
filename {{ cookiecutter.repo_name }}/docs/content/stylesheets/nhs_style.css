@@ -71,16 +71,19 @@ code {
   color: #005eb8;
   font-size: 15px;
   font-weight: 400;
-  margin-left: 1vh;
   min-width:24px;
   min-height: 24px;
   display: inline-block;
 }
 
+.footer_left {
+  color: #999;
+}
+
 .footer_left p {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
-  margin: 1vh;
+  margin: 0;
 }
 
 .legal {
@@ -89,6 +92,22 @@ code {
   justify-content: right;
   text-align: right;
   align-items: right;
+}
+
+.legal p {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.legal a {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.footer_left a {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 @media screen and (min-width: 24.375em) {
