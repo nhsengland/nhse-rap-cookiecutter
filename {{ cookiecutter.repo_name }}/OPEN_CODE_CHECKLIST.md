@@ -118,7 +118,7 @@ Verify that no sensitive, personal, or classified information is released.
 
 - [ ] **Mandatory**: Have notebook outputs been reviewed and cleared?
   - *Check Jupyter notebooks for sensitive data in outputs*
-  - *Consider using pre-commit hooks to strip outputs: [Example](https://github.com/best-practice-and-impact/govcookiecutter/blob/main/%7B%7B%20cookiecutter.repo_name%20%7D%7D/.pre-commit-config.yaml)*
+  - *Consider using pre-commit hooks to strip outputs: [Example](https://github.com/best-practice-and-impact/govcookiecutter/blob/main/{{ cookiecutter.repo_name }}/.pre-commit-config.yaml)*
 
 - [ ] **Recommended**: Is configuration separated from analytical code?
   - *Use config files (YAML, JSON, TOML) separate from analysis scripts*
