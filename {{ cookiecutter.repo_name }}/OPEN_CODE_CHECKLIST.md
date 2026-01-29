@@ -1,185 +1,186 @@
 # Open Code Checklist
 
-This checklist ensures that code published to private or public repositories meets NHS England standards for clarity, security, and reusability. Review all items before publishing your code, completing mandatory items at minimum.
+Complete this checklist before publishing code to verify it meets NHS England standards for clarity, security, and reusability.
 
-## Overview
+**Instructions**:
 
-Use this checklist to verify your code is ready for publication. Items marked **Mandatory** must be completed. Items marked **Recommended** represent best practices that significantly improve code quality.
+- Complete all **Mandatory** items before publication
+- **Recommended** items represent best practices that significantly improve code quality
+- Fill in the completion section at the end with dates, comments, and sign-off{% if cookiecutter.docs == "mkdocs" %}
+- For detailed guidance, see the [documentation site](https://{{cookiecutter.organization_name.lower().replace(' ', '')}}.github.io/{{cookiecutter.repo_name}}/contributing/open_code_checklist/){% else %}
+- For detailed guidance, see [docs/content/open_code_checklist.md](docs/content/open_code_checklist.md){% endif %}
 
----
+**Key Template Resources**:
 
-## 1. Clear Ownership and Licensing
-
-Ensure others understand who owns the code and how they can use it.
-
-### License and Documentation
-
-- [ ] **Mandatory**: Does your code have an appropriate license with copyright notice?
-  - *Add a LICENSE file (e.g., MIT, Apache-2.0, OGL-3.0)*
-  - *Include copyright notice: `Copyright © [Year] Crown Copyright ([Organization])`*
-
-- [ ] **Mandatory**: Does the README document the project's intended purpose?
-  - *Clearly state what the code does and what problems it solves*
-
-- [ ] **Recommended**: Is the README clear, concise, and complete?
-  - *Consider using the [NHS England template](https://github.com/nhsengland/nhse-rap-cookiecutter) or [best practice examples](https://github.com/othneildrew/Best-README-Template)*
-  - *Include: purpose, installation, usage, contributing guidelines*
-
-### Regulatory Compliance
-
-- [ ] **Mandatory**: Have you assessed whether MHRA 'software as a medical device' guidance applies?
-  - *Use the [MHRA flowchart](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/999908/Software_flow_chart_Ed_1-08b-IVD.pdf)*
-  - *Document the assessment outcome in your README*
-
-### Maintenance and Support
-
-- [ ] **Recommended**: Is there a designated person/team responsible for ongoing support?
-  - *State in README: "Maintained by [Team/Person]" or "No longer actively maintained (last updated: [Date])"*
-
-- [ ] **Mandatory**: Has a responsible disclosure process for security issues been defined?
-  - *Add SECURITY.md or document in README*
-  - *Consider using GitHub Security Advisories*
-
-- [ ] **Mandatory**: Is someone assigned to monitor and address security concerns?
-  - *Assign responsibility for reviewing security reports*
-
-### Versioning and Collaboration
-
-- [ ] **Recommended**: Does the project use semantic versioning?
-  - *Follow [semver](https://semver.org/): MAJOR.MINOR.PATCH (e.g., 1.2.3)*
-  - *Tag releases in Git*
-
-- [ ] **Recommended**: Are contribution guidelines included?
-  - *Add CONTRIBUTING.md with guidelines for pull requests, code style, and testing*
-  - *See examples: [GOV.UK contribution guidelines](https://github.com/alphagov/govuk-frontend/blob/master/CONTRIBUTING.md)*
-
-- [ ] **Recommended**: Are dependencies documented with version numbers?
-  - *Use requirements.txt, pyproject.toml, environment.yml, or equivalent*
-  - *Pin or specify compatible version ranges*
-
-- [ ] **Recommended**: Is the code linked to published outputs (papers, reports)?
-  - *Add links/DOIs in README to help others cite your work*
+- [README.md](README.md) - Project overview and setup instructions
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Development workflow and standards
+- [.pre-commit-config.yaml](.pre-commit-config.yaml) - Pre-configured security hooks
+- [Makefile](Makefile) - Common development commands
 
 ---
 
-## 2. Sensitive Information Protection
+## Checklist
 
-Verify that no sensitive, personal, or classified information is released.
-
-### Data and Policy
-
-- [ ] **Mandatory**: Does the code contain any sensitive, personal, secret, or classified data?
-  - *Review all data files, test data, and example datasets*
-  - *Use synthetic/dummy data only*
-
-- [ ] **Mandatory**: Does the code contain unreleased policy information?
-  - *Confirm all policy references are public*
-
-- [ ] **Mandatory**: Does the code include business-sensitive algorithms (e.g., financial allocations)?
-  - *Obtain approval before publishing proprietary algorithms*
-
-- [ ] **Mandatory**: Has written permission been obtained from data owners for any stored data?
-  - *Document data usage agreements*
-
-- [ ] **Mandatory**: Are service owners aware of the code release?
-  - *Notify and obtain approval from relevant stakeholders*
-
-- [ ] **Mandatory**: Are data transfers conducted securely?
-  - *Use encryption for data in transit*
-  - *Follow NHS data handling guidelines*
-
-### Secrets and Credentials
-
-- [ ] **Mandatory**: Are there any credentials in the source code?
-  - *Check current code AND git history*
-  - *Remove: API keys, passwords, access tokens, service accounts*
-
-- [ ] **Mandatory**: Are there any secret keys in the source code?
-  - *Check current code AND git history*
-  - *Use environment variables or secret management services*
-
-- [ ] **Mandatory**: Are there SQL server addresses or connection strings in the source code?
-  - *Check current code AND git history*
-  - *Use environment variables or configuration files (not committed)*
-
-### Git History and Commits
-
-- [ ] **Recommended**: Are commit messages clear and informative?
-  - *Use conventional commits: `feat:`, `fix:`, `docs:`, etc.*
-
-- [ ] **Mandatory**: Do commit messages contain sensitive information (e.g., names, credentials)?
-  - *Review entire git history*
-
-- [ ] **Mandatory**: Does the git history contain any previously committed sensitive information?
-  - *Even if removed in current version, sensitive data in history must be purged*
-  - *Consider using tools like BFG Repo-Cleaner if needed*
-
-### Notebooks and Documentation
-
-- [ ] **Mandatory**: Have notebook outputs been reviewed and cleared?
-  - *Check Jupyter notebooks for sensitive data in outputs*
-  - *Consider using pre-commit hooks to strip outputs: [Example](https://github.com/best-practice-and-impact/govcookiecutter/blob/main/{{ cookiecutter.repo_name }}/.pre-commit-config.yaml)*
-
-- [ ] **Recommended**: Is configuration separated from analytical code?
-  - *Use config files (YAML, JSON, TOML) separate from analysis scripts*
-
-- [ ] **Mandatory**: Have screenshots and figures been reviewed for sensitive information?
-  - *Check all images in documentation, presentations, and reports*
+| # | Item | Priority | Completed | Date | Comments | Reviewer |
+|---|------|----------|-----------|------|----------|----------|
+| **1. Ownership and Licensing** |
+| 1.1 | Code has appropriate license with copyright notice (LICENSE file) | Mandatory | ☐ | | | |
+| 1.2 | README documents project purpose and scope | Mandatory | ☐ | | | |
+| 1.3 | README is clear, concise and complete (see template examples) | Recommended | ☐ | | | |
+| 1.4 | MHRA 'software as medical device' assessment completed | Mandatory | ☐ | | | |
+| 1.5 | Designated person/team responsible for ongoing support | Recommended | ☐ | | | |
+| 1.6 | Security disclosure process defined (SECURITY.md or README) | Mandatory | ☐ | | | |
+| 1.7 | Person assigned to monitor security concerns | Mandatory | ☐ | | | |
+| 1.8 | Project uses semantic versioning (MAJOR.MINOR.PATCH) | Recommended | ☐ | | | |
+| 1.9 | Contribution guidelines included (CONTRIBUTING.md) | Recommended | ☐ | | | |
+| 1.10 | Dependencies documented with versions (pyproject.toml) | Recommended | ☐ | | | |
+| 1.11 | Code linked to published outputs (papers, reports) | Recommended | ☐ | | | |
+| **2. Sensitive Information Protection** |
+| 2.1 | No sensitive, personal, secret, or classified data in code | Mandatory | ☐ | | | |
+| 2.2 | No unreleased policy information | Mandatory | ☐ | | | |
+| 2.3 | No business-sensitive algorithms without approval | Mandatory | ☐ | | | |
+| 2.4 | Written permission obtained for any stored data | Mandatory | ☐ | | | |
+| 2.5 | Service owners aware of code release | Mandatory | ☐ | | | |
+| 2.6 | Data transfers conducted securely (encryption) | Mandatory | ☐ | | | |
+| 2.7 | No credentials (API keys, passwords, tokens) in code or history | Mandatory | ☐ | | | |
+| 2.8 | No secret keys in code or history | Mandatory | ☐ | | | |
+| 2.9 | No SQL addresses or connection strings in code or history | Mandatory | ☐ | | | |
+| 2.10 | Commit messages clear and informative | Recommended | ☐ | | | |
+| 2.11 | No sensitive information in commit messages | Mandatory | ☐ | | | |
+| 2.12 | Git history clean (no previously committed sensitive data) | Mandatory | ☐ | | | |
+| 2.13 | Notebook outputs reviewed and cleared (use `nbstripout`) | Mandatory | ☐ | | | |
+| 2.14 | Configuration separated from analytical code | Recommended | ☐ | | | |
+| 2.15 | Screenshots and figures reviewed for sensitive information | Mandatory | ☐ | | | |
+| **3. Repository Management** |
+| 3.1 | Code version controlled using Git | Recommended | ☐ | | | |
+| 3.2 | Code in organization's GitHub account (e.g., nhsengland) | Recommended | ☐ | | | |
+| **4. Third-Party Tools and Security** |
+| 4.1 | All third-party tools and dependencies identified | Mandatory | ☐ | | | |
+| 4.2 | Third-party tools comply with NCSC Cloud Security Principles | Mandatory | ☐ | | | |
+| **5. Code Review and Quality** |
+| 5.1 | Colleague reviewed code for security vulnerabilities | Mandatory | ☐ | | | |
+| 5.2 | Automated security scanning completed (Gitleaks, pre-commit) | Mandatory | ☐ | | | |
+| 5.3 | Code quality review completed | Recommended | ☐ | | | |
+| 5.4 | RAP level assessment completed (see RAP checklist below) | Recommended | ☐ | | | |
+| 5.5 | Code tested in fresh environment with test data | Recommended | ☐ | | | |
+| 5.6 | Unit tests implemented and passing | Recommended | ☐ | | | |
+| 5.7 | Linting and formatting checks pass (`make lint`) | Recommended | ☐ | | | |
 
 ---
 
-## 3. Repository Management
+## RAP Level Assessment
 
-Store code in appropriate, well-managed repositories.
+Assess your project's [RAP (Reproducible Analytical Pipeline)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/) maturity level. The Baseline level is the minimum standard for a RAP.
 
-- [ ] **Recommended**: Is the code version controlled using Git?
-  - *All production code should use version control*
+**Current RAP Level**: ___________ (Baseline / Silver / Gold)
 
-- [ ] **Recommended**: Is the code in your organization's GitHub account?
-  - *Ensure repository ownership aligns with funding organization*
-  - *Use NHS England GitHub organization for NHS England projects*
+### Baseline RAP - Getting the Fundamentals Right
+
+**All requirements must be met for Baseline RAP:**
+
+| # | Requirement | Completed | Notes / Template Support |
+|---|-------------|-----------|-------------------------|
+| B.1 | Data produced by code in an open-source language (Python, R, SQL) | ☐ | Template uses Python |
+| B.2 | Code is version controlled (Git) | ☐ | Use Git from project start |
+| B.3 | Repository includes README.md with clear reproduction steps | ☐ | Template provides README structure |
+| B.4 | Code has been peer reviewed | ☐ | Use GitHub pull requests |
+| B.5 | Code is published in the open and linked to publication (if relevant) | ☐ | See Open Code Checklist above |
+
+### Silver RAP - Implementing Best Practice
+
+**Meeting all Baseline requirements, plus:**
+
+| # | Requirement | Completed | Notes / Template Support |
+|---|-------------|-----------|-------------------------|
+| S.1 | Outputs produced by code with minimal manual intervention | ☐ | Automate data processing |
+| S.2 | Code well-documented (user guidance, code structure, docstrings) | ☐ | Use NumPy-style docstrings |
+| S.3 | Code well-organised following standard directory format | ☐ | Template provides standard structure |
+| S.4 | Reusable functions and/or classes used where appropriate | ☐ | Modularize code in module files |
+| S.5 | Code adheres to agreed coding standards (e.g., PEP8) | ☐ | Use `ruff` or `black` (included) |
+| S.6 | Pipeline includes testing framework (unit tests, back tests) | ☐ | Use `pytest` (included) |
+| S.7 | Repository includes dependency information | ☐ | Template uses `pyproject.toml` |
+| S.8 | Logs automatically recorded to ensure outputs as expected | ☐ | Use `loguru` (included) |
+| S.9 | Data handled and output in Tidy data format | ☐ | Follow Tidy data principles |
+
+### Gold RAP - Analysis as a Product
+
+**Meeting all Baseline and Silver requirements, plus:**
+
+| # | Requirement | Completed | Notes / Template Support |
+|---|-------------|-----------|-------------------------|
+| G.1 | Code is fully packaged | ☐ | Use `pyproject.toml` (included) |
+| G.2 | Repository automatically runs tests via CI/CD or integration tool | ☐ | Set up GitHub Actions |
+| G.3 | Process runs on event-based triggers or schedule | ☐ | Configure automation as needed |
+| G.4 | Changes clearly signposted (changelog, releases, semantic versioning) | ☐ | Use Git tags and releases |
 
 ---
 
-## 4. Third-Party Tools and Security
+## Guidance Notes
 
-Ensure third-party tools meet security standards.
+### Security Tools Included in Template
 
-- [ ] **Mandatory**: Have you identified all third-party tools and dependencies?
-  - *Maintain an inventory of external libraries, APIs, and services*
-  - *Document in README or DEPENDENCIES.md*
+This template includes pre-configured security tools in `.pre-commit-config.yaml`:
 
-- [ ] **Mandatory**: Do all third-party tools comply with [NCSC Cloud Security Principles](https://www.ncsc.gov.uk/collection/cloud-security/implementing-the-cloud-security-principles)?
-  - *Verify compliance for cloud services, hosting platforms, and external APIs*
+- **Gitleaks**: Detects hardcoded secrets
+- **nbstripout**: Removes Jupyter notebook outputs
+- **Pre-commit hooks**: Automatic checks on commit
+- **Ruff**: Linting and formatting (configured in `pyproject.toml`)
 
----
+**To use these tools:**
 
-## 5. Code Review and Quality Assurance
+1. Install pre-commit hooks: `pre-commit install`
+2. Run all hooks: `pre-commit run --all-files`
+3. Check for secrets: Gitleaks runs automatically on commit
+4. Lint code: `make lint`
+5. Format code: `make format`
+{% if cookiecutter.docs == "mkdocs" %}
+**For detailed guidance**, see the [Security Tools Guide](https://{{cookiecutter.organization_name.lower().replace(' ', '')}}.github.io/{{cookiecutter.repo_name}}/contributing/open_code_checklist/#security-tools-guide) on the documentation site.{% else %}
+**For detailed guidance**, see `docs/content/open_code_checklist.md`.{% endif %}
 
-Conduct thorough internal reviews before publication.
+### Common Issues and Solutions
 
-### Security Review
+#### Issue: Secrets in Git History
 
-- [ ] **Mandatory**: Has a colleague reviewed the code for sensitive data and security vulnerabilities?
-  - *Use automated security scanning tools (e.g., Bandit, safety, GitHub Dependabot)*
-  - *Document tools used and review date*
+**Problem**: API keys or passwords committed in the past but later removed.
 
-### Code Quality
+**Solution**:
 
-- [ ] **Recommended**: Has a code quality review been completed focusing on usability and clarity?
-  - *Consider using quality frameworks like [BIP Code Quality Checklist](https://best-practice-and-impact.github.io/qa-of-code-guidance/checklist_higher.html)*
-  - *Review: readability, maintainability, documentation, modularity*
+1. Use BFG Repo-Cleaner or `git filter-repo` to purge history
+2. Rotate all exposed credentials immediately
+3. Enable Gitleaks pre-commit hook: `pre-commit install`
+4. Use environment variables (`.env` file, not committed)
 
-- [ ] **Recommended**: Has the code been assessed for its [RAP (Reproducible Analytical Pipeline) level](https://github.com/NHSDigital/rap-community-of-practice/blob/main/what_is_RAP/levels_of_RAP.md)?
-  - *Determine level: Baseline, Silver, or Gold*
-  - *Document current RAP status in README*
+#### Issue: Test Data Contains Real Information
 
-### Testing
+**Problem**: Test files contain real patient/user data.
 
-- [ ] **Recommended**: Has the code been tested?
-  - *At minimum: verify code runs in a fresh environment with artificial/test data*
-  - *Best practice: unit tests, integration tests, continuous integration*
-  - *Document testing approach in README or TESTING.md*
+**Solution**:
+
+1. Replace with synthetic data (use Faker, Synthea)
+2. Store test data in `data/raw/` (see README for directory structure)
+3. Document data generation in `tests/README.md`
+4. Ensure `.gitignore` excludes data directories
+
+#### Issue: Notebook Outputs Reveal Sensitive Data
+
+**Problem**: Jupyter notebooks show confidential data or system paths.
+
+**Solution**:
+
+1. Enable `nbstripout` pre-commit hook: `pre-commit install`
+2. Clear outputs: `jupyter nbconvert --clear-output --inplace notebook.ipynb`
+3. Review all notebooks in `notebooks/` directory
+4. Verify `.pre-commit-config.yaml` includes `nbstripout`
+
+#### Issue: Large Files in Repository
+
+**Problem**: Data files or models accidentally committed.
+
+**Solution**:
+
+1. Check `.gitignore` includes data and model directories
+2. Use Git LFS for necessary large files
+3. Pre-commit hook `check-added-large-files` will catch issues
 
 ---
 
@@ -189,18 +190,32 @@ Conduct thorough internal reviews before publication.
 - [Best Practice and Impact: Quality Assurance of Code](https://best-practice-and-impact.github.io/qa-of-code-guidance/)
 - [Government Digital Service: Making Source Code Open](https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable)
 - [NCSC Cloud Security Guidance](https://www.ncsc.gov.uk/collection/cloud-security)
+- [MHRA Software as Medical Device Guidance](https://www.gov.uk/government/publications/medical-devices-software-applications-apps)
 
 ---
 
-## Completion
+## Completion and Sign-Off
 
-Once you have completed this checklist:
+### Project Information
 
-1. **Document**: Record completion date and reviewer name in your project
-2. **Archive**: Keep a copy of this checklist with your project documentation
-3. **Review**: Revisit this checklist for major updates or before each release
+| Field | Value |
+|-------|-------|
+| **Project Name** | |
+| **Publication Date** | |
+| **Release Version** | |
 
-**Checklist completed by**: ________________  
-**Date**: ________________  
-**Reviewer**: ________________  
-**Date**: ________________  
+### Review and Approval
+
+| Review Role | Name | Title | Email | Date of Sign-Off |
+|-------------|------|-------|-------|------------------|
+| Primary Reviewer | | | | |
+| Security Reviewer | | | | |
+| Senior Responsible Owner (SRO) | | | | |
+
+### Notes and Exceptions
+
+| Notes/Exceptions |
+|------------------|
+| |
+| |
+| |  
