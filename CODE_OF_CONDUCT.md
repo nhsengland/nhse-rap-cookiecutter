@@ -36,7 +36,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at [england.rapchampions@nhs.net](mailto:england.rapchampions@nhs.net).
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at [datascience@nhs.net](mailto:datascience@nhs.net).
 
 All complaints will be reviewed and investigated promptly and fairly.
 

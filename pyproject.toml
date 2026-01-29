@@ -8,7 +8,7 @@ version = "1.0.1"
 description = "A cookiecutter template for NHS England Reproducible Analytical Pipelines (RAP) projects."
 authors = [
   { name = "Joe Wilson", email = "joseph.wilson8@nhs.net" },
-  { name = "NHS England Data Science and Applied AI", email = "data.science@nhs.net" },
+  { name = "NHS England Data Science and Applied AI", email = "datascience@nhs.net" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -35,7 +35,7 @@ dev = ["build", "pre-commit", "pytest", "pytest-cookies", "pytest-xdist", "ruff"
 docs = ["mkdocs", "mkdocs-material", "mkdocs-include-markdown-plugin"]
 
 [project.urls]
-"Homepage" = "https://github.com/nhsengland/nhse-rap-cookiecutter"
+"Homepage" = "https://nhsengland.github.io/nhse-rap-cookiecutter/"
 "Source Code" = "https://github.com/nhsengland/nhse-rap-cookiecutter"
 "Bug Tracker" = "https://github.com/nhsengland/nhse-rap-cookiecutter/issues"
 
