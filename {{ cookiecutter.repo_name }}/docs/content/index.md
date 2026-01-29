@@ -61,6 +61,8 @@ Contributions are welcome! See the [Contributing Guide](contributing.md) for det
 - Our code review process
 - Coding standards and style guides
 
+Before publishing or sharing code, review the [Open Code Checklist](open_code_checklist.md) to ensure compliance with NHS England standards for security, licensing, and quality.
+
 ## API Reference
 
 For detailed API documentation, see the [API Reference](api_reference/index.md).
