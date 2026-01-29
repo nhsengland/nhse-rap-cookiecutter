@@ -1,7 +1,32 @@
 #!/usr/bin/env python3
 """Post-generation hook to rename template files and clean up unused configuration."""
 
+import warnings
 from pathlib import Path
+
+# Get the current year from cookiecutter context
+year = "{{ cookiecutter.year }}"
+
+# Validate year format
+if not year.isdigit() or len(year) != 4:
+    raise ValueError(f"Invalid year value: '{year}'. Expected 4-digit year.")
+
+# Replace year placeholder in all template files
+PLACEHOLDER = "@YEAR_PLACEHOLDER@"
+repo_root = Path(".")
+
+for file_path in repo_root.rglob("*"):
+    if file_path.is_file():
+        try:
+            content = file_path.read_text(encoding="utf-8")
+            if PLACEHOLDER in content:
+                content = content.replace(PLACEHOLDER, year)
+                file_path.write_text(content, encoding="utf-8")
+        except (UnicodeDecodeError, PermissionError):
+            # Skip binary files and files we can't read
+            pass
+        except Exception as e:
+            warnings.warn(f"Failed to update year in {file_path}: {e}", stacklevel=2)
 
 # Rename data directory
 data_dir = Path("_data")
