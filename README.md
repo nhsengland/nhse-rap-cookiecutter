@@ -123,10 +123,25 @@ your-project/
 │       ├── train.py     # Model training
 │       └── predict.py   # Model inference
 ├── LICENSE
+├── OPEN_CODE_CHECKLIST.md  # NHS England standards for publishing code
 ├── Makefile             # Convenience commands
 ├── README.md
 └── pyproject.toml       # Project configuration and dependencies
 ```
+
+## Key Features
+
+### Open Code Checklist
+
+All generated projects include an **Open Code Checklist** (`OPEN_CODE_CHECKLIST.md`) to ensure compliance with NHS England standards before publishing code. The checklist covers:
+
+- **Licensing and documentation** requirements
+- **Security checks** for sensitive data, credentials, and git history
+- **Third-party tool compliance** with NCSC guidelines
+- **Code quality and testing** standards
+- **RAP assessment** criteria
+
+The checklist is also integrated into the project documentation for easy reference during development.
 
 ## Using the Generated Project
 

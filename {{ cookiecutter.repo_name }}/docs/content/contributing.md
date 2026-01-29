@@ -479,4 +479,15 @@ If you have questions or run into problems:
 - Focus on what is best for the project and community
 - Show empathy towards other contributors
 
+## Open Code Standards
+
+Before publishing or sharing code, review the [Open Code Checklist](open_code_checklist.md) to ensure:
+
+- Appropriate licensing and documentation
+- No sensitive information in code or git history
+- Security and quality standards are met
+- Third-party dependencies are secure and documented
+
+The checklist is also available as [`OPEN_CODE_CHECKLIST.md`](../OPEN_CODE_CHECKLIST.md) in the repository root.
+
 Thank you for contributing to {{ cookiecutter.project_name }}!

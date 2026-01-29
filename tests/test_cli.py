@@ -94,6 +94,7 @@ class TestCLIProjectGeneration:
             "LICENSE",
             "LICENSE-OGL",
             "CODE_OF_CONDUCT.md",
+            "OPEN_CODE_CHECKLIST.md",
             ".env",
             "badges.toml",
             "mkdocs.yml",
