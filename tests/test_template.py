@@ -158,3 +158,75 @@ class TestDocumentation:
 
         assert result.exit_code == 0
         assert (result.project_path / "mkdocs.yml").is_file()
+
+
+class TestYearPlaceholderReplacement:
+    """Tests for copyright year placeholder replacement."""
+
+    def test_year_replaced_in_readme(self, cookies):
+        """Year placeholder is replaced in README.md."""
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        readme_content = (result.project_path / "README.md").read_text()
+        assert "@YEAR_PLACEHOLDER@" not in readme_content
+        assert "© 20" in readme_content  # Year should be present
+
+    def test_year_replaced_in_docs_index(self, cookies):
+        """Year placeholder is replaced in docs/content/index.md."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        index_content = (result.project_path / "docs" / "content" / "index.md").read_text()
+        assert "@YEAR_PLACEHOLDER@" not in index_content
+        assert "© 20" in index_content
+
+    def test_year_replaced_in_footer(self, cookies):
+        """Year placeholder is replaced in footer.html."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+        footer_path = (
+            result.project_path / "docs" / "content" / "overrides" / "partials" / "footer.html"
+        )
+        footer_content = footer_path.read_text()
+        assert "@YEAR_PLACEHOLDER@" not in footer_content
+        assert "&copy; 20" in footer_content
+
+    def test_year_replaced_in_license(self, cookies):
+        """Year placeholder is replaced in LICENSE."""
+        result = cookies.bake(extra_context={"open_source_license": "MIT"})
+
+        assert result.exit_code == 0
+        license_content = (result.project_path / "LICENSE").read_text()
+        assert "@YEAR_PLACEHOLDER@" not in license_content
+        assert "Copyright (c) 20" in license_content
+
+    def test_year_is_current_year(self, cookies):
+        """Replaced year is the current year."""
+        from datetime import datetime
+
+        current_year = str(datetime.now().year)
+
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        readme_content = (result.project_path / "README.md").read_text()
+        assert f"© {current_year}" in readme_content
+
+    def test_no_placeholder_remains_in_project(self, cookies):
+        """No year placeholder remains anywhere in the generated project."""
+        result = cookies.bake(extra_context={"docs": "mkdocs"})
+
+        assert result.exit_code == 0
+
+        # Check all text files for the placeholder
+        placeholder = "@YEAR_PLACEHOLDER@"
+        for file_path in result.project_path.rglob("*"):
+            if file_path.is_file() and file_path.suffix in [".md", ".html", ".txt", ".rst"]:
+                try:
+                    content = file_path.read_text()
+                    assert placeholder not in content, f"Placeholder found in {file_path}"
+                except (UnicodeDecodeError, PermissionError):
+                    # Skip binary files
+                    pass
