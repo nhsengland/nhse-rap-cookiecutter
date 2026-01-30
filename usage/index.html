@@ -781,10 +781,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#updating-status-badges" class="md-nav__link">
+  <a href="#using-the-badge-library-badgestoml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Updating Status Badges
+        Using the Badge Library (badges.toml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-updating-project-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Updating Project Status
       
     </span>
   </a>
@@ -796,17 +807,6 @@
     <span class="md-ellipsis">
       
         Adding CI/CD Badges
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#additional-optional-badges" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Additional Optional Badges
       
     </span>
   </a>
@@ -957,14 +957,18 @@
 <p>When you run <code>nhs-rap-template</code>, you'll be prompted for:</p>
 <ul>
 <li><strong>Project Name</strong>: Human-readable name (e.g., "My Analysis Project")</li>
+<li><strong>Repository Name</strong>: Repository name (defaults to lowercase project name with underscores)</li>
+<li><strong>Module Name</strong>: Python module name (defaults to repository name with dashes as underscores)</li>
 <li><strong>Author Details</strong>: Your name and email</li>
-<li><strong>Organization</strong>: Organization name and contact email (used in LICENSE)</li>
+<li><strong>Organization</strong>: Organization name (default: NHS England) and team contact email</li>
+<li><strong>Git Hosting Platform</strong>: github, gitlab, azure_devops, or other</li>
+<li><strong>Repository URL</strong>: Your repository URL (defaults to GitHub format, can be overridden)</li>
 <li><strong>Python Version</strong>: Minimum Python version (3.10-3.13)</li>
-<li><strong>Environment Manager</strong>: virtualenv, conda, pipenv, uv, pixi, poetry, or none</li>
-<li><strong>License</strong>: MIT, Apache-2.0, GPL-3.0, or no license</li>
-<li><strong>Documentation</strong>: mkdocs or none</li>
+<li><strong>Environment Manager</strong>: uv, virtualenv, conda, pipenv, pixi, poetry, or none</li>
 <li><strong>Linting/Formatting</strong>: ruff or flake8+black+isort</li>
-<li><strong>Code Scaffold</strong>: Include example code modules</li>
+<li><strong>License</strong>: MIT, Apache-2.0, GPL-3.0, or No license file</li>
+<li><strong>Documentation</strong>: mkdocs or none</li>
+<li><strong>Code Scaffold</strong>: Include example code modules (Yes or No)</li>
 </ul>
 <h3 id="included-packages">Included Packages</h3>
 <p><strong>All generated projects automatically include:</strong></p>
@@ -996,15 +1000,11 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>your-project-name
 </code></pre></div>
 <ol>
-<li><strong>Create environment</strong> (if using UV):</li>
+<li><strong>Run automated setup</strong>:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>sync
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>make<span class="w"> </span>setup
 </code></pre></div>
-<ol>
-<li><strong>Set up pre-commit</strong> (optional but recommended):</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install
-</code></pre></div>
+<p>This sets up your environment, installs dependencies, configures git, and installs pre-commit hooks.</p>
 <ol>
 <li><strong>Start developing</strong>:</li>
 <li>Add your code to the module folder</li>
@@ -1021,127 +1021,155 @@
 </ul>
 <h2 id="common-workflows">Common Workflows</h2>
 <h3 id="adding-dependencies">Adding Dependencies</h3>
-<p>With UV:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>uv<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
+<p>Add dependencies to your project:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">UV</label><label for="__tabbed_1_2">Poetry</label><label for="__tabbed_1_3">Conda</label><label for="__tabbed_1_4">Pipenv</label><label for="__tabbed_1_5">Pixi</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
 </code></pre></div>
-<p>With pip:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Edit environment.yml, then:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>pipenv<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pixi<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
+</code></pre></div>
+</div>
+</div>
+</div>
 <h3 id="running-tests">Running Tests</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>make<span class="w"> </span><span class="nb">test</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># or</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
+<p>The Makefile automatically uses your chosen environment manager's run command.</p>
 <h3 id="building-documentation">Building Documentation</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Serve with live reload</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>make<span class="w"> </span>docs-build<span class="w">  </span><span class="c1"># Build static site</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># or</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>uv<span class="w"> </span>run<span class="w"> </span>mkdocs<span class="w"> </span>serve
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Serve with live reload</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>make<span class="w"> </span>docs-build<span class="w">  </span><span class="c1"># Build static site</span>
 </code></pre></div>
-<p>For projects using <code>poetry</code> or <code>pixi</code>, <code>make docs</code> and <code>make docs-build</code> assume your environment is already activated (for example, via <code>poetry shell</code> or <code>pixi shell</code>).</p>
+<p>The Makefile handles the correct command for your environment manager.</p>
 <h3 id="code-quality-checks">Code Quality Checks</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span>lint<span class="w">    </span><span class="c1"># Check code</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>format<span class="w">  </span><span class="c1"># Format code</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>make<span class="w"> </span>lint<span class="w">    </span><span class="c1"># Check code</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>make<span class="w"> </span>format<span class="w">  </span><span class="c1"># Format code</span>
 </code></pre></div>
 <h2 id="cookiecutter-specific-features">Cookiecutter-Specific Features</h2>
 <p>When using the official cookiecutter tool, you get additional features:</p>
 <h3 id="using-cookiecutter-replay">Using Cookiecutter Replay</h3>
 <p>Cookiecutter saves your previous inputs. To recreate a project with the same configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Create first project</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># Later, replay with same inputs</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter<span class="w"> </span>--replay
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Create first project</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Later, replay with same inputs</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter<span class="w"> </span>--replay
 </code></pre></div>
 <h3 id="using-a-cookiecutter-config-file">Using a Cookiecutter Config File</h3>
 <p>Create <code>~/.cookiecutterrc</code> with default values:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">default_context</span><span class="p">:</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jane</span><span class="nv"> </span><span class="s">Smith&quot;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">author_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jane.smith@nhs.net&quot;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">organization_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NHS</span><span class="nv"> </span><span class="s">England&quot;</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">team_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data</span><span class="nv"> </span><span class="s">Science</span><span class="nv"> </span><span class="s">Team&quot;</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">team_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datascience@nhs.net&quot;</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nt">python_version_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="nt">environment_manager</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;uv&quot;</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="nt">linting_and_formatting</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ruff&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">default_context</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jane</span><span class="nv"> </span><span class="s">Smith&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nt">author_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jane.smith@nhs.net&quot;</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nt">organization_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NHS</span><span class="nv"> </span><span class="s">England&quot;</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">team_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data</span><span class="nv"> </span><span class="s">Science</span><span class="nv"> </span><span class="s">Team&quot;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nt">team_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datascience@nhs.net&quot;</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="nt">python_version_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">    </span><span class="nt">environment_manager</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;uv&quot;</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">    </span><span class="nt">linting_and_formatting</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ruff&quot;</span>
 </code></pre></div>
 <p>Then cookiecutter will use these as defaults:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># Will pre-fill with your defaults!</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># Will pre-fill with your defaults!</span>
 </code></pre></div>
 <h3 id="using-multiple-templates">Using Multiple Templates</h3>
 <p>With cookiecutter, you can easily switch between different templates:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># NHS RAP template for analytical projects</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Different template for web applications</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>cookiecutter<span class="w"> </span>gh:cookiecutter/cookiecutter-django
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># Your organization&#39;s custom template</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>cookiecutter<span class="w"> </span>gh:your-org/your-template
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># NHS RAP template for analytical projects</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># Different template for web applications</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>cookiecutter<span class="w"> </span>gh:cookiecutter/cookiecutter-django
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># Your organization&#39;s custom template</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>cookiecutter<span class="w"> </span>gh:your-org/your-template
 </code></pre></div>
 <h3 id="templating-from-local-directory">Templating from Local Directory</h3>
 <p>Useful when developing or customizing the template:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Clone the template</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nhsengland/nhse-rap-cookiecutter.git
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Make local modifications</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">cd</span><span class="w"> </span>nhse-rap-cookiecutter
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c1"># ... edit template files ...</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># Use your modified template</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>cookiecutter<span class="w"> </span>../nhse-rap-cookiecutter
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Clone the template</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nhsengland/nhse-rap-cookiecutter.git
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># Make local modifications</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nb">cd</span><span class="w"> </span>nhse-rap-cookiecutter
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="c1"># ... edit template files ...</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="c1"># Use your modified template</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>cookiecutter<span class="w"> </span>../nhse-rap-cookiecutter
 </code></pre></div>
 <h2 id="customizing-your-generated-project">Customizing Your Generated Project</h2>
 <h3 id="customizing-badges">Customizing Badges</h3>
-<p>The generated project includes a comprehensive set of badges at the top of the README. These provide quick information about the project status, technology, and quality metrics.</p>
+<p>The generated project includes a comprehensive set of badges at the top of the README and a <code>badges.toml</code> file with a library of ready-to-use badges you can swap in and out.</p>
 <h4 id="default-badges">Default Badges</h4>
-<p>Your generated project will include these badges automatically:</p>
+<p>Your generated project will include these badges automatically in the README:</p>
 <ul>
 <li><strong>Project Status</strong>: Active (default)</li>
 <li><strong>RAP Status</strong>: Work in Progress (default)</li>
 <li><strong>Cookiecutter</strong>: Links to cookiecutter project</li>
 <li><strong>NHS England RAP</strong>: Links to this template</li>
 <li><strong>Python Version</strong>: Automatically populated from your configuration</li>
-<li><strong>License</strong>: MIT or BSD-3-Clause (if selected during generation)</li>
+<li><strong>License</strong>: MIT, Apache-2.0, or GPL-3.0 (if selected during generation)</li>
 <li><strong>Code Style</strong>: Ruff or Black/Flake8/isort (based on your selection)</li>
 <li><strong>Pre-commit</strong>: Pre-commit enabled</li>
 </ul>
-<h4 id="updating-status-badges">Updating Status Badges</h4>
-<p><strong>Project Status</strong>: Change the badge to reflect your project's current state. You can uncomment the appropriate badge from the commented section or edit the default "Active" badge. Status options follow a data science repository lifecycle:</p>
+<h4 id="using-the-badge-library-badgestoml">Using the Badge Library (badges.toml)</h4>
+<p>Your project includes a <code>badges.toml</code> file with ready-to-use badge markdown. Simply copy and paste badges from this file into your README.md or docs/index.md.</p>
+<p><strong>Available in badges.toml:</strong></p>
+<p><strong>Project Status</strong> (<code>[project_status]</code>):</p>
 <ul>
-<li><strong>Concept</strong>: Brainstorming phase, no code or only rough scripts</li>
-<li><strong>WIP</strong>: Work in progress, active development occurring</li>
-<li><strong>PoC</strong>: Proof of Concept, code exists to prove hypothesis but not production-ready</li>
-<li><strong>MVP</strong>: Minimum Viable Product, functional model/pipeline reliable for initial users</li>
-<li><strong>Active</strong>: Actively maintained and updated</li>
-<li><strong>On Hold</strong>: Development paused (data availability, shifting priorities, etc.)</li>
-<li><strong>Archived</strong>: Project finished or abandoned, read-only</li>
+<li><code>concept</code> - Brainstorming phase, no code or only rough scripts</li>
+<li><code>wip</code> - Work in progress, active development occurring</li>
+<li><code>poc</code> - Proof of Concept, code exists to prove hypothesis but not production-ready</li>
+<li><code>mvp</code> - Minimum Viable Product, functional model/pipeline reliable for initial users</li>
+<li><code>active</code> - Actively maintained and updated (default)</li>
+<li><code>on_hold</code> - Development paused (data availability, shifting priorities, etc.)</li>
+<li><code>archived</code> - Project finished or abandoned, read-only</li>
 </ul>
-<p><strong>RAP Status</strong>: Update to reflect your <a href="https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/">Reproducible Analytical Pipeline maturity level</a>:</p>
+<p><strong>RAP Status</strong> (<code>[rap_status]</code>) - <a href="https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/">RAP maturity levels</a>:</p>
 <ul>
-<li><strong>Work in Progress</strong>: Beginning RAP journey</li>
-<li><strong>Baseline</strong>: Core RAP requirements met (version control, peer review, documentation)</li>
-<li><strong>Silver</strong>: Enhanced capabilities (automated testing, continuous integration, functions/classes)</li>
-<li><strong>Gold</strong>: Advanced practices (package/repository, error handling, logging, documentation website)</li>
+<li><code>wip</code> - Beginning RAP journey (default)</li>
+<li><code>baseline</code> - Core RAP requirements met (version control, peer review, documentation)</li>
+<li><code>silver</code> - Enhanced capabilities (automated testing, continuous integration, functions/classes)</li>
+<li><code>gold</code> - Advanced practices (package/repository, error handling, logging, documentation website)</li>
 </ul>
-<h4 id="adding-cicd-badges">Adding CI/CD Badges</h4>
-<p>Once you set up GitHub Actions workflows, uncomment the relevant badges in the commented section of your README and ensure the workflow file names match your setup (e.g., <code>tests.yml</code>, <code>lint.yml</code>, <code>docs.yml</code>).</p>
-<p>Example workflow badges provided:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>[<span class="nt">![Tests</span>](<span class="na">https://github.com/nhsengland/your-project/actions/workflows/tests.yml/badge.svg</span>)](https://github.com/nhsengland/your-project/actions/workflows/tests.yml)
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>[<span class="nt">![Lint</span>](<span class="na">https://github.com/nhsengland/your-project/actions/workflows/lint.yml/badge.svg</span>)](https://github.com/nhsengland/your-project/actions/workflows/lint.yml)
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>[<span class="nt">![Docs</span>](<span class="na">https://github.com/nhsengland/your-project/actions/workflows/docs.yml/badge.svg</span>)](https://github.com/nhsengland/your-project/actions/workflows/docs.yml)
+<p><strong>GitHub CI/CD Badges</strong> (<code>[github]</code>) - if you selected GitHub as your hosting platform:</p>
+<ul>
+<li><code>tests</code> - Test workflow status</li>
+<li><code>lint</code> - Lint workflow status</li>
+<li><code>docs</code> - Documentation build status</li>
+<li><code>release</code> - Latest release version</li>
+<li><code>pages</code> - GitHub Pages documentation status</li>
+</ul>
+<p><strong>GitLab CI/CD Badges</strong> (<code>[gitlab]</code>) - if you selected GitLab as your hosting platform:</p>
+<ul>
+<li><code>pipeline</code> - Pipeline status</li>
+<li><code>coverage</code> - Code coverage</li>
+</ul>
+<p><strong>Other Badges</strong> (<code>[other]</code>):</p>
+<ul>
+<li><code>pypi</code> - PyPI version (if publishing to PyPI)</li>
+<li><code>ogl3</code> - Open Government License badge</li>
+</ul>
+<h4 id="example-updating-project-status">Example: Updating Project Status</h4>
+<p>To change your project status from "Active" to "MVP", open <code>badges.toml</code> and copy the MVP badge:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">mvp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;[![Project Status: MVP](https://img.shields.io/badge/Project%20Status-MVP-yellowgreen)](https://github.com/your-org/your-repo)&quot;</span>
 </code></pre></div>
-<h4 id="additional-optional-badges">Additional Optional Badges</h4>
-<p>The commented section in your generated README includes many optional badges you can add:</p>
-<ul>
-<li><strong>Documentation Status</strong>: Link to your documentation site</li>
-<li><strong>Latest Release</strong>: Show current version from GitHub releases</li>
-<li><strong>PyPI Version</strong>: If publishing to PyPI</li>
-<li><strong>OGL3 License</strong>: For documentation (if applicable)</li>
-</ul>
-<p>For more badge options and customization, see <a href="https://shields.io/">shields.io</a>.</p>
+<p>Then replace the project status badge in your README.md with this copied badge markdown.</p>
+<h4 id="adding-cicd-badges">Adding CI/CD Badges</h4>
+<p>Once you set up GitHub Actions or GitLab CI workflows, copy the relevant badges from the <code>[github]</code> or <code>[gitlab]</code> sections in <code>badges.toml</code>. The badges are pre-configured with your repository URL.</p>
+<p>For custom badge options and colors, see <a href="https://shields.io/">shields.io</a>.</p>
 
 
 

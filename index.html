@@ -750,6 +750,18 @@
 </tr>
 <tr>
 <td></td>
+<td>repo_name</td>
+<td>Repository name (default: lowercase project_name with underscores)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>module_name</td>
+<td>Python module name (default: repo_name with dashes converted to underscores)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
 <td>description</td>
 <td>Brief project description</td>
 <td>Text</td>
@@ -769,7 +781,7 @@
 <tr>
 <td></td>
 <td>organization_name</td>
-<td>Your organisation (fixed: NHS England)</td>
+<td>Your organisation name (default: NHS England)</td>
 <td>Text</td>
 </tr>
 <tr>
@@ -781,7 +793,19 @@
 <tr>
 <td></td>
 <td>team_email</td>
-<td>Team contact email (optional)</td>
+<td>Team contact email</td>
+<td>Text</td>
+</tr>
+<tr>
+<td></td>
+<td>git_hosting_platform</td>
+<td>Git hosting platform</td>
+<td>github, gitlab, azure_devops, other</td>
+</tr>
+<tr>
+<td></td>
+<td>repository_url</td>
+<td>Repository URL (can override default)</td>
 <td>Text</td>
 </tr>
 <tr>
@@ -794,13 +818,13 @@
 <td></td>
 <td>environment_manager</td>
 <td>Virtual environment tool</td>
-<td>virtualenv, conda, pipenv, uv, pixi, poetry, none</td>
+<td>uv, virtualenv, conda, pipenv, pixi, poetry, none</td>
 </tr>
 <tr>
 <td><strong>Options</strong></td>
 <td>include_code_scaffold</td>
 <td>Include example code modules</td>
-<td>yes, no</td>
+<td>Yes, No</td>
 </tr>
 <tr>
 <td></td>
@@ -810,13 +834,13 @@
 </tr>
 <tr>
 <td></td>
-<td>license</td>
+<td>open_source_license</td>
 <td>Project licence</td>
-<td>MIT, BSD-3-Clause, none</td>
+<td>MIT, Apache-2.0, GPL-3.0, No license file</td>
 </tr>
 <tr>
 <td></td>
-<td>documentation</td>
+<td>docs</td>
 <td>Documentation tool</td>
 <td>mkdocs, none</td>
 </tr>
@@ -836,22 +860,32 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>├── references/          # Data dictionaries and documentation
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>├── reports/
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>│   └── figures/         # Generated graphics
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>├── tests/
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>│   ├── unittests/       # Unit tests (pytest)
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>│   └── e2e/             # End-to-end integration tests
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>├── your_module/         # Source code package
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>│   ├── __init__.py
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>│   ├── config.py        # Configuration management
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>│   ├── dataset.py       # Data loading and processing
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>│   ├── features.py      # Feature engineering
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>│   ├── plots.py         # Visualisation functions
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>│   └── modeling/
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>│       ├── train.py     # Model training
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>│       └── predict.py   # Model inference
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>├── LICENSE
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>├── Makefile             # Convenience commands
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>├── README.md
-<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>└── pyproject.toml       # Project configuration and dependencies
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>├── scripts/             # Setup and utility scripts
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>│   └── setup_repository.py  # Automated repository setup
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>├── tests/
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>│   ├── unittests/       # Unit tests (pytest)
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>│   └── e2e/             # End-to-end integration tests
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>├── your_module/         # Source code package
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>│   ├── __init__.py
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>│   ├── config.py        # Configuration management
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>│   ├── dataset.py       # Data loading and processing
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>│   ├── features.py      # Feature engineering
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>│   ├── plots.py         # Visualisation functions
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>│   └── modeling/
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>│       ├── train.py     # Model training
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>│       └── predict.py   # Model inference
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>├── .env                 # Environment variables (not tracked in git)
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>├── .pre-commit-config.yaml  # Pre-commit hooks configuration
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>├── badges.toml          # Optional project badges
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>├── CODE_OF_CONDUCT.md   # Community guidelines
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>├── LICENSE              # Project license
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>├── LICENSE-OGL          # Open Government License for docs
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>├── Makefile             # Convenience commands
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>├── mkdocs.yml           # Documentation configuration
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>├── OPEN_CODE_CHECKLIST.md  # NHS England standards for publishing code
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>├── README.md
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>├── pyproject.toml       # Project configuration and dependencies
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>└── setup.cfg            # Legacy tool configuration (flake8 only)
 </code></pre></div>
 <p>Each directory serves a specific purpose in the RAP workflow. The structure follows data science best practices while accommodating NHS-specific requirements.</p>
 <hr />
