@@ -13,10 +13,10 @@
     "python_version_number": ["3.10", "3.11", "3.12", "3.13"],
     "year": "{% now 'utc', '%Y' %}",
     "environment_manager": [
+        "uv",
         "virtualenv",
         "conda",
         "pipenv",
-        "uv",
         "pixi",
         "poetry",
         "none"
