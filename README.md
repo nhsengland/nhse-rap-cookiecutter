@@ -79,19 +79,21 @@ The template prompts for the following information:
 
 | Category | Option | Description | Choices |
 |----------|--------|-------------|---------|
-| **Project** | project_name | Human-readable project name | Text |
-| | description | Brief project description | Text |
+| **Project** | project_name | Human-readable project name | Text || | repo_name | Repository name (default: lowercase project_name with underscores) | Text |
+| | module_name | Python module name (default: repo_name with dashes converted to underscores) | Text || | description | Brief project description | Text |
 | | author_name | Your full name | Text |
 | | author_email | Your email address | Text |
-| | organization_name | Your organisation (fixed: NHS England) | Text |
+| | organization_name | Your organisation name (default: NHS England) | Text |
 | | team_name | Your team name | Text |
-| | team_email | Team contact email (optional) | Text |
+| | team_email | Team contact email | Text |
+| | git_hosting_platform | Git hosting platform | github, gitlab, azure_devops, other |
+| | repository_url | Repository URL (can override default) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
-| | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
-| **Options** | include_code_scaffold | Include example code modules | yes, no |
+| | environment_manager | Virtual environment tool | uv, virtualenv, conda, pipenv, pixi, poetry, none |
+| **Options** | include_code_scaffold | Include example code modules | Yes, No |
 | | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
-| | license | Project licence | MIT, BSD-3-Clause, none |
-| | documentation | Documentation tool | mkdocs, none |
+| | open_source_license | Project licence | MIT, Apache-2.0, GPL-3.0, No license file |
+| | docs | Documentation tool | mkdocs, none |
 
 **Note**: All generated projects include core Python packages (pandas, numpy, matplotlib, seaborn, jupyter, etc.) and development tools (pytest, pre-commit, linting) by default. The dependency file format (pyproject.toml or environment.yml) is determined automatically based on your environment manager choice.
 
@@ -110,9 +112,11 @@ your-project/
 ├── references/          # Data dictionaries and documentation
 ├── reports/
 │   └── figures/         # Generated graphics
+├── scripts/             # Setup and utility scripts
+│   └── setup_repository.py  # Automated repository setup
 ├── tests/
-│   ├── pytest/          # Pytest tests
-│   └── unittest/        # Unittest tests
+│   ├── unittests/       # Unit tests (pytest)
+│   └── e2e/             # End-to-end integration tests
 ├── your_module/         # Source code package
 │   ├── __init__.py
 │   ├── config.py        # Configuration management
@@ -122,11 +126,18 @@ your-project/
 │   └── modeling/
 │       ├── train.py     # Model training
 │       └── predict.py   # Model inference
-├── LICENSE
-├── OPEN_CODE_CHECKLIST.md  # NHS England standards for publishing code
+├── .env                 # Environment variables (not tracked in git)
+├── .pre-commit-config.yaml  # Pre-commit hooks configuration
+├── badges.toml          # Optional project badges
+├── CODE_OF_CONDUCT.md   # Community guidelines
+├── LICENSE              # Project license
+├── LICENSE-OGL          # Open Government License for docs
 ├── Makefile             # Convenience commands
+├── mkdocs.yml           # Documentation configuration
+├── OPEN_CODE_CHECKLIST.md  # NHS England standards for publishing code
 ├── README.md
-└── pyproject.toml       # Project configuration and dependencies
+├── pyproject.toml       # Project configuration and dependencies
+└── setup.cfg            # Legacy tool configuration (flake8 only)
 ```
 
 ## Key Features
@@ -145,7 +156,23 @@ The checklist is also integrated into the project documentation for easy referen
 
 ## Using the Generated Project
 
-After generating a project:
+After generating a project, use the automated setup script:
+
+```bash
+cd your-project-name
+make setup
+```
+
+The setup script will:
+
+- Initialize git repository with default branch
+- Configure git remote with your repository URL
+- Set up your Python environment (uv, conda, poetry, etc.)
+- Install all project dependencies
+- Install pre-commit hooks
+- Create an initial commit
+
+Alternatively, you can set up manually:
 
 ```bash
 cd your-project-name

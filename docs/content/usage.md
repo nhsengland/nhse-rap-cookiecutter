@@ -93,14 +93,18 @@ cookiecutter gh:nhsengland/nhse-rap-cookiecutter --checkout v1.0.0
 When you run `nhs-rap-template`, you'll be prompted for:
 
 - **Project Name**: Human-readable name (e.g., "My Analysis Project")
+- **Repository Name**: Repository name (defaults to lowercase project name with underscores)
+- **Module Name**: Python module name (defaults to repository name with dashes as underscores)
 - **Author Details**: Your name and email
-- **Organization**: Organization name and contact email (used in LICENSE)
+- **Organization**: Organization name (default: NHS England) and team contact email
+- **Git Hosting Platform**: github, gitlab, azure_devops, or other
+- **Repository URL**: Your repository URL (defaults to GitHub format, can be overridden)
 - **Python Version**: Minimum Python version (3.10-3.13)
-- **Environment Manager**: virtualenv, conda, pipenv, uv, pixi, poetry, or none
-- **License**: MIT, Apache-2.0, GPL-3.0, or no license
-- **Documentation**: mkdocs or none
+- **Environment Manager**: uv, virtualenv, conda, pipenv, pixi, poetry, or none
 - **Linting/Formatting**: ruff or flake8+black+isort
-- **Code Scaffold**: Include example code modules
+- **License**: MIT, Apache-2.0, GPL-3.0, or No license file
+- **Documentation**: mkdocs or none
+- **Code Scaffold**: Include example code modules (Yes or No)
 
 ### Included Packages
 
@@ -142,19 +146,15 @@ After creating your project:
    cd your-project-name
    ```
 
-2. **Create environment** (if using UV):
+2. **Run automated setup**:
 
    ```bash
-   uv sync
+   make setup
    ```
 
-3. **Set up pre-commit** (optional but recommended):
+   This sets up your environment, installs dependencies, configures git, and installs pre-commit hooks.
 
-   ```bash
-   uv run pre-commit install
-   ```
-
-4. **Start developing**:
+3. **Start developing**:
    - Add your code to the module folder
    - Add tests to the `tests/` folder
    - Update documentation in `docs/`
@@ -172,37 +172,55 @@ All generated files can be customised:
 
 ### Adding Dependencies
 
-With UV:
+Add dependencies to your project:
 
-```bash
-uv add pandas numpy
-```
+=== "UV"
 
-With pip:
+    ```bash
+    uv add pandas numpy
+    ```
 
-```bash
-pip install pandas numpy
-pip freeze > requirements.txt
-```
+=== "Poetry"
+
+    ```bash
+    poetry add pandas numpy
+    ```
+
+=== "Conda"
+
+    ```bash
+    # Edit environment.yml, then:
+    conda install pandas numpy
+    ```
+
+=== "Pipenv"
+
+    ```bash
+    pipenv install pandas numpy
+    ```
+
+=== "Pixi"
+
+    ```bash
+    pixi add pandas numpy
+    ```
 
 ### Running Tests
 
 ```bash
 make test
-# or
-uv run pytest tests/
 ```
+
+The Makefile automatically uses your chosen environment manager's run command.
 
 ### Building Documentation
 
 ```bash
 make docs        # Serve with live reload
 make docs-build  # Build static site
-# or
-uv run mkdocs serve
 ```
 
-For projects using `poetry` or `pixi`, `make docs` and `make docs-build` assume your environment is already activated (for example, via `poetry shell` or `pixi shell`).
+The Makefile handles the correct command for your environment manager.
 
 ### Code Quality Checks
 
@@ -285,59 +303,74 @@ cookiecutter ../nhse-rap-cookiecutter
 
 ### Customizing Badges
 
-The generated project includes a comprehensive set of badges at the top of the README. These provide quick information about the project status, technology, and quality metrics.
+The generated project includes a comprehensive set of badges at the top of the README and a `badges.toml` file with a library of ready-to-use badges you can swap in and out.
 
 #### Default Badges
 
-Your generated project will include these badges automatically:
+Your generated project will include these badges automatically in the README:
 
 - **Project Status**: Active (default)
 - **RAP Status**: Work in Progress (default)
 - **Cookiecutter**: Links to cookiecutter project
 - **NHS England RAP**: Links to this template
 - **Python Version**: Automatically populated from your configuration
-- **License**: MIT or BSD-3-Clause (if selected during generation)
+- **License**: MIT, Apache-2.0, or GPL-3.0 (if selected during generation)
 - **Code Style**: Ruff or Black/Flake8/isort (based on your selection)
 - **Pre-commit**: Pre-commit enabled
 
-#### Updating Status Badges
+#### Using the Badge Library (badges.toml)
 
-**Project Status**: Change the badge to reflect your project's current state. You can uncomment the appropriate badge from the commented section or edit the default "Active" badge. Status options follow a data science repository lifecycle:
+Your project includes a `badges.toml` file with ready-to-use badge markdown. Simply copy and paste badges from this file into your README.md or docs/index.md.
 
-- **Concept**: Brainstorming phase, no code or only rough scripts
-- **WIP**: Work in progress, active development occurring
-- **PoC**: Proof of Concept, code exists to prove hypothesis but not production-ready
-- **MVP**: Minimum Viable Product, functional model/pipeline reliable for initial users
-- **Active**: Actively maintained and updated
-- **On Hold**: Development paused (data availability, shifting priorities, etc.)
-- **Archived**: Project finished or abandoned, read-only
+**Available in badges.toml:**
 
-**RAP Status**: Update to reflect your [Reproducible Analytical Pipeline maturity level](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/):
+**Project Status** (`[project_status]`):
 
-- **Work in Progress**: Beginning RAP journey
-- **Baseline**: Core RAP requirements met (version control, peer review, documentation)
-- **Silver**: Enhanced capabilities (automated testing, continuous integration, functions/classes)
-- **Gold**: Advanced practices (package/repository, error handling, logging, documentation website)
+- `concept` - Brainstorming phase, no code or only rough scripts
+- `wip` - Work in progress, active development occurring
+- `poc` - Proof of Concept, code exists to prove hypothesis but not production-ready
+- `mvp` - Minimum Viable Product, functional model/pipeline reliable for initial users
+- `active` - Actively maintained and updated (default)
+- `on_hold` - Development paused (data availability, shifting priorities, etc.)
+- `archived` - Project finished or abandoned, read-only
+
+**RAP Status** (`[rap_status]`) - [RAP maturity levels](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/):
+
+- `wip` - Beginning RAP journey (default)
+- `baseline` - Core RAP requirements met (version control, peer review, documentation)
+- `silver` - Enhanced capabilities (automated testing, continuous integration, functions/classes)
+- `gold` - Advanced practices (package/repository, error handling, logging, documentation website)
+
+**GitHub CI/CD Badges** (`[github]`) - if you selected GitHub as your hosting platform:
+
+- `tests` - Test workflow status
+- `lint` - Lint workflow status
+- `docs` - Documentation build status
+- `release` - Latest release version
+- `pages` - GitHub Pages documentation status
+
+**GitLab CI/CD Badges** (`[gitlab]`) - if you selected GitLab as your hosting platform:
+
+- `pipeline` - Pipeline status
+- `coverage` - Code coverage
+
+**Other Badges** (`[other]`):
+
+- `pypi` - PyPI version (if publishing to PyPI)
+- `ogl3` - Open Government License badge
+
+#### Example: Updating Project Status
+
+To change your project status from "Active" to "MVP", open `badges.toml` and copy the MVP badge:
+
+```toml
+mvp = "[![Project Status: MVP](https://img.shields.io/badge/Project%20Status-MVP-yellowgreen)](https://github.com/your-org/your-repo)"
+```
+
+Then replace the project status badge in your README.md with this copied badge markdown.
 
 #### Adding CI/CD Badges
 
-Once you set up GitHub Actions workflows, uncomment the relevant badges in the commented section of your README and ensure the workflow file names match your setup (e.g., `tests.yml`, `lint.yml`, `docs.yml`).
+Once you set up GitHub Actions or GitLab CI workflows, copy the relevant badges from the `[github]` or `[gitlab]` sections in `badges.toml`. The badges are pre-configured with your repository URL.
 
-Example workflow badges provided:
-
-```markdown
-[![Tests](https://github.com/nhsengland/your-project/actions/workflows/tests.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/tests.yml)
-[![Lint](https://github.com/nhsengland/your-project/actions/workflows/lint.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/lint.yml)
-[![Docs](https://github.com/nhsengland/your-project/actions/workflows/docs.yml/badge.svg)](https://github.com/nhsengland/your-project/actions/workflows/docs.yml)
-```
-
-#### Additional Optional Badges
-
-The commented section in your generated README includes many optional badges you can add:
-
-- **Documentation Status**: Link to your documentation site
-- **Latest Release**: Show current version from GitHub releases
-- **PyPI Version**: If publishing to PyPI
-- **OGL3 License**: For documentation (if applicable)
-
-For more badge options and customization, see [shields.io](https://shields.io/).
+For custom badge options and colors, see [shields.io](https://shields.io/).
