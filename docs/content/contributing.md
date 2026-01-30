@@ -13,15 +13,43 @@ We welcome contributions to the NHS RAP Cookiecutter Template.
 
 2. Install dependencies:
 
-   ```bash
-   uv sync --all-extras
-   ```
+    === "UV (Recommended)"
+
+        ```bash
+        uv sync --all-extras
+        ```
+
+    === "Poetry"
+
+        ```bash
+        poetry install --all-extras
+        ```
+
+    === "Pip"
+
+        ```bash
+        pip install -e .[dev,test,docs]
+        ```
 
 3. Install pre-commit hooks:
 
-   ```bash
-   uv run pre-commit install
-   ```
+    === "UV"
+
+        ```bash
+        uv run pre-commit install
+        ```
+
+    === "Poetry"
+
+        ```bash
+        poetry run pre-commit install
+        ```
+
+    === "Activated Environment"
+
+        ```bash
+        pre-commit install
+        ```
 
 ## Making Changes
 
@@ -36,13 +64,29 @@ git checkout -b feature/your-feature-name
 All tests must pass before submitting changes:
 
 ```bash
-uv run pytest tests/ -v
+make test  # or: uv run pytest tests/ -v
 ```
 
 With coverage:
 
 ```bash
-uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
+=== "UV"
+
+    ```bash
+    uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
+    ```
+
+=== "Poetry"
+
+    ```bash
+    poetry run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
+    ```
+
+=== "Activated Environment"
+
+    ```bash
+    pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
+    ```
 ```
 
 ### Code Quality

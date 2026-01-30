@@ -108,24 +108,74 @@ Choose from 1, 2, 3, 4, 5, 6, 7 [1]: 4
 
 ## Quick Start After Creation
 
-After your project is created:
+After your project is created, use the automated setup script:
 
 ```bash
 # Navigate to your project
 cd my_nhs_analysis
 
-# Set up environment (if using UV)
-uv sync
-
-# Install pre-commit hooks
-uv run pre-commit install
-
-# Run tests
-uv run pytest tests/
-
-# Build documentation
-uv run mkdocs serve
+# Run automated setup
+make setup
 ```
+
+The setup script will:
+
+- Initialize git repository with default branch
+- Configure git remote with your repository URL
+- Set up your Python environment (uv, conda, poetry, etc.)
+- Install all project dependencies
+- Install pre-commit hooks
+- Create an initial commit
+
+### Manual Commands
+
+If you prefer to set up manually or need to run individual steps, use your chosen environment manager's commands:
+
+=== "UV"
+
+    ```bash
+    uv sync
+    uv run pre-commit install
+    make test
+    make docs
+    ```
+
+=== "Conda"
+
+    ```bash
+    conda env create -f environment.yml
+    conda activate your_project
+    pre-commit install
+    make test
+    make docs
+    ```
+
+=== "Poetry"
+
+    ```bash
+    poetry install
+    poetry run pre-commit install
+    make test
+    make docs
+    ```
+
+=== "Pipenv"
+
+    ```bash
+    pipenv install --dev
+    pipenv run pre-commit install
+    make test
+    make docs
+    ```
+
+=== "Pixi"
+
+    ```bash
+    pixi install
+    pixi run pre-commit install
+    make test
+    make docs
+    ```
 
 ## Next Steps
 

@@ -65,14 +65,12 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
    ```bash
    python -m venv venv
    source venv/bin/activate
-   pip install -r requirements.txt
    pip install -e .
    ```
 
 {% else %}
 
    ```bash
-   pip install -r requirements.txt
    pip install -e .
    ```
 
