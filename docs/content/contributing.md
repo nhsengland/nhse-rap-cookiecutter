@@ -69,7 +69,6 @@ make test  # or: uv run pytest tests/ -v
 
 With coverage:
 
-```bash
 === "UV"
 
     ```bash
@@ -87,7 +86,6 @@ With coverage:
     ```bash
     pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
     ```
-```
 
 ### Code Quality
 

@@ -79,8 +79,10 @@ The template prompts for the following information:
 
 | Category | Option | Description | Choices |
 |----------|--------|-------------|---------|
-| **Project** | project_name | Human-readable project name | Text || | repo_name | Repository name (default: lowercase project_name with underscores) | Text |
-| | module_name | Python module name (default: repo_name with dashes converted to underscores) | Text || | description | Brief project description | Text |
+| **Project** | project_name | Human-readable project name | Text |
+| | repo_name | Repository name (default: lowercase project_name with underscores) | Text |
+| | module_name | Python module name (default: repo_name with dashes converted to underscores) | Text |
+| | description | Brief project description | Text |
 | | author_name | Your full name | Text |
 | | author_email | Your email address | Text |
 | | organization_name | Your organisation name (default: NHS England) | Text |
