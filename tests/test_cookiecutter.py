@@ -86,6 +86,7 @@ class TestCookiecutterProjectGeneration:
             "notebooks",
             "references",
             "reports",
+            "scripts",
             "tests",
         }
         actual_dirs = {d.name for d in project_path.iterdir() if d.is_dir()}

@@ -31,7 +31,26 @@ This project comes pre-configured with:
 
 All dependencies are managed through {% if cookiecutter.environment_manager == "conda" %}`environment.yml`{% else %}`pyproject.toml`{% endif %}, ensuring reproducible installations.
 
-## Installation
+## Quick Setup
+
+The easiest way to set up this project is using the automated setup script:
+
+```bash
+make setup
+```
+
+This script will:
+
+- Initialize git repository with default branch
+- Configure git remote ({{ cookiecutter.repository_url }})
+- Set up your Python environment
+- Install all dependencies
+- Install pre-commit hooks
+- Create an initial commit
+
+## Manual Installation
+
+If you prefer manual setup or need to run individual steps:
 
 {% if cookiecutter.environment_manager == 'conda' %}
 

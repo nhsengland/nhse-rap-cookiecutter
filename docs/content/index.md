@@ -93,18 +93,22 @@ The template prompts for the following:
 | Category | Option | Description | Choices |
 |----------|--------|-------------|---------|
 | **Project** | project_name | Human-readable project name | Text |
+| | repo_name | Repository name (default: lowercase project_name with underscores) | Text |
+| | module_name | Python module name (default: repo_name with dashes converted to underscores) | Text |
 | | description | Brief project description | Text |
 | | author_name | Your full name | Text |
 | | author_email | Your email address | Text |
-| | organization_name | Your organisation (fixed: NHS England) | Text |
+| | organization_name | Your organisation name (default: NHS England) | Text |
 | | team_name | Your team name | Text |
-| | team_email | Team contact email (optional) | Text |
+| | team_email | Team contact email | Text |
+| | git_hosting_platform | Git hosting platform | github, gitlab, azure_devops, other |
+| | repository_url | Repository URL (can override default) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
-| | environment_manager | Virtual environment tool | virtualenv, conda, pipenv, uv, pixi, poetry, none |
-| **Options** | include_code_scaffold | Include example code modules | yes, no |
+| | environment_manager | Virtual environment tool | uv, virtualenv, conda, pipenv, pixi, poetry, none |
+| **Options** | include_code_scaffold | Include example code modules | Yes, No |
 | | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
-| | license | Project licence | MIT, BSD-3-Clause, none |
-| | documentation | Documentation tool | mkdocs, none |
+| | open_source_license | Project licence | MIT, Apache-2.0, GPL-3.0, No license file |
+| | docs | Documentation tool | mkdocs, none |
 
 ---
 
@@ -123,6 +127,8 @@ your-project/
 ├── references/          # Data dictionaries and documentation
 ├── reports/
 │   └── figures/         # Generated graphics
+├── scripts/             # Setup and utility scripts
+│   └── setup_repository.py  # Automated repository setup
 ├── tests/
 │   ├── unittests/       # Unit tests (pytest)
 │   └── e2e/             # End-to-end integration tests
@@ -135,10 +141,18 @@ your-project/
 │   └── modeling/
 │       ├── train.py     # Model training
 │       └── predict.py   # Model inference
-├── LICENSE
+├── .env                 # Environment variables (not tracked in git)
+├── .pre-commit-config.yaml  # Pre-commit hooks configuration
+├── badges.toml          # Optional project badges
+├── CODE_OF_CONDUCT.md   # Community guidelines
+├── LICENSE              # Project license
+├── LICENSE-OGL          # Open Government License for docs
 ├── Makefile             # Convenience commands
+├── mkdocs.yml           # Documentation configuration
+├── OPEN_CODE_CHECKLIST.md  # NHS England standards for publishing code
 ├── README.md
-└── pyproject.toml       # Project configuration and dependencies
+├── pyproject.toml       # Project configuration and dependencies
+└── setup.cfg            # Legacy tool configuration (flake8 only)
 ```
 
 Each directory serves a specific purpose in the RAP workflow. The structure follows data science best practices while accommodating NHS-specific requirements.

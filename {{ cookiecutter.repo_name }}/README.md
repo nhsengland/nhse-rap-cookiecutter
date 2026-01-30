@@ -38,7 +38,26 @@ Copy badges from badges.toml and paste them above to customize your README.
 {% if cookiecutter.environment_manager != "none" %}- {{cookiecutter.environment_manager}} for environment management
 {% endif %}- [List any other required software, APIs, or system dependencies]
 
-### Installation
+### Quick Setup
+
+Use the automated setup script to initialize your repository:
+
+```bash
+make setup
+```
+
+This script will:
+
+- Initialize git repository with default branch
+- Configure git remote ({{cookiecutter.repository_url}})
+- Set up your Python environment
+- Install all dependencies
+- Install pre-commit hooks
+- Create an initial commit
+
+### Manual Installation
+
+Alternatively, set up manually:
 
 1. Clone this repository:
 

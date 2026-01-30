@@ -6,22 +6,22 @@ We welcome contributions to the NHS RAP Cookiecutter Template.
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/nhsengland/nhse-rap-cookiecutter.git
-cd nhse-rap-cookiecutter
-```
+   ```bash
+   git clone https://github.com/nhsengland/nhse-rap-cookiecutter.git
+   cd nhse-rap-cookiecutter
+   ```
 
-1. Install dependencies:
+2. Install dependencies:
 
-```bash
-uv sync --all-extras
-```
+   ```bash
+   uv sync --all-extras
+   ```
 
-1. Install pre-commit hooks:
+3. Install pre-commit hooks:
 
-```bash
-uv run pre-commit install
-```
+   ```bash
+   uv run pre-commit install
+   ```
 
 ## Running Tests
 
@@ -36,6 +36,27 @@ uv run pytest tests/ --cov=nhse_rap_cookiecutter --cov-report=term-missing
 
 # Run specific test file
 uv run pytest tests/test_cli.py -v
+
+# Run tests across multiple Python versions with tox
+uv run tox
+
+# Run tox for specific Python version
+uv run tox -e py310  # or py311, py312, py313
+```
+
+### Testing Across Python Versions
+
+The project uses `tox` to test across Python 3.10-3.13:
+
+```bash
+# Run all Python versions
+uv run tox
+
+# Run specific version
+uv run tox -e py312
+
+# Run in parallel
+uv run tox -p
 ```
 
 ## Code Quality
@@ -94,6 +115,7 @@ Copyright (c) 2026 NHS England
 This ensures generated projects always display the current year without manual updates.
 
 **Files using dynamic years:**
+
 - `{{ cookiecutter.repo_name }}/LICENSE` - Uses cookiecutter's `{% now 'utc', '%Y' %}`
 - `{{ cookiecutter.repo_name }}/docs/content/overrides/partials/footer.html` - Uses MkDocs' `{{ "now().year" }}`
 - `docs/overrides/partials/footer.html` - Cookiecutter repo footer, uses MkDocs' `{{ "now().year" }}`

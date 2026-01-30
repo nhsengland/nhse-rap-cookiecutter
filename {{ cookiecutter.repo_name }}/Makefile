@@ -4,11 +4,37 @@
 
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
+{% if cookiecutter.environment_manager == 'uv' -%}
+PYTHON_INTERPRETER = uv run python
+RUN_PREFIX = uv run
+{% elif cookiecutter.environment_manager == 'poetry' -%}
+PYTHON_INTERPRETER = poetry run python
+RUN_PREFIX = poetry run
+{% elif cookiecutter.environment_manager == 'pixi' -%}
+PYTHON_INTERPRETER = pixi run python
+RUN_PREFIX = pixi run
+{% elif cookiecutter.environment_manager == 'pipenv' -%}
+PYTHON_INTERPRETER = pipenv run python
+RUN_PREFIX = pipenv run
+{% elif cookiecutter.environment_manager == 'conda' -%}
 PYTHON_INTERPRETER = python
+RUN_PREFIX = 
+{% elif cookiecutter.environment_manager == 'virtualenv' -%}
+PYTHON_INTERPRETER = python
+RUN_PREFIX = 
+{% else -%}
+PYTHON_INTERPRETER = python
+RUN_PREFIX = 
+{% endif %}
 
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
+
+## Initialize repository (run once after generating from template)
+.PHONY: setup
+setup:
+	$(PYTHON_INTERPRETER) scripts/setup_repository.py
 
 ## Install Python dependencies
 .PHONY: requirements
@@ -41,107 +67,44 @@ clean:
 ## Lint using ruff (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run ruff format --check
-	uv run ruff check
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run ruff format --check
-	poetry run ruff check
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run ruff format --check
-	pixi run ruff check
-	{% else -%}
-	ruff format --check
-	ruff check
-	{% endif %}
+	$(RUN_PREFIX) ruff format --check
+	$(RUN_PREFIX) ruff check
 
 ## Format source code with ruff
 .PHONY: format
 format:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run ruff check --fix
-	uv run ruff format
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run ruff check --fix
-	poetry run ruff format
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run ruff check --fix
-	pixi run ruff format
-	{% else -%}
-	ruff check --fix
-	ruff format
-	{% endif %}
+	$(RUN_PREFIX) ruff check --fix
+	$(RUN_PREFIX) ruff format
 {% elif cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run flake8 {{ cookiecutter.module_name }}
-	uv run isort --check --diff {{ cookiecutter.module_name }}
-	uv run black --check {{ cookiecutter.module_name }}
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run flake8 {{ cookiecutter.module_name }}
-	poetry run isort --check --diff {{ cookiecutter.module_name }}
-	poetry run black --check {{ cookiecutter.module_name }}
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run flake8 {{ cookiecutter.module_name }}
-	pixi run isort --check --diff {{ cookiecutter.module_name }}
-	pixi run black --check {{ cookiecutter.module_name }}
-	{% else -%}
-	flake8 {{ cookiecutter.module_name }}
-	isort --check --diff {{ cookiecutter.module_name }}
-	black --check {{ cookiecutter.module_name }}
-	{% endif %}
+	$(RUN_PREFIX) flake8 {{ cookiecutter.module_name }}
+	$(RUN_PREFIX) isort --check --diff {{ cookiecutter.module_name }}
+	$(RUN_PREFIX) black --check {{ cookiecutter.module_name }}
 
 ## Format source code with black
 .PHONY: format
 format:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run isort {{ cookiecutter.module_name }}
-	uv run black {{ cookiecutter.module_name }}
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run isort {{ cookiecutter.module_name }}
-	poetry run black {{ cookiecutter.module_name }}
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run isort {{ cookiecutter.module_name }}
-	pixi run black {{ cookiecutter.module_name }}
-	{% else -%}
-	isort {{ cookiecutter.module_name }}
-	black {{ cookiecutter.module_name }}
-	{% endif %}
+	$(RUN_PREFIX) isort {{ cookiecutter.module_name }}
+	$(RUN_PREFIX) black {{ cookiecutter.module_name }}
 {% endif %}
 
 ## Run tests
 .PHONY: test
 test:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run pytest tests
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run pytest tests
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run pytest tests
-	{% else -%}
-	pytest tests
-	{% endif %}
+	$(RUN_PREFIX) pytest tests
 
 {% if cookiecutter.docs == 'mkdocs' %}
 ## Serve documentation with live reload
 .PHONY: docs
 docs:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run mkdocs serve --livereload
-	{% else -%}
-	mkdocs serve --livereload
-	{% endif %}
+	$(RUN_PREFIX) mkdocs serve --livereload
 
 ## Build documentation
 .PHONY: docs-build
 docs-build:
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run mkdocs build
-	{% else -%}
-	mkdocs build
-	{% endif %}
+	$(RUN_PREFIX) mkdocs build
 {% endif %}
 
 {% if cookiecutter.environment_manager != 'none' %}
@@ -182,15 +145,7 @@ create_environment:
 ## Make dataset
 .PHONY: data
 data: requirements
-	{% if cookiecutter.environment_manager == 'uv' -%}
-	uv run python {{ cookiecutter.module_name }}/dataset.py
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry run python {{ cookiecutter.module_name }}/dataset.py
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	pixi run python {{ cookiecutter.module_name }}/dataset.py
-	{% else -%}
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
-	{% endif %}
 {% endif %}
 
 #################################################################################
