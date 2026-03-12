@@ -2,14 +2,11 @@
 """Post-generation hook to rename template files and clean up unused configuration."""
 
 import warnings
+from datetime import datetime
 from pathlib import Path
 
-# Get the current year from cookiecutter context
-year = "{{ cookiecutter.year }}"
-
-# Validate year format
-if not year.isdigit() or len(year) != 4:
-    raise ValueError(f"Invalid year value: '{year}'. Expected 4-digit year.")
+# Compute the current year from Python's datetime (avoids jinja2-time dependency)
+year = str(datetime.now().year)
 
 # Replace year placeholder in all template files
 PLACEHOLDER = "@YEAR_PLACEHOLDER@"
