@@ -1,0 +1,28 @@
+# Pre-commit runs small checks automatically every time you `git commit`.
+# It catches easy mistakes before they reach your repository.
+#
+# After installing the project, turn it on once with:  pre-commit install
+# See https://pre-commit.com for more information.
+repos:
+  # Ruff: lints and auto-formats your Python code.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.3
+    hooks:
+      - id: ruff           # find common mistakes (and fix what it safely can)
+        args: [--fix]
+      - id: ruff-format    # apply consistent formatting
+
+  # nbstripout: clears Jupyter notebook outputs before committing, so big
+  # images and result tables don't bloat your git history.
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.8.1
+    hooks:
+      - id: nbstripout
+
+  # A few small, friendly tidy-up hooks.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace   # remove trailing spaces
+      - id: end-of-file-fixer     # ensure files end in a single newline
+      - id: check-added-large-files  # stop accidental commits of huge files

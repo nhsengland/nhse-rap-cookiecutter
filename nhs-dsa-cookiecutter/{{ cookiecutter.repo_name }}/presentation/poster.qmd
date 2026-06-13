@@ -1,0 +1,52 @@
+---
+title: "{{ cookiecutter.project_name }}"
+subtitle: "{{ cookiecutter.description }}"
+author: "{{ cookiecutter.author_name }}"
+date: today
+---
+
+<!--
+This is a placeholder poster. Posters are great for conferences and team
+show-and-tells: big headings, short text, one or two strong visuals.
+
+Render it with:
+
+    quarto render presentation/poster.qmd
+
+For a true large-format poster layout, Quarto offers dedicated poster formats
+(see https://quarto.org/docs/output-formats/). This template renders to HTML so
+it works out of the box; switch the format once you know what you need. A
+matching PowerPoint version is provided as poster.pptx.
+-->
+
+## Background
+
+[One short paragraph: what is the problem, and why should anyone care?]
+
+## Methods
+
+[A few bullet points are plenty on a poster.]
+
+- [Data source]
+- [Approach]
+- [Tools]
+
+## Results
+
+[Your strongest visual goes here. Posters are read from a distance — make it big
+and let it carry the message.]
+
+<!-- ![Main result](../reports/figures/age_by_person.png) -->
+
+## Conclusions
+
+- [Main takeaway]
+- [What's next]
+
+## Contact
+
+{{ cookiecutter.author_name }}
+
+---
+
+*Created with the [NHS DSA beginner data-science template](https://github.com/nhsengland/nhs-dsa-cookiecutter).*

@@ -1,0 +1,43 @@
+---
+title: "{{ cookiecutter.project_name }}: one-page summary"
+subtitle: "{{ cookiecutter.description }}"
+author: "{{ cookiecutter.author_name }}"
+date: today
+---
+
+<!--
+This is a placeholder one-page summary. Replace the bracketed prompts with your
+own content, then render it with:
+
+    quarto render presentation/one_page_summary.qmd
+
+Quarto turns this plain-text file into a polished HTML document. You can also
+produce PDF or Word output — see https://quarto.org/docs/output-formats/.
+A matching PowerPoint version is provided as one_page_summary.pptx.
+-->
+
+## The question
+
+[What were you trying to find out? State it in one or two plain sentences.]
+
+## What we did
+
+[Briefly describe the data you used and the approach you took. Keep it short —
+this is a summary, not a methods chapter.]
+
+## What we found
+
+[The headline result. If you have a chart, drop it in like this:]
+
+<!-- ![Age by person](../reports/figures/age_by_person.png) -->
+
+- [Key finding one]
+- [Key finding two]
+
+## So what?
+
+[Why does this matter, and what should happen next?]
+
+---
+
+*Created with the [NHS DSA beginner data-science template](https://github.com/nhsengland/nhs-dsa-cookiecutter).*

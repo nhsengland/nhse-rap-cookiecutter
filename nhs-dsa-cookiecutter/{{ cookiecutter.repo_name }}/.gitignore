@@ -1,0 +1,38 @@
+# Data — keep your raw and processed data out of git, but keep the empty
+# folder structure (tracked via the .gitkeep files). The "!data/**/" line lets
+# git descend into the subfolders so the .gitkeep negation below can take effect.
+data/**
+!data/**/
+!data/**/.gitkeep
+
+# Environment variables and secrets — never commit these.
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing and tooling caches
+.pytest_cache/
+.ruff_cache/
+
+# Quarto / presentation build output
+/presentation/*_files/
+/presentation/*.html
+
+# OS / editor cruft
+.DS_Store
+*.swp
+.idea/
+.vscode/

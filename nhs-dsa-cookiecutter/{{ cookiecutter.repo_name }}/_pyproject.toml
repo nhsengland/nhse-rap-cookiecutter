@@ -1,0 +1,57 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = {{ cookiecutter.module_name|tojson }}
+version = "0.0.1"
+description = {{ cookiecutter.description|tojson }}
+authors = [
+  { name = {{ cookiecutter.author_name|tojson }} },
+]
+{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }
+{% endif %}readme = "README.md"
+requires-python = ">={{ cookiecutter.python_version_number }},<3.14"
+
+# A small, friendly starter set of libraries. Add or remove as your project grows.
+dependencies = [
+    "jupyterlab",
+    "loguru",
+    "matplotlib",
+    "pandas",
+    "python-dotenv",
+]
+
+# Tools you need while developing, but not to run the project itself.
+# Listed twice so both environment managers pick them up automatically:
+#   - [dependency-groups] is installed by default when you run `uv sync`.
+#   - [project.optional-dependencies] is what `pip install -e ".[dev]"` reads.
+[dependency-groups]
+dev = [
+    "pre-commit",
+    "pytest",
+    "ruff",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "pytest",
+    "ruff",
+]
+
+[tool.ruff]
+line-length = 99
+src = ["{{ cookiecutter.module_name }}"]
+
+[tool.ruff.lint]
+# E/W: style, F: likely bugs, I: import sorting. A gentle, sensible default.
+select = ["E", "W", "F", "I"]
+ignore = ["E501"]  # don't nag about long lines while you're learning
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+# Put the project root on the import path so `import {{ cookiecutter.module_name }}`
+# works in tests even before the package is installed.
+pythonpath = ["."]

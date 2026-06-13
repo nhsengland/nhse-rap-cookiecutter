@@ -1,0 +1,48 @@
+# Test configurations for the NHS DSA cookiecutter template.
+# Each entry exercises a different combination of the (few) prompts.
+# All values must match options in cookiecutter.json.
+
+default_uv_mit:
+  config_description: "Defaults: uv + MIT licence"
+  project_name: "My First Project"
+  author_name: "Test Author"
+  description: "A first data science project."
+  python_version_number: "3.11"
+  environment_manager: "uv"
+  open_source_license: "MIT"
+
+pip_venv:
+  config_description: "pip+venv environment manager"
+  project_name: "Pip Venv Project"
+  author_name: "Test Author"
+  description: "Using pip and venv instead of uv."
+  python_version_number: "3.12"
+  environment_manager: "pip+venv"
+  open_source_license: "MIT"
+
+apache_license:
+  config_description: "Apache-2.0 licence"
+  project_name: "Apache Project"
+  author_name: "Test Author"
+  description: "Apache licensed project."
+  python_version_number: "3.11"
+  environment_manager: "uv"
+  open_source_license: "Apache-2.0"
+
+no_license:
+  config_description: "No licence file"
+  project_name: "No Licence Project"
+  author_name: "Test Author"
+  description: "Project without a licence file."
+  python_version_number: "3.13"
+  environment_manager: "pip+venv"
+  open_source_license: "No license file"
+
+python_310:
+  config_description: "Python 3.10 with uv"
+  project_name: "Older Python Project"
+  author_name: "Test Author"
+  description: "Pinned to Python 3.10."
+  python_version_number: "3.10"
+  environment_manager: "uv"
+  open_source_license: "MIT"

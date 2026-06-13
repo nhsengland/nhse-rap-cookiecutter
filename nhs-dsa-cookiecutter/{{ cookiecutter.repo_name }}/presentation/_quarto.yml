@@ -1,0 +1,11 @@
+# Quarto project configuration for the presentation templates.
+# Render everything in this folder with:  quarto render presentation/
+# Learn more at https://quarto.org
+project:
+  title: "{{ cookiecutter.project_name }} — presentation templates"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    embed-resources: true   # produce a single, self-contained HTML file
