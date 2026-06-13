@@ -13,12 +13,8 @@
     "python_version_number": ["3.10", "3.11", "3.12", "3.13"],
     "environment_manager": [
         "uv",
-        "virtualenv",
-        "conda",
-        "pipenv",
-        "pixi",
-        "poetry",
-        "none"
+        "venv",
+        "conda"
     ],
     "linting_and_formatting": [
         "ruff",

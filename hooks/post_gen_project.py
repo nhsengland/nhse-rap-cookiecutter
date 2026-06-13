@@ -38,12 +38,8 @@ if env_file.exists():
 env_manager = "{{ cookiecutter.environment_manager }}"
 
 dependency_files = {
-    "virtualenv": "_pyproject.toml",
     "uv": "_pyproject.toml",
-    "poetry": "_pyproject.toml",
-    "pixi": "_pyproject.toml",
-    "pipenv": "_pyproject.toml",
-    "none": "_pyproject.toml",
+    "venv": "_pyproject.toml",
     "conda": "_environment.yml",
 }
 
