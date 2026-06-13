@@ -103,6 +103,8 @@ The template prompts for the following information:
 
 ```text
 your-project/
+├── .github/
+│   └── workflows/       # GitHub Actions CI (tests, lint, gitleaks, docs)
 ├── data/
 │   ├── external/        # Data from third-party sources
 │   ├── interim/         # Intermediate transformed data
@@ -155,6 +157,17 @@ All generated projects include an **Open Code Checklist** (`OPEN_CODE_CHECKLIST.
 - **RAP assessment** criteria
 
 The checklist is also integrated into the project documentation for easy reference during development.
+
+### GitHub Actions CI/CD
+
+For projects hosted on GitHub, the template generates a small, KISS set of workflows in `.github/workflows/`:
+
+- **`tests.yml`** – runs the `pytest` suite on every push and pull request to `main`
+- **`lint.yml`** – checks code style with your chosen linter (ruff, or flake8 + black + isort)
+- **`gitleaks.yml`** – scans the repository for committed secrets
+- **`docs.yml`** – builds and deploys the MkDocs site to GitHub Pages (only when docs are enabled)
+
+The workflows adapt to your chosen environment manager (uv, venv, or conda), and matching status badges are added to the project README. For non-GitHub hosting (GitLab, Azure DevOps, etc.) the `.github/` directory is omitted.
 
 ## Using the Generated Project
 

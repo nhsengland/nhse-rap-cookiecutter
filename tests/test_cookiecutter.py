@@ -79,6 +79,7 @@ class TestCookiecutterProjectGeneration:
 
         project_path = tmp_path / "project_name"
         expected_dirs = {
+            ".github",
             "project_name",
             "data",
             "docs",

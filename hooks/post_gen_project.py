@@ -74,6 +74,17 @@ if docs_choice != "mkdocs":
     mkdocs_config = Path("mkdocs.yml")
     if mkdocs_config.exists():
         mkdocs_config.unlink()
+    # The docs workflow is only useful when MkDocs is enabled
+    docs_workflow = Path(".github") / "workflows" / "docs.yml"
+    if docs_workflow.exists():
+        docs_workflow.unlink()
+
+# GitHub Actions workflows only run on GitHub - remove them otherwise
+git_hosting_platform = "{{ cookiecutter.git_hosting_platform }}"
+if git_hosting_platform != "github":
+    github_dir = Path(".github")
+    if github_dir.exists():
+        shutil.rmtree(github_dir)
 
 # Remove code scaffold when disabled
 include_scaffold = "{{ cookiecutter.include_code_scaffold }}"
