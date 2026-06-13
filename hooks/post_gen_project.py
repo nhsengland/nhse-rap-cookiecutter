@@ -99,6 +99,20 @@ if include_scaffold != "Yes":
     if model_card.exists():
         model_card.unlink()
 
+# Apply the chosen project layout. The "src" layout moves the importable
+# package under a top-level src/ directory (aligned with the RAP community
+# package template); "flat" keeps it at the project root (the default).
+layout = "{{ cookiecutter.layout }}"
+if layout == "src":
+    src_dir = Path("src")
+    src_dir.mkdir(exist_ok=True)
+    module_dir = Path("{{ cookiecutter.module_name }}")
+    if module_dir.exists():
+        module_dir.rename(src_dir / module_dir.name)
+    else:
+        # No code scaffold - keep an empty src/ so the layout is still visible
+        (src_dir / ".gitkeep").touch()
+
 # Remove LICENSE when no license is chosen
 license_choice = "{{ cookiecutter.open_source_license }}"
 if license_choice == "No license file":

@@ -159,6 +159,25 @@ The status of each workflow is shown by the badges at the top of this README. Th
 │
 ├── tests                  <- Unit tests, integration tests, and test fixtures
 │
+{% if cookiecutter.layout == 'src' -%}
+└── src                    <- Importable package under a src/ layout
+    └── {{ cookiecutter.module_name }}  <- Source code for use in this project
+        │
+        ├── __init__.py         <- Makes {{ cookiecutter.module_name }} a Python module
+        │
+        ├── config.py           <- Store useful variables and configuration
+        │
+        ├── dataset.py          <- Scripts to download or generate data
+        │
+        ├── features.py         <- Code to create features for modeling
+        │
+        ├── modeling
+        │   ├── __init__.py
+        │   ├── predict.py      <- Code to run model inference with trained models
+        │   └── train.py        <- Code to train models
+        │
+        └── plots.py            <- Code to create visualisations
+{% else -%}
 └── {{ cookiecutter.module_name }}      <- Source code for use in this project
     │
     ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
@@ -169,12 +188,13 @@ The status of each workflow is shown by the badges at the top of this README. Th
     │
     ├── features.py             <- Code to create features for modeling
     │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
+    ├── modeling
+    │   ├── __init__.py
+    │   ├── predict.py          <- Code to run model inference with trained models
     │   └── train.py            <- Code to train models
     │
     └── plots.py                <- Code to create visualisations
+{% endif -%}
 ```
 
 --------

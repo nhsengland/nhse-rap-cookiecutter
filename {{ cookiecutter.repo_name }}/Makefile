@@ -4,6 +4,8 @@
 
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
+MODULE_PATH = {% if cookiecutter.layout == 'src' %}src/{{ cookiecutter.module_name }}{% else %}{{ cookiecutter.module_name }}{% endif %}
+
 {% if cookiecutter.environment_manager == 'uv' -%}
 PYTHON_INTERPRETER = uv run python
 RUN_PREFIX = uv run
@@ -61,15 +63,15 @@ format:
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	$(RUN_PREFIX) flake8 {{ cookiecutter.module_name }}
-	$(RUN_PREFIX) isort --check --diff {{ cookiecutter.module_name }}
-	$(RUN_PREFIX) black --check {{ cookiecutter.module_name }}
+	$(RUN_PREFIX) flake8 $(MODULE_PATH)
+	$(RUN_PREFIX) isort --check --diff $(MODULE_PATH)
+	$(RUN_PREFIX) black --check $(MODULE_PATH)
 
 ## Format source code with black
 .PHONY: format
 format:
-	$(RUN_PREFIX) isort {{ cookiecutter.module_name }}
-	$(RUN_PREFIX) black {{ cookiecutter.module_name }}
+	$(RUN_PREFIX) isort $(MODULE_PATH)
+	$(RUN_PREFIX) black $(MODULE_PATH)
 {% endif %}
 
 ## Run tests
@@ -117,7 +119,7 @@ create_environment:
 ## Make dataset
 .PHONY: data
 data: requirements
-	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
+	$(PYTHON_INTERPRETER) $(MODULE_PATH)/dataset.py
 {% endif %}
 
 #################################################################################
