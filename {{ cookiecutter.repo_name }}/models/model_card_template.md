@@ -11,7 +11,7 @@ This section contains top-level information about what the model is. The details
 | **Description:** | [General overview of the model, what it does, and motivation for developing it. No more than one paragraph] |
 | **Model Type:** | [Specify the type of model (e.g., clustering, time series, deep learning models, reinforcement learning, supervised learning, ensemble, hybrid, etc.) and describe its main characteristics] |
 | **Developed By:** | {{ cookiecutter.author_name }} / {{ cookiecutter.team_name }} |
-| **Launch Date:** | [Expected or Launch Date - e.g., {% now 'utc', '%B %Y' %}] |
+| **Launch Date:** | [Expected or Launch Date - e.g., @YEAR_PLACEHOLDER@] |
 | **Version** | [As in model registry - e.g., 1.0.0] |
 
 ## Intended Use

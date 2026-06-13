@@ -74,7 +74,7 @@ extra:
       link: mailto:{{ cookiecutter.team_email }}{% endif %}
   generator: false
 
-copyright: Copyright &copy; {% now 'utc', '%Y' %} Crown Copyright ({{ cookiecutter.organization_name }})
+copyright: Copyright &copy; @YEAR_PLACEHOLDER@ Crown Copyright ({{ cookiecutter.organization_name }})
 
 markdown_extensions:
   - tables
