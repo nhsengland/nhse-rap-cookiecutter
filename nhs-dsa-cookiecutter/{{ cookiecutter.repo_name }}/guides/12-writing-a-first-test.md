@@ -1,4 +1,4 @@
-# 5. Writing your first test
+# 12. Writing your first test
 
 A **test** is a small piece of code that checks your *other* code does what you
 expect. Instead of eyeballing a result and hoping, you write down the answer you
@@ -77,4 +77,4 @@ assert df.loc[0, "name"] == "Ada"
 
 Run pytest and watch it pass.
 
-➡️ Next: [Reading data safely](06-reading-data-safely.md)
+➡️ Next: [Writing good tests](13-writing-good-tests.md)

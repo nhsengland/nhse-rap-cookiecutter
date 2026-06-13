@@ -21,14 +21,19 @@ A generated project contains:
 - **A small, friendly module** — `config.py` (paths + logging) and a worked
   `dataset.py` example for loading data safely.
 - **A worked example test** in `tests/`.
-- **`guides/`** — eight beginner tutorials: project structure, notebooks →
-  modules, virtual environments, git basics, writing a first test, reading data
-  safely, making a first plot, and a "what good looks like" checklist.
+- **`guides/`** — 18 beginner tutorials in three parts: *understand your
+  project* (structure & file tour), *basic skills* (environments, pandas,
+  notebooks → modules, reading data, plotting, git, GitHub, keeping data safe,
+  and an intro to **RAP** and its levels), and *going further* (writing tests,
+  functional coding, logging, bringing in uv, and bridging to the full RAP
+  template).
 - **`presentation/`** — Quarto (`.qmd`) and PowerPoint (`.pptx`) templates for a
   one-page summary and a poster.
-- **Modern tooling** — `pyproject.toml` with **uv** as the default environment
-  manager (pip + venv optional), and a light `.pre-commit-config.yaml`
-  (ruff + nbstripout + whitespace fixes).
+- **An Open Code checklist** (`OPEN_CODE_CHECKLIST.md`) to run through before
+  sharing code publicly.
+- **Sensible tooling** — `pyproject.toml` with **pip + venv** as the default
+  environment manager (uv optional), and a light `.pre-commit-config.yaml`
+  (ruff + nbstripout + whitespace fixes + **gitleaks** secret-scanning).
 - **A short, readable setup script** (`scripts/setup_project.py`) you can learn
   from — it does `git init`, installs the environment, turns on pre-commit, and
   makes your first commit.
@@ -58,7 +63,7 @@ You'll be asked a handful of questions:
 | `author_name` | Your name | *Your Name* |
 | `description` | One line about the project | — |
 | `python_version_number` | Python version to target | *3.11* |
-| `environment_manager` | `uv` or `pip+venv` | *uv* |
+| `environment_manager` | `pip+venv` or `uv` | *pip+venv* |
 | `open_source_license` | `MIT`, `Apache-2.0`, or none | *MIT* |
 
 The `repo_name` and `module_name` are derived from `project_name` automatically.

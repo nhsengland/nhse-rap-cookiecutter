@@ -1,4 +1,4 @@
-# 2. From notebooks to modules
+# 5. From notebooks to modules
 
 Notebooks are wonderful for exploring: you run a cell, see the result, tweak it,
 run again. But notebooks have a weakness — code in a notebook is hard to reuse,
@@ -48,7 +48,7 @@ df = load_dataset("data/raw/example.csv")
 The benefits stack up:
 
 - **One source of truth.** Fix a bug once, and every notebook gets the fix.
-- **It can be tested.** See [writing your first test](05-writing-a-first-test.md).
+- **It can be tested.** See [writing your first test](12-writing-a-first-test.md).
 - **Notebooks stay readable.** They show *what* you're doing, not the plumbing.
 
 ## Importing your own code into a notebook
@@ -65,4 +65,4 @@ notebook is open, restart the notebook kernel to pick it up.
 3. Add a second function to `dataset.py` — say, one that returns only the rows
    where a column is above some value — and call it from the notebook too.
 
-➡️ Next: [Virtual environments](03-virtual-environments.md)
+➡️ Next: [Reading data safely](06-reading-data-safely.md)

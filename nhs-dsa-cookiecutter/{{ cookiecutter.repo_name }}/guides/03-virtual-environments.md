@@ -39,6 +39,11 @@ source .venv/bin/activate    # on Windows: .venv\Scripts\activate
 
 Your prompt changes to show `(.venv)`. Now any `python` or `pytest` command
 uses this project's packages. When you're done, type `deactivate`.
+
+Once you're comfortable with this, there's a faster, more modern tool called
+**uv** that handles environments for you. It's an optional upgrade, not
+something you need now — see [Bringing in uv](16-bringing-in-uv.md) when you're
+ready.
 {% endif %}
 
 ## Adding a new package
@@ -71,4 +76,4 @@ try the same command — outside the environment, pandas may not be found. That'
 the box at work.
 {% endif %}
 
-➡️ Next: [Git basics](04-git-basics.md)
+➡️ Next: [Pandas basics](04-pandas-basics.md)

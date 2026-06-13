@@ -5,7 +5,7 @@
     "author_name": "Your Name",
     "description": "My first data science project.",
     "python_version_number": ["3.11", "3.12", "3.13", "3.10"],
-    "environment_manager": ["uv", "pip+venv"],
+    "environment_manager": ["pip+venv", "uv"],
     "open_source_license": ["MIT", "Apache-2.0", "No license file"],
     "_copy_without_render": ["*.pptx"]
 }

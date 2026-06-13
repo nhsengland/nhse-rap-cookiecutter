@@ -1,4 +1,4 @@
-# 4. Git basics
+# 8. Git basics
 
 **Git** is a tool that saves snapshots of your project over time. Think of it as
 an unlimited, labelled undo history: you can always go back to how things were,
@@ -62,8 +62,9 @@ you should only ever see *your own work* listed.
 
 Once you're comfortable, the natural next steps are **branches** (working on a
 change in isolation) and **pushing** to a remote like GitHub (backing up and
-sharing your work). You don't need them on day one — but `add`, `commit`, and
-clear messages will serve you well from the very start.
+sharing your work). The next guide, [Using GitHub](09-using-github.md), covers
+exactly that. You don't need them on day one — but `add`, `commit`, and clear
+messages will serve you well from the very start.
 
 ## Try it
 
@@ -71,4 +72,4 @@ Add a line to this project's README, then run `git status`, `git add .`, and
 `git commit -m "Tweak the README"`. Run `git log --oneline` to see your commit
 sitting in the history next to the initial one.
 
-➡️ Next: [Writing your first test](05-writing-a-first-test.md)
+➡️ Next: [Using GitHub](09-using-github.md)

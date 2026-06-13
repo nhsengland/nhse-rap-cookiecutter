@@ -69,4 +69,4 @@ Change the chart to a horizontal bar chart with `ax.barh(...)`, give it a new
 title, and save it under a new filename. Open both images from
 `reports/figures/` and compare.
 
-➡️ Next: [What good looks like](08-what-good-looks-like.md)
+➡️ Next: [Git basics](08-git-basics.md)

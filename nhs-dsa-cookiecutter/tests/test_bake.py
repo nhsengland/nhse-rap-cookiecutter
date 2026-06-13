@@ -43,6 +43,7 @@ class TestBakeStructure:
             ".gitignore",
             ".env",
             "LICENSE",
+            "OPEN_CODE_CHECKLIST.md",
             "scripts/setup_project.py",
             "tests/test_dataset.py",
         ]:
@@ -58,8 +59,8 @@ class TestBakeStructure:
         result = cookies.bake(extra_context=DEFAULT_CONTEXT)
         guides = result.project_path / "guides"
         markdown = list(guides.glob("*.md"))
-        # README index + 8 numbered tutorials.
-        assert len(markdown) == 9, f"expected 9 guide files, found {len(markdown)}"
+        # README index + 18 numbered tutorials.
+        assert len(markdown) == 19, f"expected 19 guide files, found {len(markdown)}"
 
     def test_presentation_templates_present(self, cookies):
         result = cookies.bake(extra_context=DEFAULT_CONTEXT)

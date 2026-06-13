@@ -51,4 +51,4 @@ data folders are empty apart from a hidden `.gitkeep` file — that's a trick to
 keep an otherwise-empty folder in git. Drop a CSV into `data/raw/` and you're
 ready for the [reading data safely](06-reading-data-safely.md) guide.
 
-➡️ Next: [From notebooks to modules](02-notebooks-to-modules.md)
+➡️ Next: [Understanding your project](02-understanding-your-project.md)

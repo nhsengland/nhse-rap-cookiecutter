@@ -1,4 +1,4 @@
-# 8. What good looks like — a checklist
+# 18. What good looks like — a checklist
 
 You don't need to do everything perfectly. But a handful of habits separate a
 project that's a pleasure to pick up from one that's a headache. Here's a

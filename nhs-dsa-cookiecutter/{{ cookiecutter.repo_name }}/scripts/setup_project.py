@@ -45,8 +45,9 @@ def main() -> None:
         run(["git", "branch", "-M", "main"])  # name the default branch "main"
 
     # 2. Create the environment and install the project's packages.
-    #    "uv" is the recommended, fast option. "pip+venv" uses tools that ship
-    #    with Python, which is handy if you can't install anything extra.
+    #    "pip+venv" (the default) uses tools that ship with Python — nothing
+    #    extra to install. "uv" is a faster, modern alternative you can move to
+    #    later; see guides/16-bringing-in-uv.md.
     if ENV_MANAGER == "uv":
         run(["uv", "sync"])  # creates .venv and installs everything
         run_in_env = ["uv", "run"]  # how we run a tool inside the new env

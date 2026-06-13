@@ -26,3 +26,11 @@ repos:
       - id: trailing-whitespace   # remove trailing spaces
       - id: end-of-file-fixer     # ensure files end in a single newline
       - id: check-added-large-files  # stop accidental commits of huge files
+
+  # gitleaks: scans your changes for secrets (passwords, API keys, tokens)
+  # before they can be committed. Catching a secret here is much easier than
+  # removing it from your git history later. See guides/10 for why this matters.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks

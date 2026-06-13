@@ -46,16 +46,19 @@
 ## Learn as you go
 
 The **[guides/](guides/)** folder contains short, friendly tutorials written
-for people doing their first real project:
+for people doing their first real project. They come in three parts:
 
-1. [Project structure & why it matters](guides/01-project-structure.md)
-2. [From notebooks to modules](guides/02-notebooks-to-modules.md)
-3. [Virtual environments](guides/03-virtual-environments.md)
-4. [Git basics](guides/04-git-basics.md)
-5. [Writing your first test](guides/05-writing-a-first-test.md)
-6. [Reading data safely](guides/06-reading-data-safely.md)
-7. [Making your first plot](guides/07-making-a-first-plot.md)
-8. [What good looks like — a checklist](guides/08-what-good-looks-like.md)
+- **Understand your project** — what each part of the generated template does
+  and why it's there.
+- **Basic skills for working in the repo** — virtual environments, pandas, git,
+  GitHub, keeping data safe, and a short intro to **RAP** (Reproducible
+  Analytical Pipelines) and its levels.
+- **Going further (towards full RAP)** — writing tests, functional coding,
+  logging, bringing in uv, bridging to the full RAP template, and a "what good
+  looks like" checklist.
+
+Start at the **[guides index](guides/README.md)** and work straight through — each
+guide links to the next.
 
 ## What's in here
 
@@ -64,6 +67,7 @@ for people doing their first real project:
 ├── README.md            <- You are here
 ├── pyproject.toml       <- Project + its packages (dependencies)
 ├── .pre-commit-config.yaml  <- Automatic checks on each commit
+├── OPEN_CODE_CHECKLIST.md   <- Safety checklist before sharing code publicly
 ├── .env                 <- Secrets and settings (never committed)
 │
 ├── data/                <- Your data (kept out of git)
