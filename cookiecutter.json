@@ -11,7 +11,6 @@
     "repository_url": "https://github.com/{{ cookiecutter.organization_name.lower().replace(' ', '') }}/{{ cookiecutter.repo_name }}",
     "description": "A short description of the project.",
     "python_version_number": ["3.10", "3.11", "3.12", "3.13"],
-    "year": "{% now 'utc', '%Y' %}",
     "environment_manager": [
         "uv",
         "virtualenv",
@@ -31,7 +30,6 @@
     "_copy_without_render": [
         "*.html",
         "*.css",
-        "*.js",
-        "LICENSE"
+        "*.js"
     ]
 }

@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 """Post-generation hook to rename template files and clean up unused configuration."""
 
+import shutil
 import warnings
+from datetime import datetime
 from pathlib import Path
 
-# Get the current year from cookiecutter context
-year = "{{ cookiecutter.year }}"
-
-# Validate year format
-if not year.isdigit() or len(year) != 4:
-    raise ValueError(f"Invalid year value: '{year}'. Expected 4-digit year.")
+year = str(datetime.now().year)
 
 # Replace year placeholder in all template files
 PLACEHOLDER = "@YEAR_PLACEHOLDER@"
@@ -23,7 +20,6 @@ for file_path in repo_root.rglob("*"):
                 content = content.replace(PLACEHOLDER, year)
                 file_path.write_text(content, encoding="utf-8")
         except (UnicodeDecodeError, PermissionError):
-            # Skip binary files and files we can't read
             pass
         except Exception as e:
             warnings.warn(f"Failed to update year in {file_path}: {e}", stacklevel=2)
@@ -41,8 +37,6 @@ if env_file.exists():
 # Determine which dependency file to keep based on environment manager
 env_manager = "{{ cookiecutter.environment_manager }}"
 
-# Mapping of environment manager to dependency file
-# Most use pyproject.toml, only conda needs environment.yml
 dependency_files = {
     "virtualenv": "_pyproject.toml",
     "uv": "_pyproject.toml",
@@ -74,3 +68,33 @@ if linting_choice == "ruff":
     setup_cfg = Path("setup.cfg")
     if setup_cfg.exists():
         setup_cfg.unlink()
+
+# Remove docs and mkdocs config when docs are not enabled
+docs_choice = "{{ cookiecutter.docs }}"
+if docs_choice != "mkdocs":
+    docs_dir = Path("docs")
+    if docs_dir.exists():
+        shutil.rmtree(docs_dir)
+    mkdocs_config = Path("mkdocs.yml")
+    if mkdocs_config.exists():
+        mkdocs_config.unlink()
+
+# Remove code scaffold when disabled
+include_scaffold = "{{ cookiecutter.include_code_scaffold }}"
+if include_scaffold != "Yes":
+    module_dir = Path("{{ cookiecutter.module_name }}")
+    if module_dir.exists():
+        shutil.rmtree(module_dir)
+    example_test = Path("tests") / "unittests" / "test_data.py"
+    if example_test.exists():
+        example_test.unlink()
+    model_card = Path("models") / "model_card_template.md"
+    if model_card.exists():
+        model_card.unlink()
+
+# Remove LICENSE when no license is chosen
+license_choice = "{{ cookiecutter.open_source_license }}"
+if license_choice == "No license file":
+    license_file = Path("LICENSE")
+    if license_file.exists():
+        license_file.unlink()
