@@ -63,6 +63,11 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
+## Update pre-commit hooks to their latest versions
+.PHONY: hooks-update
+hooks-update:
+	$(RUN_PREFIX) pre-commit autoupdate
+
 {% if cookiecutter.linting_and_formatting == 'ruff' %}
 ## Lint using ruff (use `make format` to do formatting)
 .PHONY: lint
@@ -115,8 +120,11 @@ create_environment:
 	conda env create --name $(PROJECT_NAME) -f environment.yml
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
-	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	python -m venv .venv
+	@echo ">>> New virtualenv created at .venv"
+	@echo ">>> Activate with:"
+	@echo ">>> Windows: .\\.venv\\Scripts\\activate"
+	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
 	{% elif cookiecutter.environment_manager == 'pipenv' -%}
 	pipenv --python $(PYTHON_VERSION)
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
