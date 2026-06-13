@@ -3,10 +3,10 @@
 
 import shutil
 import warnings
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
-year = str(datetime.now().year)
+year = str(datetime.now(timezone.utc).year)
 
 # Replace year placeholder in all template files
 PLACEHOLDER = "@YEAR_PLACEHOLDER@"

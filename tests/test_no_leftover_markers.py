@@ -63,11 +63,22 @@ class TestNoLeftoverMarkers:
         )
 
     def test_no_jinja_markers_in_text_files(self, cookies, config_name, context):
-        """No raw {{ or {% markers remain in rendered text files."""
+        """No raw {{ or {% markers remain in rendered text files.
+
+        Files under .github/ are excluded: GitHub Actions workflows legitimately
+        use ${{ }} expression syntax which contains {{ but is not a Jinja marker.
+        """
         result = cookies.bake(extra_context=context)
         assert result.exit_code == 0
 
+        github_dir = result.project_path / ".github"
         for file_path in _text_files(result.project_path):
+            try:
+                # Skip .github/ — GitHub Actions ${{ }} syntax is not a Jinja marker
+                file_path.relative_to(github_dir)
+                continue
+            except ValueError:
+                pass
             try:
                 content = file_path.read_text(encoding="utf-8")
             except (UnicodeDecodeError, PermissionError):
@@ -100,6 +111,9 @@ class TestNoLeftoverMarkers:
             assert not (result.project_path / name).exists(), (
                 f"[{config_name}] '{name}' should have been renamed/removed by hook"
             )
+        assert not (result.project_path / "_data").exists(), (
+            f"[{config_name}] '_data/' should have been renamed to 'data/' by hook"
+        )
 
     def test_docs_removed_when_docs_none(self, cookies, config_name, context):
         """docs/ directory and mkdocs.yml are absent when docs=none."""
