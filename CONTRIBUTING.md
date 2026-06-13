@@ -90,35 +90,26 @@ cookiecutter . --no-input
 
 ### Dynamic Year Values
 
-Always use dynamic year values instead of hardcoding them. The approach depends on whether the file is processed by cookiecutter or by MkDocs:
+Always use `@YEAR_PLACEHOLDER@` in template files — never hardcode a year and never use
+the `{% now %}` Jinja2 extension (it was removed from cookiecutter in v2.3+).
 
-**For cookiecutter-processed files** (e.g., LICENSE, Python files):
+The post-generation hook (`hooks/post_gen_project.py`) replaces every occurrence of
+`@YEAR_PLACEHOLDER@` with the current year at project-generation time. This works across
+all file types, including copy-without-render files such as `*.html`.
 
-```jinja
-{# CORRECT - Processed by cookiecutter during generation #}
-Copyright (c) {% now 'utc', '%Y' %} NHS England
-
-{# WRONG - Hardcoded year #}
-Copyright (c) 2026 NHS England
+```text
+CORRECT  →  Copyright (c) @YEAR_PLACEHOLDER@ NHS England
+WRONG    →  Copyright (c) 2026 NHS England          (hardcoded)
+WRONG    →  Copyright (c) {% now 'utc', '%Y' %}     (removed extension)
 ```
 
-**For MkDocs template files** (e.g., footer.html):
+**Files using `@YEAR_PLACEHOLDER@`:**
 
-```jinja
-{# CORRECT - Evaluated by MkDocs at build time #}
-&copy; {{ "now().year" }} Crown Copyright (NHS England)
-
-{# WRONG - Hardcoded year #}
-&copy; 2026 Crown Copyright (NHS England)
-```
-
-This ensures generated projects always display the current year without manual updates.
-
-**Files using dynamic years:**
-
-- `{{ cookiecutter.repo_name }}/LICENSE` - Uses cookiecutter's `{% now 'utc', '%Y' %}`
-- `{{ cookiecutter.repo_name }}/docs/content/overrides/partials/footer.html` - Uses MkDocs' `{{ "now().year" }}`
-- `docs/overrides/partials/footer.html` - Cookiecutter repo footer, uses MkDocs' `{{ "now().year" }}`
+- `{{ cookiecutter.repo_name }}/LICENSE`
+- `{{ cookiecutter.repo_name }}/mkdocs.yml`
+- `{{ cookiecutter.repo_name }}/docs/content/overrides/partials/footer.html`
+- `{{ cookiecutter.repo_name }}/README.md`
+- `{{ cookiecutter.repo_name }}/docs/content/index.md`
 
 ## Making Changes
 
