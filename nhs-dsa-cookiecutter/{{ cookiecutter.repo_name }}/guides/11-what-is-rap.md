@@ -55,6 +55,7 @@ Everything in Baseline, plus:
 - A **testing** framework.
 - **Dependency** information recorded.
 - **Logging** so you can confirm outputs are as expected.
+- Data handled and output in a **tidy** data format.
 
 ### 🥇 Gold RAP — analysis as a product
 
