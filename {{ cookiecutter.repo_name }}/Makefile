@@ -7,24 +7,9 @@ PYTHON_VERSION = {{ cookiecutter.python_version_number }}
 {% if cookiecutter.environment_manager == 'uv' -%}
 PYTHON_INTERPRETER = uv run python
 RUN_PREFIX = uv run
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-PYTHON_INTERPRETER = poetry run python
-RUN_PREFIX = poetry run
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-PYTHON_INTERPRETER = pixi run python
-RUN_PREFIX = pixi run
-{% elif cookiecutter.environment_manager == 'pipenv' -%}
-PYTHON_INTERPRETER = pipenv run python
-RUN_PREFIX = pipenv run
-{% elif cookiecutter.environment_manager == 'conda' -%}
-PYTHON_INTERPRETER = python
-RUN_PREFIX = 
-{% elif cookiecutter.environment_manager == 'virtualenv' -%}
-PYTHON_INTERPRETER = python
-RUN_PREFIX = 
 {% else -%}
 PYTHON_INTERPRETER = python
-RUN_PREFIX = 
+RUN_PREFIX =
 {% endif %}
 
 #################################################################################
@@ -41,18 +26,10 @@ setup:
 requirements:
 	{% if "uv" == cookiecutter.environment_manager -%}
 	uv sync
-	{% elif "pixi" == cookiecutter.environment_manager -%}
-	pixi install
-	{% elif "poetry" == cookiecutter.environment_manager -%}
-	poetry install
 	{% elif "conda" == cookiecutter.environment_manager -%}
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
-	{% elif "pipenv" == cookiecutter.environment_manager -%}
-	pipenv install
-	{% elif "virtualenv" == cookiecutter.environment_manager -%}
-	pip install -e .
-	{% elif "none" == cookiecutter.environment_manager -%}
-	pip install -e .
+	{% elif "venv" == cookiecutter.environment_manager -%}
+	pip install -e ".[dev{% if cookiecutter.docs == 'mkdocs' %},docs{% endif %}]"
 	{% endif -%}
 
 
@@ -112,37 +89,24 @@ docs-build:
 	$(RUN_PREFIX) mkdocs build
 {% endif %}
 
-{% if cookiecutter.environment_manager != 'none' %}
 ## Set up Python interpreter environment
 .PHONY: create_environment
 create_environment:
 	{% if cookiecutter.environment_manager == 'conda' -%}
 	conda env create --name $(PROJECT_NAME) -f environment.yml
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
-	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
+	{% elif cookiecutter.environment_manager == 'venv' -%}
 	python -m venv .venv
-	@echo ">>> New virtualenv created at .venv"
+	@echo ">>> New venv created at .venv"
 	@echo ">>> Activate with:"
 	@echo ">>> Windows: .\\.venv\\Scripts\\activate"
 	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
-	{% elif cookiecutter.environment_manager == 'pipenv' -%}
-	pipenv --python $(PYTHON_VERSION)
-	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
 	uv venv --python $(PYTHON_VERSION)
 	@echo ">>> New uv virtual environment created. Activate with:"
 	@echo ">>> Windows: .\\\\.venv\\\\Scripts\\\\activate"
 	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
-	{% elif cookiecutter.environment_manager == 'pixi' -%}
-	@echo ">>> Pixi environment configured in pyproject.toml. Run 'make requirements' to install dependencies."
-	@echo ">>> Activate with:\npixi shell"
-	{% elif cookiecutter.environment_manager == 'poetry' -%}
-	poetry env use $(PYTHON_VERSION)
-	@echo ">>> Poetry environment created. Activate with: "
-	@echo '$$(poetry env activate)'
-	@echo ">>> Or run commands with:\npoetry run <command>"
-{% endif %}
-{% endif %}
+	{% endif %}
 
 
 #################################################################################

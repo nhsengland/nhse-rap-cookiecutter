@@ -14,7 +14,7 @@ This template provides a standardised project structure for developing Reproduci
 
 - Standardised structure following RAP principles
 - Pre-configured tooling for testing, linting, and formatting
-- Multiple environment options (uv, conda, poetry, virtualenv, etc.)
+- Multiple environment options (uv, pip + venv, or conda)
 - NHS-branded documentation ready to customise
 - Security scanning with gitleaks pre-commit hook
 - Flexible configuration for different project needs
@@ -104,7 +104,7 @@ The template prompts for the following:
 | | git_hosting_platform | Git hosting platform | github, gitlab, azure_devops, other |
 | | repository_url | Repository URL (can override default) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
-| | environment_manager | Virtual environment tool | uv, virtualenv, conda, pipenv, pixi, poetry, none |
+| | environment_manager | Virtual environment tool | uv, venv, conda |
 | **Options** | include_code_scaffold | Include example code modules | Yes, No |
 | | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
 | | open_source_license | Project licence | MIT, Apache-2.0, GPL-3.0, No license file |

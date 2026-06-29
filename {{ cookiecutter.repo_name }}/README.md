@@ -35,8 +35,8 @@ Copy badges from badges.toml and paste them above to customize your README.
 ### Prerequisites
 
 - Python {{cookiecutter.python_version_number}}
-{% if cookiecutter.environment_manager != "none" %}- {{cookiecutter.environment_manager}} for environment management
-{% endif %}- [List any other required software, APIs, or system dependencies]
+- {{cookiecutter.environment_manager}} for environment management
+- [List any other required software, APIs, or system dependencies]
 
 ### Quick Setup
 
@@ -69,7 +69,7 @@ Alternatively, set up manually:
 2. Set up your environment:
 {% if cookiecutter.environment_manager == "conda" %}   ```bash
    conda env create -f environment.yml
-   conda activate {{cookiecutter.module_name}}
+   conda activate {{cookiecutter.repo_name}}
 
    ```
 
@@ -77,22 +77,10 @@ Alternatively, set up manually:
    uv sync
 
    ```
-{% elif cookiecutter.environment_manager == "poetry" %}   ```bash
-   poetry install
-   ```
-
-{% elif cookiecutter.environment_manager == "pipenv" %}   ```bash
-   pipenv install
-
-   ```
-{% elif cookiecutter.environment_manager == "pixi" %}   ```bash
-   pixi install
-   ```
-
 {% else %}   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -e .
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -e ".[dev{% if cookiecutter.docs == 'mkdocs' %},docs{% endif %}]"
 
    ```
 {% endif %}
