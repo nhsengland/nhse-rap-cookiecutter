@@ -113,6 +113,7 @@ def validate_config(config_name: str, config_values: dict[str, Any]) -> None:
         "open_source_license",
         "docs",
         "include_code_scaffold",
+        "layout",
     }
 
     for key, value in config_values.items():
@@ -223,7 +224,11 @@ def validate_generated_project(project_path: Path, config_values: dict[str, Any]
         config_values.get("project_name", "").lower().replace(" ", "_").replace("-", "_"),
     )
     if module_name:
-        expected_dirs.append(module_name)
+        # The src layout nests the package under src/
+        if config_values.get("layout") == "src":
+            expected_dirs.append(f"src/{module_name}")
+        else:
+            expected_dirs.append(module_name)
 
     logger.debug(f"Checking critical files: {critical_files}")
     missing_critical = []

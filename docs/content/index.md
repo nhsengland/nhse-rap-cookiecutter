@@ -106,6 +106,7 @@ The template prompts for the following:
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
 | | environment_manager | Virtual environment tool | uv, venv, conda |
 | **Options** | include_code_scaffold | Include example code modules | Yes, No |
+| | layout | Package layout (flat = package at root, src = package under `src/`) | flat, src |
 | | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
 | | open_source_license | Project licence | MIT, Apache-2.0, GPL-3.0, No license file |
 | | docs | Documentation tool | mkdocs, none |

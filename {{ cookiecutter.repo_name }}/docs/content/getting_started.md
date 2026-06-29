@@ -116,8 +116,9 @@ If you prefer manual setup or need to run individual steps:
 
 ```
 {{ cookiecutter.repo_name }}/
-├── {{ cookiecutter.module_name }}/     # Source code
-├── data/                               # Data files
+{% if cookiecutter.layout == 'src' %}├── src/{{ cookiecutter.module_name }}/ # Source code (src layout)
+{% else %}├── {{ cookiecutter.module_name }}/     # Source code
+{% endif %}├── data/                               # Data files
 │   ├── external/                       # External data sources
 │   ├── interim/                        # Intermediate processed data
 │   ├── processed/                      # Final processed data

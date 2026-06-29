@@ -45,11 +45,12 @@ jobs:
       - name: Run linters
         {% if cookiecutter.environment_manager == 'conda' %}shell: bash -el {0}
         {% endif %}run: |
+{% if cookiecutter.layout == 'src' %}{% set module_path = 'src/' ~ cookiecutter.module_name %}{% else %}{% set module_path = cookiecutter.module_name %}{% endif -%}
 {% if cookiecutter.linting_and_formatting == 'ruff' %}
           {{ run }}ruff check .
           {{ run }}ruff format --check .
 {% else %}
-          {{ run }}flake8 {{ cookiecutter.module_name }}
-          {{ run }}isort --check --diff {{ cookiecutter.module_name }}
-          {{ run }}black --check {{ cookiecutter.module_name }}
+          {{ run }}flake8 {{ module_path }}
+          {{ run }}isort --check --diff {{ module_path }}
+          {{ run }}black --check {{ module_path }}
 {% endif %}
