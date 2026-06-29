@@ -100,11 +100,12 @@ When you run `nhs-rap-template`, you'll be prompted for:
 - **Git Hosting Platform**: github, gitlab, azure_devops, or other
 - **Repository URL**: Your repository URL (defaults to GitHub format, can be overridden)
 - **Python Version**: Minimum Python version (3.10-3.13)
-- **Environment Manager**: uv, virtualenv, conda, pipenv, pixi, poetry, or none
+- **Environment Manager**: uv (recommended), pip + venv, or conda
 - **Linting/Formatting**: ruff or flake8+black+isort
 - **License**: MIT, Apache-2.0, GPL-3.0, or No license file
 - **Documentation**: mkdocs or none
 - **Code Scaffold**: Include example code modules (Yes or No)
+- **Layout**: Package layout — `flat` (package at the project root) or `src` (package under `src/`, aligned with the RAP community package template)
 
 ### Included Packages
 
@@ -120,7 +121,7 @@ When you run `nhs-rap-template`, you'll be prompted for:
 
 The dependency file format is determined automatically by your environment manager choice:
 
-- **virtualenv, uv, pixi, poetry, pipenv, none**: `pyproject.toml` (modern Python standard)
+- **uv, pip + venv**: `pyproject.toml` (modern Python standard)
 - **conda**: `environment.yml` (conda-specific format)
 
 Both formats include the same packages - the difference is only in file format to match your chosen tool.
@@ -174,16 +175,17 @@ All generated files can be customised:
 
 Add dependencies to your project:
 
-=== "UV"
+=== "uv"
 
     ```bash
     uv add pandas numpy
     ```
 
-=== "Poetry"
+=== "pip + venv"
 
     ```bash
-    poetry add pandas numpy
+    # Add the dependency to pyproject.toml, then:
+    pip install -e ".[dev]"
     ```
 
 === "Conda"
@@ -191,18 +193,6 @@ Add dependencies to your project:
     ```bash
     # Edit environment.yml, then:
     conda install pandas numpy
-    ```
-
-=== "Pipenv"
-
-    ```bash
-    pipenv install pandas numpy
-    ```
-
-=== "Pixi"
-
-    ```bash
-    pixi add pandas numpy
     ```
 
 ### Running Tests
