@@ -964,7 +964,7 @@
 <li><strong>Git Hosting Platform</strong>: github, gitlab, azure_devops, or other</li>
 <li><strong>Repository URL</strong>: Your repository URL (defaults to GitHub format, can be overridden)</li>
 <li><strong>Python Version</strong>: Minimum Python version (3.10-3.13)</li>
-<li><strong>Environment Manager</strong>: uv, virtualenv, conda, pipenv, pixi, poetry, or none</li>
+<li><strong>Environment Manager</strong>: uv (recommended), pip + venv, or conda</li>
 <li><strong>Linting/Formatting</strong>: ruff or flake8+black+isort</li>
 <li><strong>License</strong>: MIT, Apache-2.0, GPL-3.0, or No license file</li>
 <li><strong>Documentation</strong>: mkdocs or none</li>
@@ -978,7 +978,7 @@
 <h3 id="dependency-file-format">Dependency File Format</h3>
 <p>The dependency file format is determined automatically by your environment manager choice:</p>
 <ul>
-<li><strong>virtualenv, uv, pixi, poetry, pipenv, none</strong>: <code>pyproject.toml</code> (modern Python standard)</li>
+<li><strong>uv, pip + venv</strong>: <code>pyproject.toml</code> (modern Python standard)</li>
 <li><strong>conda</strong>: <code>environment.yml</code> (conda-specific format)</li>
 </ul>
 <p>Both formats include the same packages - the difference is only in file format to match your chosen tool.</p>
@@ -1022,14 +1022,15 @@
 <h2 id="common-workflows">Common Workflows</h2>
 <h3 id="adding-dependencies">Adding Dependencies</h3>
 <p>Add dependencies to your project:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">UV</label><label for="__tabbed_1_2">Poetry</label><label for="__tabbed_1_3">Conda</label><label for="__tabbed_1_4">Pipenv</label><label for="__tabbed_1_5">Pixi</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">uv</label><label for="__tabbed_1_2">pip + venv</label><label for="__tabbed_1_3">Conda</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Add the dependency to pyproject.toml, then:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1037,77 +1038,69 @@
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy
 </code></pre></div>
 </div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>pipenv<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pixi<span class="w"> </span>add<span class="w"> </span>pandas<span class="w"> </span>numpy
-</code></pre></div>
-</div>
 </div>
 </div>
 <h3 id="running-tests">Running Tests</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span><span class="nb">test</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>make<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 <p>The Makefile automatically uses your chosen environment manager's run command.</p>
 <h3 id="building-documentation">Building Documentation</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Serve with live reload</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>make<span class="w"> </span>docs-build<span class="w">  </span><span class="c1"># Build static site</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Serve with live reload</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>make<span class="w"> </span>docs-build<span class="w">  </span><span class="c1"># Build static site</span>
 </code></pre></div>
 <p>The Makefile handles the correct command for your environment manager.</p>
 <h3 id="code-quality-checks">Code Quality Checks</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>make<span class="w"> </span>lint<span class="w">    </span><span class="c1"># Check code</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>make<span class="w"> </span>format<span class="w">  </span><span class="c1"># Format code</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span>lint<span class="w">    </span><span class="c1"># Check code</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>format<span class="w">  </span><span class="c1"># Format code</span>
 </code></pre></div>
 <h2 id="cookiecutter-specific-features">Cookiecutter-Specific Features</h2>
 <p>When using the official cookiecutter tool, you get additional features:</p>
 <h3 id="using-cookiecutter-replay">Using Cookiecutter Replay</h3>
 <p>Cookiecutter saves your previous inputs. To recreate a project with the same configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Create first project</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># Later, replay with same inputs</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter<span class="w"> </span>--replay
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Create first project</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># Later, replay with same inputs</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter<span class="w"> </span>--replay
 </code></pre></div>
 <h3 id="using-a-cookiecutter-config-file">Using a Cookiecutter Config File</h3>
 <p>Create <code>~/.cookiecutterrc</code> with default values:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">default_context</span><span class="p">:</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jane</span><span class="nv"> </span><span class="s">Smith&quot;</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nt">author_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jane.smith@nhs.net&quot;</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nt">organization_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NHS</span><span class="nv"> </span><span class="s">England&quot;</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="nt">team_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data</span><span class="nv"> </span><span class="s">Science</span><span class="nv"> </span><span class="s">Team&quot;</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="nt">team_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datascience@nhs.net&quot;</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="nt">python_version_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">    </span><span class="nt">environment_manager</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;uv&quot;</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">    </span><span class="nt">linting_and_formatting</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ruff&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">default_context</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Jane</span><span class="nv"> </span><span class="s">Smith&quot;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">author_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jane.smith@nhs.net&quot;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">organization_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NHS</span><span class="nv"> </span><span class="s">England&quot;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">team_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data</span><span class="nv"> </span><span class="s">Science</span><span class="nv"> </span><span class="s">Team&quot;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">team_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;datascience@nhs.net&quot;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="nt">python_version_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="nt">environment_manager</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;uv&quot;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="nt">linting_and_formatting</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ruff&quot;</span>
 </code></pre></div>
 <p>Then cookiecutter will use these as defaults:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># Will pre-fill with your defaults!</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1"># Will pre-fill with your defaults!</span>
 </code></pre></div>
 <h3 id="using-multiple-templates">Using Multiple Templates</h3>
 <p>With cookiecutter, you can easily switch between different templates:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># NHS RAP template for analytical projects</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># Different template for web applications</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>cookiecutter<span class="w"> </span>gh:cookiecutter/cookiecutter-django
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># Your organization&#39;s custom template</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>cookiecutter<span class="w"> </span>gh:your-org/your-template
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># NHS RAP template for analytical projects</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>cookiecutter<span class="w"> </span>gh:nhsengland/nhse-rap-cookiecutter
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Different template for web applications</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>cookiecutter<span class="w"> </span>gh:cookiecutter/cookiecutter-django
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># Your organization&#39;s custom template</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>cookiecutter<span class="w"> </span>gh:your-org/your-template
 </code></pre></div>
 <h3 id="templating-from-local-directory">Templating from Local Directory</h3>
 <p>Useful when developing or customizing the template:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Clone the template</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nhsengland/nhse-rap-cookiecutter.git
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># Make local modifications</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nb">cd</span><span class="w"> </span>nhse-rap-cookiecutter
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="c1"># ... edit template files ...</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="c1"># Use your modified template</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>cookiecutter<span class="w"> </span>../nhse-rap-cookiecutter
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Clone the template</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nhsengland/nhse-rap-cookiecutter.git
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Make local modifications</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">cd</span><span class="w"> </span>nhse-rap-cookiecutter
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c1"># ... edit template files ...</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># Use your modified template</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>cookiecutter<span class="w"> </span>../nhse-rap-cookiecutter
 </code></pre></div>
 <h2 id="customizing-your-generated-project">Customizing Your Generated Project</h2>
 <h3 id="customizing-badges">Customizing Badges</h3>
@@ -1164,7 +1157,7 @@
 </ul>
 <h4 id="example-updating-project-status">Example: Updating Project Status</h4>
 <p>To change your project status from "Active" to "MVP", open <code>badges.toml</code> and copy the MVP badge:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">mvp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;[![Project Status: MVP](https://img.shields.io/badge/Project%20Status-MVP-yellowgreen)](https://github.com/your-org/your-repo)&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">mvp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;[![Project Status: MVP](https://img.shields.io/badge/Project%20Status-MVP-yellowgreen)](https://github.com/your-org/your-repo)&quot;</span>
 </code></pre></div>
 <p>Then replace the project status badge in your README.md with this copied badge markdown.</p>
 <h4 id="adding-cicd-badges">Adding CI/CD Badges</h4>
