@@ -91,10 +91,6 @@ class TestDataPipeline:
 # Run all tests
 {% if cookiecutter.environment_manager == 'uv' -%}
 uv run pytest
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-poetry run pytest
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-pixi run pytest
 {% else -%}
 pytest
 {% endif %}
@@ -102,10 +98,6 @@ pytest
 # Run only unit tests
 {% if cookiecutter.environment_manager == 'uv' -%}
 uv run pytest tests/unittests/
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-poetry run pytest tests/unittests/
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-pixi run pytest tests/unittests/
 {% else -%}
 pytest tests/unittests/
 {% endif %}
@@ -113,10 +105,6 @@ pytest tests/unittests/
 # Run only e2e tests
 {% if cookiecutter.environment_manager == 'uv' -%}
 uv run pytest tests/e2e/
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-poetry run pytest tests/e2e/
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-pixi run pytest tests/e2e/
 {% else -%}
 pytest tests/e2e/
 {% endif %}
@@ -124,10 +112,6 @@ pytest tests/e2e/
 # Run with coverage
 {% if cookiecutter.environment_manager == 'uv' -%}
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 {% else -%}
 pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 {% endif %}
@@ -135,10 +119,6 @@ pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 # Run specific test file
 {% if cookiecutter.environment_manager == 'uv' -%}
 uv run pytest tests/unittests/test_dataset.py
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-poetry run pytest tests/unittests/test_dataset.py
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-pixi run pytest tests/unittests/test_dataset.py
 {% else -%}
 pytest tests/unittests/test_dataset.py
 {% endif %}
@@ -219,10 +199,6 @@ Aim for 100% test coverage. Use coverage reports to identify untested code:
 ```bash
 {% if cookiecutter.environment_manager == 'uv' -%}
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=term-missing
-{% elif cookiecutter.environment_manager == 'poetry' -%}
-poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=term-missing
-{% elif cookiecutter.environment_manager == 'pixi' -%}
-pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=term-missing
 {% else -%}
 pytest --cov={{ cookiecutter.module_name }} --cov-report=term-missing
 {% endif %}

@@ -13,12 +13,8 @@
     "python_version_number": ["3.10", "3.11", "3.12", "3.13"],
     "environment_manager": [
         "uv",
-        "virtualenv",
-        "conda",
-        "pipenv",
-        "pixi",
-        "poetry",
-        "none"
+        "venv",
+        "conda"
     ],
     "linting_and_formatting": [
         "ruff",
@@ -27,6 +23,7 @@
     "open_source_license": ["MIT", "Apache-2.0", "GPL-3.0", "No license file"],
     "docs": ["mkdocs", "none"],
     "include_code_scaffold": ["Yes", "No"],
+    "layout": ["flat", "src"],
     "_copy_without_render": [
         "*.html",
         "*.css",
