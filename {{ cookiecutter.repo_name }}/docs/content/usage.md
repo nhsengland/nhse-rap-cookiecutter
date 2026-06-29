@@ -109,39 +109,6 @@ uv run python -m {{ cookiecutter.module_name }}.dataset
 uv run python -m {{ cookiecutter.module_name }}.modeling.train
 ```
 
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Run the full pipeline
-poetry run python -m {{ cookiecutter.module_name }}
-
-# Run specific steps
-poetry run python -m {{ cookiecutter.module_name }}.dataset
-poetry run python -m {{ cookiecutter.module_name }}.modeling.train
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-# Run the full pipeline
-pixi run python -m {{ cookiecutter.module_name }}
-
-# Run specific steps
-pixi run python -m {{ cookiecutter.module_name }}.dataset
-pixi run python -m {{ cookiecutter.module_name }}.modeling.train
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Run the full pipeline
-pipenv run python -m {{ cookiecutter.module_name }}
-
-# Run specific steps
-pipenv run python -m {{ cookiecutter.module_name }}.dataset
-pipenv run python -m {{ cookiecutter.module_name }}.modeling.train
-```
-
 {% else %}
 
 ```bash
@@ -169,27 +136,6 @@ Jupyter notebooks are stored in the `notebooks/` directory. Use them for:
 ```bash
 # Start Jupyter
 uv run jupyter lab
-```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Start Jupyter
-poetry run jupyter lab
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-# Start Jupyter
-pixi run jupyter lab
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Start Jupyter
-pipenv run jupyter lab
 ```
 
 {% else %}
@@ -227,45 +173,6 @@ uv run pytest tests/unittests/
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
 
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Run all tests
-poetry run pytest
-
-# Run unit tests only
-poetry run pytest tests/unittests/
-
-# Run with coverage
-poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-# Run all tests
-pixi run pytest
-
-# Run unit tests only
-pixi run pytest tests/unittests/
-
-# Run with coverage
-pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Run all tests
-pipenv run pytest
-
-# Run unit tests only
-pipenv run pytest tests/unittests/
-
-# Run with coverage
-pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-```
-
 {% else %}
 
 ```bash
@@ -294,45 +201,6 @@ uv run ruff format .
 
 # Run both
 uv run ruff check . && uv run ruff format .
-```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Check code style
-poetry run ruff check .
-
-# Format code
-poetry run ruff format .
-
-# Run both
-poetry run ruff check . && poetry run ruff format .
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-# Check code style
-pixi run ruff check .
-
-# Format code
-pixi run ruff format .
-
-# Run both
-pixi run ruff check . && pixi run ruff format .
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Check code style
-pipenv run ruff check .
-
-# Format code
-pipenv run ruff format .
-
-# Run both
-pipenv run ruff check . && pipenv run ruff format .
 ```
 
 {% else %}
@@ -378,7 +246,7 @@ make requirements        # Install dependencies
 make clean    # Remove compiled Python files
 ```
 
-All Make commands automatically use the correct command runner based on your chosen environment manager ({% if cookiecutter.environment_manager == 'uv' %}uv{% elif cookiecutter.environment_manager == 'poetry' %}poetry{% elif cookiecutter.environment_manager == 'pixi' %}pixi{% else %}python{% endif %}).
+All Make commands automatically use the correct command runner based on your chosen environment manager ({% if cookiecutter.environment_manager == 'uv' %}uv{% else %}python{% endif %}).
 
 ## Best Practices
 

@@ -9,12 +9,8 @@ class TestDependencyFileGeneration:
     @pytest.mark.parametrize(
         "env_manager,expected_file",
         [
-            ("virtualenv", "pyproject.toml"),
             ("uv", "pyproject.toml"),
-            ("poetry", "pyproject.toml"),
-            ("pixi", "pyproject.toml"),
-            ("pipenv", "pyproject.toml"),
-            ("none", "pyproject.toml"),
+            ("venv", "pyproject.toml"),
             ("conda", "environment.yml"),
         ],
     )
@@ -25,9 +21,7 @@ class TestDependencyFileGeneration:
         assert result.exit_code == 0
         assert (result.project_path / expected_file).exists()
 
-    @pytest.mark.parametrize(
-        "env_manager", ["virtualenv", "uv", "poetry", "pixi", "pipenv", "none"]
-    )
+    @pytest.mark.parametrize("env_manager", ["uv", "venv"])
     def test_pyproject_managers_do_not_create_environment_yml(self, cookies, env_manager):
         """Pyproject.toml managers should not create environment.yml."""
         result = cookies.bake(extra_context={"environment_manager": env_manager})
