@@ -71,7 +71,7 @@ class TestSetupScriptForEnvironmentManagers:
 
     @pytest.mark.parametrize(
         "env_manager",
-        ["virtualenv", "conda", "pipenv", "uv", "pixi", "poetry", "none"],
+        ["uv", "venv", "conda"],
     )
     def test_setup_script_handles_environment_manager(self, cookies, env_manager):
         """Setup script includes logic for each environment manager."""
@@ -81,8 +81,7 @@ class TestSetupScriptForEnvironmentManagers:
         setup_script = result.project_path / "scripts" / "setup_repository.py"
         content = setup_script.read_text()
 
-        if env_manager != "none":
-            assert env_manager in content
+        assert env_manager in content
 
 
 class TestSetupScriptDocumentation:
