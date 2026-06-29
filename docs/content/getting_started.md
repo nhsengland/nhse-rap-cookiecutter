@@ -95,14 +95,10 @@ team_email []: datascience@nhs.net
 description [A short description of the project.]: Analysis of patient outcomes
 python_version_number [3.10]: 3.11
 Select environment_manager:
-1 - virtualenv
-2 - conda
-3 - pipenv
-4 - uv
-5 - pixi
-6 - poetry
-7 - none
-Choose from 1, 2, 3, 4, 5, 6, 7 [1]: 4
+1 - uv
+2 - venv
+3 - conda
+Choose from 1, 2, 3 [1]: 1
 ...
 ```
 
@@ -122,7 +118,7 @@ The setup script will:
 
 - Initialize git repository with default branch
 - Configure git remote with your repository URL
-- Set up your Python environment (uv, conda, poetry, etc.)
+- Set up your Python environment (uv, venv, or conda)
 - Install all project dependencies
 - Install pre-commit hooks
 - Create an initial commit
@@ -131,11 +127,22 @@ The setup script will:
 
 If you prefer to set up manually or need to run individual steps, use your chosen environment manager's commands:
 
-=== "UV"
+=== "uv"
 
     ```bash
     uv sync
     uv run pre-commit install
+    make test
+    make docs
+    ```
+
+=== "pip + venv"
+
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+    pip install -e ".[dev,docs]"
+    pre-commit install
     make test
     make docs
     ```
@@ -146,33 +153,6 @@ If you prefer to set up manually or need to run individual steps, use your chose
     conda env create -f environment.yml
     conda activate your_project
     pre-commit install
-    make test
-    make docs
-    ```
-
-=== "Poetry"
-
-    ```bash
-    poetry install
-    poetry run pre-commit install
-    make test
-    make docs
-    ```
-
-=== "Pipenv"
-
-    ```bash
-    pipenv install --dev
-    pipenv run pre-commit install
-    make test
-    make docs
-    ```
-
-=== "Pixi"
-
-    ```bash
-    pixi install
-    pixi run pre-commit install
     make test
     make docs
     ```

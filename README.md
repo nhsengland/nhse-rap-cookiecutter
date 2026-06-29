@@ -91,8 +91,9 @@ The template prompts for the following information:
 | | git_hosting_platform | Git hosting platform | github, gitlab, azure_devops, other |
 | | repository_url | Repository URL (can override default) | Text |
 | **Python** | python_version_number | Minimum Python version | 3.10, 3.11, 3.12, 3.13 |
-| | environment_manager | Virtual environment tool | uv, virtualenv, conda, pipenv, pixi, poetry, none |
+| | environment_manager | Virtual environment tool | uv, venv, conda |
 | **Options** | include_code_scaffold | Include example code modules | Yes, No |
+| | layout | Package layout (flat = package at root, src = package under `src/`) | flat, src |
 | | linting_and_formatting | Code quality tools | ruff, flake8+black+isort |
 | | open_source_license | Project licence | MIT, Apache-2.0, GPL-3.0, No license file |
 | | docs | Documentation tool | mkdocs, none |
@@ -103,6 +104,8 @@ The template prompts for the following information:
 
 ```text
 your-project/
+├── .github/
+│   └── workflows/       # GitHub Actions CI (tests, lint, gitleaks, docs)
 ├── data/
 │   ├── external/        # Data from third-party sources
 │   ├── interim/         # Intermediate transformed data
@@ -119,7 +122,7 @@ your-project/
 ├── tests/
 │   ├── unittests/       # Unit tests (pytest)
 │   └── e2e/             # End-to-end integration tests
-├── your_module/         # Source code package
+├── your_module/         # Source code package (flat layout; or src/your_module/ with the src layout)
 │   ├── __init__.py
 │   ├── config.py        # Configuration management
 │   ├── dataset.py       # Data loading and processing
@@ -156,6 +159,26 @@ All generated projects include an **Open Code Checklist** (`OPEN_CODE_CHECKLIST.
 
 The checklist is also integrated into the project documentation for easy reference during development.
 
+### GitHub Actions CI/CD
+
+For projects hosted on GitHub, the template generates a small, KISS set of workflows in `.github/workflows/`:
+
+- **`tests.yml`** – runs the `pytest` suite on every push and pull request to `main`
+- **`lint.yml`** – checks code style with your chosen linter (ruff, or flake8 + black + isort)
+- **`gitleaks.yml`** – scans the repository for committed secrets
+- **`docs.yml`** – builds and deploys the MkDocs site to GitHub Pages (only when docs are enabled)
+
+The workflows adapt to your chosen environment manager (uv, venv, or conda), and matching status badges are added to the project README. For non-GitHub hosting (GitLab, Azure DevOps, etc.) the `.github/` directory is omitted.
+
+### Project Layout
+
+The template supports two package layouts via the `layout` prompt:
+
+- **`flat`** (default) – the importable package sits at the project root (`your_module/`). This matches the Cookiecutter Data Science style.
+- **`src`** – the importable package sits under a top-level `src/` directory (`src/your_module/`), aligned with the [NHS RAP community package template](https://github.com/NHSDigital/rap-package-template). The src layout helps avoid accidentally importing the package from the working directory instead of the installed version.
+
+The import name (`import your_module`) is identical for both layouts, so usage, tests, and documentation are unaffected by the choice.
+
 ## Using the Generated Project
 
 After generating a project, use the automated setup script:
@@ -169,7 +192,7 @@ The setup script will:
 
 - Initialize git repository with default branch
 - Configure git remote with your repository URL
-- Set up your Python environment (uv, conda, poetry, etc.)
+- Set up your Python environment (uv, venv, or conda)
 - Install all project dependencies
 - Install pre-commit hooks
 - Create an initial commit
