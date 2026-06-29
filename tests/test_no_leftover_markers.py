@@ -26,6 +26,7 @@ COOKIECUTTER_KEYS = {
     "open_source_license",
     "docs",
     "include_code_scaffold",
+    "layout",
 }
 
 # File extensions where leftover Jinja/placeholder markers would be a bug.

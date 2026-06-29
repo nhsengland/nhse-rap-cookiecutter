@@ -95,7 +95,7 @@ Ensure third-party tools meet security standards.
 **Template dependency management:**
 
 - [pyproject.toml]({{cookiecutter.repository_url}}/blob/main/pyproject.toml): All dependencies listed with versions
-- Multiple environment managers supported (uv, poetry, conda, etc.)
+- Multiple environment managers supported (uv, venv, conda)
 - [Makefile]({{cookiecutter.repository_url}}/blob/main/Makefile): `make requirements` for simple dependency installation
 
 ### 5. Code Review and Quality
