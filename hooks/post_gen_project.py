@@ -74,6 +74,17 @@ if docs_choice != "mkdocs":
     mkdocs_config = Path("mkdocs.yml")
     if mkdocs_config.exists():
         mkdocs_config.unlink()
+    # The docs workflow is only useful when MkDocs is enabled
+    docs_workflow = Path(".github") / "workflows" / "docs.yml"
+    if docs_workflow.exists():
+        docs_workflow.unlink()
+
+# GitHub Actions workflows only run on GitHub - remove them otherwise
+git_hosting_platform = "{{ cookiecutter.git_hosting_platform }}"
+if git_hosting_platform != "github":
+    github_dir = Path(".github")
+    if github_dir.exists():
+        shutil.rmtree(github_dir)
 
 # Remove code scaffold when disabled
 include_scaffold = "{{ cookiecutter.include_code_scaffold }}"
@@ -87,6 +98,20 @@ if include_scaffold != "Yes":
     model_card = Path("models") / "model_card_template.md"
     if model_card.exists():
         model_card.unlink()
+
+# Apply the chosen project layout. The "src" layout moves the importable
+# package under a top-level src/ directory (aligned with the RAP community
+# package template); "flat" keeps it at the project root (the default).
+layout = "{{ cookiecutter.layout }}"
+if layout == "src":
+    src_dir = Path("src")
+    src_dir.mkdir(exist_ok=True)
+    module_dir = Path("{{ cookiecutter.module_name }}")
+    if module_dir.exists():
+        module_dir.rename(src_dir / module_dir.name)
+    else:
+        # No code scaffold - keep an empty src/ so the layout is still visible
+        (src_dir / ".gitkeep").touch()
 
 # Remove LICENSE when no license is chosen
 license_choice = "{{ cookiecutter.open_source_license }}"

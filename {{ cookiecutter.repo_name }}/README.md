@@ -1,12 +1,12 @@
 # {{cookiecutter.project_name}}
 
-[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green)]({{cookiecutter.repository_url}}) [![RAP Status: Work in Progress](https://img.shields.io/badge/RAP%20Status-WIP-red)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/) [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter) [![NHS England RAP](https://img.shields.io/badge/NHS%20RAP-Project%20template-005EB8?logo=cookiecutter)](https://github.com/nhsengland/nhse-rap-cookiecutter) [![Python {{cookiecutter.python_version_number}}](https://img.shields.io/badge/Python-{{cookiecutter.python_version_number}}-blue)](https://www.python.org/downloads/){% if cookiecutter.open_source_license == "MIT" %} [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licenses/MIT){% elif cookiecutter.open_source_license == "Apache-2.0" %} [![Licence: Apache-2.0](https://img.shields.io/badge/Licence-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0){% elif cookiecutter.open_source_license == "GPL-3.0" %} [![Licence: GPL-3.0](https://img.shields.io/badge/Licence-GPL--3.0-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0){% endif %}{% if cookiecutter.linting_and_formatting == "ruff" %} [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff){% elif cookiecutter.linting_and_formatting == "flake8+black+isort" %} [![Code Style: Black](https://img.shields.io/badge/Code%20Style-Black-000000.svg)](https://github.com/psf/black) [![Linting: Flake8](https://img.shields.io/badge/Linting-Flake8-blue)](https://flake8.pycqa.org/) [![Import Sort: isort](https://img.shields.io/badge/Import%20Sort-isort-blue)](https://pycqa.github.io/isort/){% endif %} [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Project Status: Active](https://img.shields.io/badge/Project%20Status-Active-green)]({{cookiecutter.repository_url}}) [![RAP Status: Work in Progress](https://img.shields.io/badge/RAP%20Status-WIP-red)](https://nhsdigital.github.io/rap-community-of-practice/introduction_to_RAP/levels_of_RAP/) [![Cookiecutter](https://img.shields.io/badge/Cookiecutter-Template-D4AA00?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter) [![NHS England RAP](https://img.shields.io/badge/NHS%20RAP-Project%20template-005EB8?logo=cookiecutter)](https://github.com/nhsengland/nhse-rap-cookiecutter) [![Python {{cookiecutter.python_version_number}}](https://img.shields.io/badge/Python-{{cookiecutter.python_version_number}}-blue)](https://www.python.org/downloads/){% if cookiecutter.open_source_license == "MIT" %} [![Licence: MIT](https://img.shields.io/badge/Licence-MIT-yellow.svg)](https://opensource.org/licenses/MIT){% elif cookiecutter.open_source_license == "Apache-2.0" %} [![Licence: Apache-2.0](https://img.shields.io/badge/Licence-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0){% elif cookiecutter.open_source_license == "GPL-3.0" %} [![Licence: GPL-3.0](https://img.shields.io/badge/Licence-GPL--3.0-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0){% endif %}{% if cookiecutter.linting_and_formatting == "ruff" %} [![Code Style: Ruff](https://img.shields.io/badge/Code%20Style-Ruff-D7FF64.svg)](https://github.com/astral-sh/ruff){% elif cookiecutter.linting_and_formatting == "flake8+black+isort" %} [![Code Style: Black](https://img.shields.io/badge/Code%20Style-Black-000000.svg)](https://github.com/psf/black) [![Linting: Flake8](https://img.shields.io/badge/Linting-Flake8-blue)](https://flake8.pycqa.org/) [![Import Sort: isort](https://img.shields.io/badge/Import%20Sort-isort-blue)](https://pycqa.github.io/isort/){% endif %} [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit){% if cookiecutter.git_hosting_platform == "github" %} [![Tests]({{cookiecutter.repository_url}}/actions/workflows/tests.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/tests.yml) [![Lint]({{cookiecutter.repository_url}}/actions/workflows/lint.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/lint.yml) [![Gitleaks]({{cookiecutter.repository_url}}/actions/workflows/gitleaks.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/gitleaks.yml){% if cookiecutter.docs == "mkdocs" %} [![Docs]({{cookiecutter.repository_url}}/actions/workflows/docs.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/docs.yml){% endif %}{% endif %}
 
 <!-- 
 Additional badge options available in badges.toml:
 - Project status: concept, wip, poc, mvp, active, on_hold, archived
 - RAP status: wip, baseline, silver, gold
-- Optional badges: github_tests, github_lint, github_docs, github_release, github_pages
+- Optional badges: github_tests, github_lint, github_gitleaks, github_docs, github_release, github_pages
                    gitlab_pipeline, gitlab_coverage, pypi, ogl3
 
 Copy badges from badges.toml and paste them above to customize your README.
@@ -110,10 +110,24 @@ See our [Contributing Guidelines](CONTRIBUTING.md) for details on:
 
 Before publishing or sharing code, please review the [Open Code Checklist](OPEN_CODE_CHECKLIST.md) to ensure compliance with NHS England standards for security, licensing, and quality.
 
-## Project Organization
+{% if cookiecutter.git_hosting_platform == "github" %}## Continuous Integration
+
+This project ships with a small set of GitHub Actions workflows in `.github/workflows/`:
+
+| Workflow | File | Purpose |
+|----------|------|---------|
+| **Tests** | `tests.yml` | Runs the `pytest` suite on every push and pull request to `main`. |
+| **Lint** | `lint.yml` | Checks code style with {% if cookiecutter.linting_and_formatting == "ruff" %}`ruff`{% else %}`flake8`, `black` and `isort`{% endif %}. |
+| **Gitleaks** | `gitleaks.yml` | Scans the repository for accidentally committed secrets. |
+{% if cookiecutter.docs == "mkdocs" %}| **Docs** | `docs.yml` | Builds the MkDocs site and deploys it to GitHub Pages from `main`. |
+{% endif %}
+The status of each workflow is shown by the badges at the top of this README. The workflows are intentionally simple - edit them in `.github/workflows/` to suit your project.
+
+{% endif %}## Project Organization
 
 ```
-├── LICENSE                <- Project license (MIT/Apache-2.0/GPL-3.0)
+{% if cookiecutter.git_hosting_platform == "github" %}├── .github/workflows     <- GitHub Actions CI workflows (tests, lint, gitleaks{% if cookiecutter.docs == "mkdocs" %}, docs{% endif %})
+{% endif %}├── LICENSE                <- Project license (MIT/Apache-2.0/GPL-3.0)
 ├── LICENSE-OGL            <- Open Government License v3.0 for documentation
 ├── CODE_OF_CONDUCT.md     <- Community guidelines and code of conduct
 ├── CONTRIBUTING.md        <- Contribution guidelines
@@ -145,6 +159,25 @@ Before publishing or sharing code, please review the [Open Code Checklist](OPEN_
 │
 ├── tests                  <- Unit tests, integration tests, and test fixtures
 │
+{% if cookiecutter.layout == 'src' -%}
+└── src                    <- Importable package under a src/ layout
+    └── {{ cookiecutter.module_name }}  <- Source code for use in this project
+        │
+        ├── __init__.py         <- Makes {{ cookiecutter.module_name }} a Python module
+        │
+        ├── config.py           <- Store useful variables and configuration
+        │
+        ├── dataset.py          <- Scripts to download or generate data
+        │
+        ├── features.py         <- Code to create features for modeling
+        │
+        ├── modeling
+        │   ├── __init__.py
+        │   ├── predict.py      <- Code to run model inference with trained models
+        │   └── train.py        <- Code to train models
+        │
+        └── plots.py            <- Code to create visualisations
+{% else -%}
 └── {{ cookiecutter.module_name }}      <- Source code for use in this project
     │
     ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
@@ -155,12 +188,13 @@ Before publishing or sharing code, please review the [Open Code Checklist](OPEN_
     │
     ├── features.py             <- Code to create features for modeling
     │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
+    ├── modeling
+    │   ├── __init__.py
+    │   ├── predict.py          <- Code to run model inference with trained models
     │   └── train.py            <- Code to train models
     │
     └── plots.py                <- Code to create visualisations
+{% endif -%}
 ```
 
 --------

@@ -105,6 +105,7 @@ When you run `nhs-rap-template`, you'll be prompted for:
 - **License**: MIT, Apache-2.0, GPL-3.0, or No license file
 - **Documentation**: mkdocs or none
 - **Code Scaffold**: Include example code modules (Yes or No)
+- **Layout**: Package layout — `flat` (package at the project root) or `src` (package under `src/`, aligned with the RAP community package template)
 
 ### Included Packages
 
