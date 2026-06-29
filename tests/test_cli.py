@@ -124,6 +124,7 @@ class TestCLIProjectGeneration:
 
         project_path = output_dir / "project_name"
         expected_dirs = {
+            ".github",
             "project_name",
             "data",
             "docs",

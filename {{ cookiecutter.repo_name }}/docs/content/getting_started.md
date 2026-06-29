@@ -5,7 +5,7 @@ This guide will help you set up and start working with {{ cookiecutter.project_n
 ## Prerequisites
 
 - Python {{ cookiecutter.python_version_number }}+
-{% if cookiecutter.environment_manager != 'none' %}- {{ cookiecutter.environment_manager }} installed{% endif %}
+- {{ cookiecutter.environment_manager }} installed
 
 ## What's Included
 
@@ -69,63 +69,9 @@ If you prefer manual setup or need to run individual steps:
    pip install -e .
    ```
 
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-### Using Pipenv
-
-1. Install dependencies:
-
-   ```bash
-   pipenv install --dev
-   ```
-
-2. Activate the environment:
-
-   ```bash
-   pipenv shell
-   ```
-
-3. Install the package in development mode:
-
-   ```bash
-   pip install -e .
-   ```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-### Using Poetry
-
-1. Install dependencies:
-
-   ```bash
-   poetry install
-   ```
-
-2. Activate the environment:
-
-   ```bash
-   poetry shell
-   ```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-### Using Pixi
-
-1. Install dependencies:
-
-   ```bash
-   pixi install
-   ```
-
-2. Run commands with pixi:
-
-   ```bash
-   pixi run python
-   ```
-
 {% elif cookiecutter.environment_manager == 'uv' %}
 
-### Using UV
+### Using uv
 
 1. Create and sync the environment:
 
@@ -133,45 +79,35 @@ If you prefer manual setup or need to run individual steps:
    uv sync
    ```
 
-2. Run commands with UV:
+2. Run commands with uv:
 
    ```bash
    uv run python
    uv run pytest
    ```
 
-{% elif cookiecutter.environment_manager == 'virtualenv' %}
+{% else %}
 
-### Using Virtualenv
+### Using pip + venv
 
 1. Create a virtual environment:
 
    ```bash
-   python -m venv venv
+   python -m venv .venv
    ```
 
 2. Activate the environment:
 
    ```bash
-   source venv/bin/activate  # On Linux/Mac
+   source .venv/bin/activate  # On Linux/Mac
    # or
-   venv\Scripts\activate  # On Windows
+   .venv\Scripts\activate  # On Windows
    ```
 
 3. Install the package and its dependencies:
 
    ```bash
-   pip install -e .
-   ```
-
-{% else %}
-
-### Manual Installation
-
-1. Install the package and its dependencies:
-
-   ```bash
-   pip install -e .
+   pip install -e ".[dev{% if cookiecutter.docs == 'mkdocs' %},docs{% endif %}]"
    ```
 
 {% endif %}
@@ -180,8 +116,9 @@ If you prefer manual setup or need to run individual steps:
 
 ```
 {{ cookiecutter.repo_name }}/
-├── {{ cookiecutter.module_name }}/     # Source code
-├── data/                               # Data files
+{% if cookiecutter.layout == 'src' %}├── src/{{ cookiecutter.module_name }}/ # Source code (src layout)
+{% else %}├── {{ cookiecutter.module_name }}/     # Source code
+{% endif %}├── data/                               # Data files
 │   ├── external/                       # External data sources
 │   ├── interim/                        # Intermediate processed data
 │   ├── processed/                      # Final processed data
@@ -203,24 +140,6 @@ If you prefer manual setup or need to run individual steps:
 uv run pytest
 ```
 
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-poetry run pytest
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-pixi run pytest
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-pipenv run pytest
-```
-
 {% else %}
 
 ```bash
@@ -236,35 +155,12 @@ This documentation is built with MkDocs. To serve it locally:
 {% if cookiecutter.environment_manager == 'uv' %}
 
 ```bash
-cd docs/mkdocs
 uv run mkdocs serve
-```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-cd docs/mkdocs
-poetry run mkdocs serve
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-cd docs/mkdocs
-pixi run mkdocs serve
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-cd docs/mkdocs
-pipenv run mkdocs serve
 ```
 
 {% else %}
 
 ```bash
-cd docs/mkdocs
 mkdocs serve
 ```
 

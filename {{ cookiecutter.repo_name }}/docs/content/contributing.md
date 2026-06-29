@@ -16,7 +16,7 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
 ### Prerequisites
 
 - Python {{ cookiecutter.python_version_number }}+
-{% if cookiecutter.environment_manager != 'none' %}- {{ cookiecutter.environment_manager }}{% endif %}
+- {{ cookiecutter.environment_manager }}
 - Git
 
 ### Setting Up Development Environment
@@ -35,24 +35,6 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
    uv sync
    ```
 
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-   ```bash
-   poetry install
-   ```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-   ```bash
-   pixi install
-   ```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-   ```bash
-   pipenv install --dev
-   ```
-
 {% elif cookiecutter.environment_manager == 'conda' %}
 
    ```bash
@@ -60,18 +42,12 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
    conda activate {{ cookiecutter.repo_name }}
    ```
 
-{% elif cookiecutter.environment_manager == 'virtualenv' %}
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate
-   pip install -e .
-   ```
-
 {% else %}
 
    ```bash
-   pip install -e .
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -e ".[dev{% if cookiecutter.docs == 'mkdocs' %},docs{% endif %}]"
    ```
 
 {% endif %}
@@ -81,24 +57,6 @@ This project follows NHS England RAP (Reproducible Analytical Pipeline) principl
 
    ```bash
    uv run pytest
-   ```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-   ```bash
-   poetry run pytest
-   ```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-   ```bash
-   pixi run pytest
-   ```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-   ```bash
-   pipenv run pytest
    ```
 
 {% else %}
@@ -197,36 +155,6 @@ uv run pytest
 uv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
 ```
 
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Run all tests
-poetry run pytest
-
-# Run with coverage
-poetry run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-```
-
-```
-{% elif cookiecutter.environment_manager == 'pixi' %}
-```bash
-# Run all tests
-pixi run pytest
-
-# Run with coverage
-pixi run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Run all tests
-pipenv run pytest
-
-# Run with coverage
-pipenv run pytest --cov={{ cookiecutter.module_name }} --cov-report=html
-```
-
 {% else %}
 
 ```bash
@@ -254,45 +182,6 @@ uv run ruff format .
 
 # Fix auto-fixable issues
 uv run ruff check --fix .
-```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Check code style
-poetry run ruff check .
-
-# Format code
-poetry run ruff format .
-
-# Fix auto-fixable issues
-poetry run ruff check --fix .
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-# Check code style
-pixi run ruff check .
-
-# Format code
-pixi run ruff format .
-
-# Fix auto-fixable issues
-pixi run ruff check --fix .
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Check code style
-pipenv run ruff check .
-
-# Format code
-pipenv run ruff format .
-
-# Fix auto-fixable issues
-pipenv run ruff check --fix .
 ```
 
 {% else %}
@@ -337,39 +226,6 @@ uv run pytest
 # Check code style
 uv run ruff check .
 uv run ruff format .
-```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-# Run tests
-poetry run pytest
-
-# Check code style
-poetry run ruff check .
-poetry run ruff format .
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-# Run tests
-pixi run pytest
-
-# Check code style
-pixi run ruff check .
-pixi run ruff format .
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-# Run tests
-pipenv run pytest
-
-# Check code style
-pipenv run ruff check .
-pipenv run ruff format .
 ```
 
 {% else %}
@@ -417,27 +273,6 @@ Then create a pull request on the repository.
 ```bash
 cd docs/mkdocs
 uv run mkdocs serve
-```
-
-{% elif cookiecutter.environment_manager == 'poetry' %}
-
-```bash
-cd docs/mkdocs
-poetry run mkdocs serve
-```
-
-{% elif cookiecutter.environment_manager == 'pixi' %}
-
-```bash
-cd docs/mkdocs
-pixi run mkdocs serve
-```
-
-{% elif cookiecutter.environment_manager == 'pipenv' %}
-
-```bash
-cd docs/mkdocs
-pipenv run mkdocs serve
 ```
 
 {% else %}

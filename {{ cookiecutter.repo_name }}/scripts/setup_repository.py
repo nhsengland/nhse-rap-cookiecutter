@@ -188,24 +188,17 @@ def setup_environment() -> None:
 
     env_manager = "{{ cookiecutter.environment_manager }}"
 
-    if env_manager == "none":
-        print("No environment manager selected. Skipping environment setup.")
-        print("You will need to manage dependencies manually.")
-        return
-
-    # Check if environment manager is installed
-    if not check_command_available(env_manager):
+    # venv ships with Python 3, so only the interpreter needs to be available.
+    command_to_check = "python" if env_manager == "venv" else env_manager
+    if not check_command_available(command_to_check):
         install_instructions = {
             "uv": "Install uv: curl -LsSf https://astral.sh/uv/install.sh | sh",
             "conda": "Install conda: https://docs.conda.io/en/latest/miniconda.html",
-            "poetry": "Install poetry: curl -sSL https://install.python-poetry.org | python3 -",
-            "pipenv": "Install pipenv: pip install pipenv",
-            "pixi": "Install pixi: curl -fsSL https://pixi.sh/install.sh | bash",
-            "virtualenv": "Install virtualenv: pip install virtualenv",
+            "venv": "venv ships with Python 3 - please install Python 3.",
         }
         instruction = install_instructions.get(env_manager, f"Please install {env_manager}")
         raise SetupError(dedent(f"""
-            {env_manager} is not installed.
+            {command_to_check} is not installed.
             {instruction}
         """).strip())
 
@@ -221,21 +214,20 @@ def setup_environment() -> None:
             print(f"{Colors.GREEN}✓ Virtual environment created with uv{Colors.RESET}")
             status.environment = "success"
 
-    elif env_manager == "virtualenv":
+    elif env_manager == "venv":
         if Path(".venv").exists():
             print(f"{Colors.YELLOW}✓ Virtual environment already exists{Colors.RESET}")
             status.environment = "skipped"
         else:
-            python_version = "{{ cookiecutter.python_version_number }}"
-            run_command(["virtualenv", "venv", f"--python=python{python_version}"])
-            print(f"{Colors.GREEN}✓ Virtual environment created with Python {python_version}{Colors.RESET}")
+            run_command([sys.executable, "-m", "venv", ".venv"])
+            print(f"{Colors.GREEN}✓ Virtual environment created at .venv{Colors.RESET}")
             status.environment = "success"
 
     elif env_manager == "conda":
         env_name = "{{ cookiecutter.repo_name }}"
         result = subprocess.run(
-            ["conda", "env", "list"], 
-            capture_output=True, 
+            ["conda", "env", "list"],
+            capture_output=True,
             text=True
         )
         if env_name in result.stdout:
@@ -246,41 +238,6 @@ def setup_environment() -> None:
             print(f"{Colors.GREEN}✓ Conda environment created{Colors.RESET}")
             status.environment = "success"
 
-    elif env_manager == "poetry":
-        # Check if poetry environment exists
-        result = subprocess.run(
-            ["poetry", "env", "info", "--path"],
-            capture_output=True,
-            text=True
-        )
-        if result.returncode == 0 and result.stdout.strip():
-            print("Poetry environment already exists. Running install to sync dependencies.")
-        else:
-            print("Creating Poetry environment and installing dependencies.")
-        run_command(["poetry", "install"])
-        print(f"{Colors.GREEN}✓ Poetry setup complete{Colors.RESET}")
-        status.environment = "success"
-        status.dependencies = "success"
-        return  # Poetry installs deps automatically
-
-    elif env_manager == "pipenv":
-        # Pipenv doesn't have a simple check, but install is idempotent
-        print("Setting up Pipenv environment and dependencies.")
-        run_command(["pipenv", "install", "--dev"])
-        print(f"{Colors.GREEN}✓ Pipenv setup complete{Colors.RESET}")
-        status.environment = "success"
-        status.dependencies = "success"
-        return  # Pipenv installs deps automatically
-
-    elif env_manager == "pixi":
-        # Pixi install is idempotent
-        print("Setting up Pixi environment and dependencies.")
-        run_command(["pixi", "install"])
-        print(f"{Colors.GREEN}✓ Pixi setup complete{Colors.RESET}")
-        status.environment = "success"
-        status.dependencies = "success"
-        return  # Pixi installs deps automatically
-
 
 def install_dependencies() -> None:
     """Install project dependencies."""
@@ -288,23 +245,19 @@ def install_dependencies() -> None:
 
     env_manager = "{{ cookiecutter.environment_manager }}"
 
-    # Skip if no environment manager or if already installed by environment setup
-    if env_manager in ["none", "poetry", "pipenv", "pixi"]:
-        return
-
     if env_manager == "uv":
         run_command(["uv", "sync", "--all-extras"])
         print(f"{Colors.GREEN}✓ Dependencies installed with uv (including all extras){Colors.RESET}")
         status.dependencies = "success"
 
-    elif env_manager == "virtualenv":
+    elif env_manager == "venv":
         # Activate and install with pip
         if sys.platform == "win32":
             pip_cmd = [".venv/Scripts/pip"]
         else:
             pip_cmd = [".venv/bin/pip"]
-        run_command(pip_cmd + ["install", "-e", ".[dev,test,docs]"])
-        print(f"{Colors.GREEN}✓ Dependencies installed with pip (including dev, test, docs extras){Colors.RESET}")
+        run_command(pip_cmd + ["install", "-e", ".[dev{% if cookiecutter.docs == 'mkdocs' %},docs{% endif %}]"])
+        print(f"{Colors.GREEN}✓ Dependencies installed with pip{Colors.RESET}")
         status.dependencies = "success"
 
     elif env_manager == "conda":
@@ -325,19 +278,13 @@ def setup_precommit() -> None:
     elif env_manager == "conda":
         env_name = "{{ cookiecutter.repo_name }}"
         cmd = ["conda", "run", "-n", env_name, "pre-commit", "install"]
-    elif env_manager == "poetry":
-        cmd = ["poetry", "run", "pre-commit", "install"]
-    elif env_manager == "pipenv":
-        cmd = ["pipenv", "run", "pre-commit", "install"]
-    elif env_manager == "pixi":
-        cmd = ["pixi", "run", "pre-commit", "install"]
-    elif env_manager == "virtualenv":
+    elif env_manager == "venv":
         if sys.platform == "win32":
             cmd = [".venv/Scripts/pre-commit", "install"]
         else:
             cmd = [".venv/bin/pre-commit", "install"]
     else:
-        print("No environment manager. Attempting to use system pre-commit.")
+        print("Attempting to use system pre-commit.")
         cmd = ["pre-commit", "install"]
 
     try:
@@ -404,13 +351,7 @@ def create_initial_commit() -> None:
         elif env_manager == "conda":
             env_name = "{{ cookiecutter.repo_name }}"
             run_command(["conda", "run", "-n", env_name, "pre-commit", "run", "--all-files"])
-        elif env_manager == "poetry":
-            run_command(["poetry", "run", "pre-commit", "run", "--all-files"])
-        elif env_manager == "pipenv":
-            run_command(["pipenv", "run", "pre-commit", "run", "--all-files"])
-        elif env_manager == "pixi":
-            run_command(["pixi", "run", "pre-commit", "run", "--all-files"])
-        elif env_manager == "virtualenv":
+        elif env_manager == "venv":
             if sys.platform == "win32":
                 run_command([".venv/Scripts/pre-commit", "run", "--all-files"])
             else:
@@ -496,13 +437,7 @@ def print_next_steps() -> None:
         env_name = "{{ cookiecutter.repo_name }}"
         print(f"   conda activate {env_name}")
         print("   pytest tests/unittests/ -v")
-    elif env_manager == "poetry":
-        print("   poetry run pytest tests/unittests/ -v")
-    elif env_manager == "pipenv":
-        print("   pipenv run pytest tests/unittests/ -v")
-    elif env_manager == "pixi":
-        print("   pixi run pytest tests/unittests/ -v")
-    elif env_manager == "virtualenv":
+    elif env_manager == "venv":
         print("   source .venv/bin/activate  # On Windows: .venv\\Scripts\\activate")
         print("   pytest tests/unittests/ -v")
     else:
@@ -547,12 +482,9 @@ def print_next_steps() -> None:
         elif env_manager == "conda":
             print("   conda activate {{ cookiecutter.repo_name }}")
             print("   mkdocs serve")
-        elif env_manager == "poetry":
-            print("   poetry run mkdocs serve")
-        elif env_manager == "pipenv":
-            print("   pipenv run mkdocs serve")
-        elif env_manager == "pixi":
-            print("   pixi run mkdocs serve")
+        elif env_manager == "venv":
+            print("   source .venv/bin/activate  # On Windows: .venv\\Scripts\\activate")
+            print("   mkdocs serve")
         else:
             print("   mkdocs serve")
         print("   Then visit: http://127.0.0.1:8000")

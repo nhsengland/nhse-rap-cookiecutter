@@ -31,6 +31,7 @@ gold = "[![RAP Status: Gold](https://img.shields.io/badge/RAP%20Status-Gold-gold
 [github]
 tests = "[![Tests]({{cookiecutter.repository_url}}/actions/workflows/tests.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/tests.yml)"
 lint = "[![Lint]({{cookiecutter.repository_url}}/actions/workflows/lint.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/lint.yml)"
+gitleaks = "[![Gitleaks]({{cookiecutter.repository_url}}/actions/workflows/gitleaks.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/gitleaks.yml)"
 docs = "[![Docs]({{cookiecutter.repository_url}}/actions/workflows/docs.yml/badge.svg)]({{cookiecutter.repository_url}}/actions/workflows/docs.yml)"
 release = "[![Latest Release](https://img.shields.io/github/v/release/{{cookiecutter.organization_name | lower | replace(' ', '')}}/{{cookiecutter.repo_name}})]({{cookiecutter.repository_url}}/releases)"
 pages = "[![Documentation Status](https://img.shields.io/badge/docs-live-brightgreen)](https://{{cookiecutter.organization_name | lower | replace(' ', '')}}.github.io/{{cookiecutter.repo_name}}/)"
