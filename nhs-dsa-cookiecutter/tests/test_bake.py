@@ -65,6 +65,11 @@ class TestBakeStructure:
     def test_presentation_templates_present(self, cookies):
         result = cookies.bake(extra_context=DEFAULT_CONTEXT)
         pres = result.project_path / "presentation"
-        for f in ["_quarto.yml", "one_page_summary.qmd", "poster.qmd",
-                  "one_page_summary.pptx", "poster.pptx"]:
+        for f in [
+            "_quarto.yml",
+            "one_page_summary.qmd",
+            "poster.qmd",
+            "one_page_summary.pptx",
+            "poster.pptx",
+        ]:
             assert (pres / f).is_file(), f"missing presentation file: {f}"
