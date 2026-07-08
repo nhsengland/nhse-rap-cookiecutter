@@ -113,3 +113,19 @@ class TestSetupScriptDocumentation:
 
         assert "def setup_precommit()" in content
         assert '"""Install pre-commit hooks' in content
+
+    def test_setup_script_command_check_is_cross_platform(self, cookies):
+        """Command availability check works on Windows.
+
+        The check must use ``shutil.which`` rather than the ``which``
+        command, which does not exist on Windows and aborted setup there
+        before the script's own Windows handling could run.
+        """
+        result = cookies.bake()
+
+        assert result.exit_code == 0
+        setup_script = result.project_path / "scripts" / "setup_repository.py"
+        content = setup_script.read_text()
+
+        assert "shutil.which" in content
+        assert '["which"' not in content
