@@ -13,6 +13,7 @@ Run this script after generating the project from the cookiecutter template.
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -93,15 +94,10 @@ def check_command_available(cmd: str) -> bool:
     bool
         True if command is available, False otherwise
     """
-    try:
-        subprocess.run(
-            ["which", cmd],
-            capture_output=True,
-            check=True,
-        )
-        return True
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return False
+    # shutil.which resolves against PATH on every OS. The previous
+    # subprocess call to `which` failed on Windows, where that command
+    # does not exist, so setup aborted before its own Windows handling ran.
+    return shutil.which(cmd) is not None
 
 
 def setup_git_repository() -> None:
